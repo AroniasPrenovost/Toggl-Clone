@@ -1,0 +1,30 @@
+li.listItem {
+  display: list-item;
+}
+
+li.listItem {
+  width: inherit;
+  -webkit-transition: transform .25s ease-in-out;
+  -moz-transition: transform .25s ease-in-out;
+  -o-transition: transform .25s ease-in-out;
+  transition: transform .25s ease-in-out;
+  -webkit-transition: box-shadow .25s ease-in-out;
+  -moz-transition: box-shadow .25s ease-in-out;
+  -o-transition: box-shadow .25s ease-in-out;
+  transition: box-shadow .25s ease-in-out; }
+  li.listItem:hover {
+    cursor: pointer; }
+
+/* styles during drag */
+li.listItem.ui-sortable-helper {
+  background-color: #e5e5e5;
+  -webkit-box-shadow: 0 0 8px rgba(53, 41, 41, 0.8);
+  -moz-box-shadow: 0 0 8px rgba(53, 41, 41, 0.8);
+  box-shadow: 0 0 8px rgba(53, 41, 41, 0.8);
+  transform: scale(1.015);
+  z-index: 100; }
+
+li.listItem.ui-sortable-placeholder {
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000; }

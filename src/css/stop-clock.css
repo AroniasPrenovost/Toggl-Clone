@@ -1,0 +1,20 @@
+.clock-container {
+  width: 10%;
+  display: inline;
+  font-size: 18px;
+  color: black;
+  background-color: #f7f7f7;
+  height: 50px;
+  padding: 13px 13px 13px 20px;
+  box-sizing: border-box;
+  border: 3px solid rgba(0, 0, 0, 0); }
+
+input#clock {
+  width: 10%; }
+
+#start-btn {
+  float: right;
+  background-color: green;
+  height: 50px;
+  width: 10%;
+  display: inline-block; }

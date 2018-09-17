@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Gulp, Sass, webpack and ES6 modules boilerplate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="src/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="src/css/li-sort.css">
+    <link rel="stylesheet" type="text/css" href="src/css/stop-clock.css">
+    <link rel="stylesheet" type="text/css" href="src/css/dropdown.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" crossorigin="anonymous" />
+</head>
+<body>
+    <div class="content">
+
+    </div>
+    <button class="button" id="exportToExcel">Export To CSV</button>
+
+    <div class="formbar">
+
+    </div>
+    <button class="button" style="float:none;" id="colorCode">Color Code</button>
+    <button class="button" style="float:none;" id="colorNormal">Color Normal</button>
+
+    <!-- <button id="stop-btn">Stop</button> -->
+    <button id="reset-btn">Clear</button>
+
+    <div id="container">
+        <h1>&#916;<i class="fa fa-plus"></i></h1>
+    </div>
+
+    <div id="container-2">     
+        <input type="text" id="placeholder" placeholder="Add New To-Do">
+        <button id="start-btn">Start</button>
+
+        <!-- project dropdown --> 
+        <div class="dropdown">
+            <button id="toggle" class="dropbtn">Project Name</button>
+            <div id="myDropdown" class="dropdown-content">
+                <input type="text" placeholder="Search.." id="myInput">
+                <a id='Proposals' class='dDButton'>Proposals</a>
+                <a id='Field Word' class='dDButton'>Field Word</a>
+                <a id='Tax Docs' class='dDButton'>Tax Docs</a>
+                <a id='Event Planning' class='dDButton'>Event Planning</a>
+                <a id='Internal' class='dDButton'>Internal</a>
+            </div>
+        </div>
+        <!-- end project dropdown --> 
+        <input class="noEnterSubmit" id="clock" type="text" size="12" name="clock" value="0 : 00 : 00"/>
+    </div>
+
+    <ul id="projects" class="droppable-area">
+        <li class="listItem">
+            <span>
+                <i class="fa fa-trash"></i>
+            </span>
+            <p>
+                <i class="fa fa-hourglass"></i>
+            </p>
+            <div class="separator">&nbsp;_&nbsp;</div>
+            <div class="separator">º</div>wewe   
+            <div class="projIcon">
+                <h6 style="background-color:rgb(92, 107, 115)">Tax Docs</h6>
+            </div>
+        </li>
+
+        <li class="listItem">
+            <span>
+                <i class="fa fa-trash"></i>
+            </span>
+            <p><i class="fa fa-hourglass"></i></p>
+            <div class="separator">&nbsp;_&nbsp;</div>
+            <div class="separator">º</div>test    
+            <div class="projIcon">
+                <h6 style="background-color:rgb(92, 107, 115)">Proposals</h6>
+            </div>
+        </li>
+
+        <li class="listItem">
+            <span><i class="fa fa-trash"></i>
+            </span>
+            <p><i class="fa fa-hourglass"></i></p>
+            <div class="separator">&nbsp;_&nbsp;</div>
+            <div class="separator">º</div>vbvvbwew   
+            <div class="projIcon">
+                <h6 style="background-color:rgb(92, 107, 115)">Event Planning</h6>
+            </div>
+        </li>
+
+        <li class="listItem">
+            <span>
+                <i class="fa fa-trash"></i>
+            </span>
+            <p><i class="fa fa-hourglass"></i></p>
+            <div class="separator">&nbsp;_&nbsp;</div>
+            <div class="separator">º</div>we kove this   
+            <div class="projIcon">
+                <h6 style="background-color:rgb(92, 107, 115)">Tax Docs</h6>
+            </div>
+        </li>
+    </ul>
+
+    <!-- jquery + jquery ui drag drop --> 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+
+    <!-- modules --> 
+    <script src="dist/bundle.js"></script>
+</body>
+</html>
