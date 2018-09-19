@@ -1,7 +1,6 @@
 import {dragDropList} from './modules/drag-drop';
 import {listSearch} from './modules/list-search';
-import {crossOffTask, deleteListItem, hideListInput} from './modules/li-delete-hide';
-
+import {addListTask, deleteListItem, toggleBilling, hideListInput} from './modules/li-delete-hide';
 
 import {startTimer, trackListItemTime} from './modules/timer-components';
 
@@ -16,19 +15,17 @@ dragDropList();
 listSearch(); 
 
 // li items delete, hide 
-crossOffTask();
+addListTask();
 deleteListItem();
+
 hideListInput();
 trackListItemTime();
-
-
 
 // choose project dropdown 
 toggleProjectDropdown();
 filterFunction();
 filterEntry();
 appendProjToButton();
-
 
 // initialize <li> append
 appendToList();
