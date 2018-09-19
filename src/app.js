@@ -1,6 +1,6 @@
 import {dragDropList} from './modules/drag-drop';
 import {listSearch} from './modules/list-search';
-import {addListTask, deleteListItem, toggleBilling, hideListInput} from './modules/li-delete-hide';
+import {addListTask, deleteListItem, toggleBill, hideListInput} from './modules/li-delete-hide';
 
 import {startTimer, trackListItemTime} from './modules/timer-components';
 
@@ -10,6 +10,7 @@ import {appendToList, colorCodeButtons} from './modules/list-interactions';
 
 // drag drop 
 dragDropList();
+toggleBill();
 
 // <li> alphabetical search 
 listSearch(); 

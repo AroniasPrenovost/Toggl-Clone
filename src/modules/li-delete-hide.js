@@ -1,5 +1,3 @@
-// instad of cross-off, this adds to task input
-// but doesn't update project 
 let toggleBilling = document.getElementById("billIcon"); 
 
 const addListTask = () => {
@@ -27,9 +25,13 @@ const deleteListItem = () =>  {
     });
 }
 
-toggleBilling.addEventListener('click', () => {
-  toggleBilling.classList.toggle("billIcon");
-});
+const toggleBill = () => {
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('billIcon')) {
+            event.target.classList.toggle('billIconToggle');
+        }
+    }, false);
+}
 
 const hideListInput = () => {
     $(".fa-plus").click(function(){
@@ -39,4 +41,4 @@ const hideListInput = () => {
     });
 }
 
-export {addListTask, deleteListItem, hideListInput}; 
+export {addListTask, deleteListItem, toggleBill, hideListInput}; 

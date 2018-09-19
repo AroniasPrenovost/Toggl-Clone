@@ -119,6 +119,9 @@ li:hover span {
   display: inline; }
 
 .billIcon {
+  font-weight: normal; }
+
+.billIconToggle {
   font-weight: bold; }
 
 .noselect {

@@ -132,7 +132,7 @@ if (typeof color === "string" || color instanceof String){
 var projectCat = "<div class='projIcon'><h6 style='background-color:" + color + "'" + ">" + projtitle + "</h6></div>"
 // create a new li and add to ul
 //    $("ul").append("<li><span><i class='fa fa-trash'></i><i class='fa fa-hourglass'></i></span> " + todoText + "</li>");
-$("ul").append("<li class='listItem'><span><i class='fa fa-trash'></i></span><p><i class='fa fa-hourglass'></i></p>" + "<div class='separator'>&nbsp;_&nbsp;</div>" + "<div class='separator'>&#186;</div>" + todoText + "   " + projectCat + "</li>");
+$("ul").append("<li class='listItem'><span><i class='fa fa-trash'></i></span><p><i class='fa fa-hourglass'></i></p>" + "<div class='separator'>&nbsp;_&nbsp;</div>" + "<div class='separator'>&#186;</div>" + todoText + "   " + projectCat + "     " + "<p id=\'billIcon\' class=\'noselect\'>$</p>" + "</li>");
 
 // show lis reset inputs 
 showLis();
