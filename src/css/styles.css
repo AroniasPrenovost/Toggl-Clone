@@ -101,12 +101,6 @@ li:hover span {
 .fa-plus {
   float: right; }
 
-/*
-.completed {
-	color: gray;
-	text-decoration: line-through;
-}
-*/
 .projIcon {
   display: inline-block;
   display: visible; }
@@ -119,10 +113,15 @@ li:hover span {
   display: inline; }
 
 .billIcon {
-  font-weight: normal; }
+  font-weight: normal;
+  color: black;
+  background-color: transparent;
+  position: fixed;
+  display: inline-block; }
 
 .billIconToggle {
-  font-weight: bold; }
+  font-weight: bold;
+  position: fixed; }
 
 .noselect {
   -webkit-touch-callout: none;
@@ -137,7 +136,7 @@ li:hover span {
   /* Internet Explorer/Edge */
   user-select: none;
   /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */ }
+      supported by Chrome and Opera */ }
 
 .listTime {
   display: inline-block;
@@ -150,89 +149,80 @@ li:hover span {
   display: inline-block; }
 
 /*
-input {
+    input {
     font-size: 18px;
     color: #666;
     background-color: #f7f7f7;
     padding: 13px 13px 13px 20px;
     box-sizing: border-box;
     border: none !important;
-}
+    }
 
 
-*/
+    */
 /* task input */
 /*
-input:nth-child(2){
+    input:nth-child(2){
     width:40%; /* was 55% */
 /*
     outline: none !important;
     border: none !important;
-}
-*/
+    }
+    */
 /* start/stop button */
 /*
-input:nth-child(3){
+    input:nth-child(3){
     float:right; 
     width:20%; 
     height: 52px;
     outline: none !important;
     border: none !important;
     color:#ecf0f1;
-}
-*/
+    }
+    */
 /* clock */
 /*
-input:nth-child(4){
+    input:nth-child(4){
     text-align:right; width:15%; outline: none !important;
     border: none !important;
     float:right; 
-}
-*/
+    }
+    */
 /*
-li {
-	background: white;
-	height: 40px;
-	line-height: 40px;
-	color: #666;
-}
+    li {
+    background: white;
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+    }
 
-span {
-	background: #e74c3c;
-	height: 40px;
-	margin-right: 20px;
-	text-align: center;
-	color: white;
-	width: 0px;
-	display: inline-block;
-	transition: 0.2s linear;
-	opacity: 1;
-}
+    span {
+    background: #e74c3c;
+    height: 40px;
+    margin-right: 20px;
+    text-align: center;
+    color: white;
+    width: 0px;
+    display: inline-block;
+    transition: 0.2s linear;
+    opacity: 1;
+    }
 
+    li:nth-child(2n){
+    background: #f7f7f7;
+    }
 
+    li:hover span {
+    width: 40px;
+    opacity: 1.0;
+    }
 
-
-li:nth-child(2n){
-	background: #f7f7f7;
-}
-
-
-
-
-li:hover span {
-	width: 40px;
-	opacity: 1.0;
-}
-
-input:focus{
-	background: white;
-	border: 3px solid #2980b9;
-	outline: none;
-}
-
-
-
-*/
+    input:focus{
+    background: white;
+    border: 3px solid #2980b9;
+    outline: none;
+    }
+    */
 li:nth-child(odd) {
   background: #fff; }
 

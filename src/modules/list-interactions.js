@@ -88,7 +88,7 @@ $( ".dDButton" ).each(function() {
 });
 
 let projColor = '';
-var counter = '';
+let counter = '';
 for (var o = 0; o < currentProjectColors.length; o++) {
     if (str1 === currentProjectColors[o][0]) {
         projColor = currentProjectColors[o][1];
@@ -101,44 +101,49 @@ for (var o = 0; o < currentProjectColors.length; o++) {
 
 if (counter === currentProjectColors.length) {
     projColor = getRandomColor();
-}
-return projColor;
-}
-return str2; 
+    }
+    return projColor;
+    }
+    return str2; 
 }
 
 const appendToList = () => {
     $("input[type='text'").keypress(function(event){
         if(event.which === 13){
-// grab new todo text from input
-var todoText = $(this).val();
-$(this).val("");
-var color = '';
-var projtitle = toggle.innerHTML.split(" - ").pop();
-alert(projtitle);
-var color = $("h6:first").css("background-color");
 
-//  one or more li exists
-if (typeof color === "string" || color instanceof String){
-    if (color !== "rgb(92, 107, 115)") {
-        color = determineProjectTagColors(projtitle, color);
-    } else {
-        color = color;
-    }
-} else { // first instance of li 
-    color = "rgb(92, 107, 115)";
-}
+        // grab new todo text from input
+        let todoText = $(this).val();
+        $(this).val("");
 
-var projectCat = "<div class='projIcon'><h6 style='background-color:" + color + "'" + ">" + projtitle + "</h6></div>"
-// create a new li and add to ul
-//    $("ul").append("<li><span><i class='fa fa-trash'></i><i class='fa fa-hourglass'></i></span> " + todoText + "</li>");
-$("ul").append("<li class='listItem'><span><i class='fa fa-trash'></i></span><p><i class='fa fa-hourglass'></i></p>" + "<div class='separator'>&nbsp;_&nbsp;</div>" + "<div class='separator'>&#186;</div>" + todoText + "   " + projectCat + "     " + "<p id=\'billIcon\' class=\'noselect\'>$</p>" + "</li>");
+        let projtitle = toggle.innerHTML.split(" - ").pop();
 
-// show lis reset inputs 
-showLis();
-resetInputs();
-}   
-});
+        let color = '';
+        color = $("h6:first").css("background-color");
+
+        //  one or more li exists
+        if (typeof color === "string" || color instanceof String){
+            if (color !== "rgb(92, 107, 115)") {
+                color = determineProjectTagColors(projtitle, color);
+            } else {
+                color = color;
+            }
+        } else { 
+            color = "rgb(92, 107, 115)"; // first instance of li 
+        }
+
+        let projectNameIcon = "<div class='projIcon'><h6 style='background-color:" + color + "'" + ">" + projtitle + "</h6></div>";
+        let projectBillIcon = "<div class='billIcon noselect'>$</div>";
+        let deleteLiIcon = "<span><i class='fa fa-trash'></i></span>";
+        let appendTimeIcon = "<p><i class='fa fa-hourglass'></i></p>";
+
+        // create a new li and add to ul
+        $("ul").append("<li class='listItem'>" + deleteLiIcon + appendTimeIcon + "<div class='separator'>&nbsp;_&nbsp;</div>" + "<div class='separator'>&#186;</div>" + todoText + projectNameIcon + projectBillIcon + "</li>");
+
+        // show lis + reset inputs 
+        showLis();
+        resetInputs();
+        }   
+    });
 }
 
 export {appendToList, colorCodeButtons};

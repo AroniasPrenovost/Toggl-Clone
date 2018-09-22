@@ -12,7 +12,7 @@
 input#clock {
   width: 10%; }
 
-#start-btn {
+.start-btn {
   float: right;
   background-color: green;
   height: 50px;
