@@ -3,6 +3,7 @@ let toggleBilling = document.getElementById("billIcon");
 const addListTask = () => {
     $("ul").on("click", "li", function(){ 
 
+    if (event.target.classList.contains('billIcon') != true) {
         // index of button clicked
         let buttonIndex = $(this).index();
         let li = document.getElementById('projects').getElementsByClassName('listItem')[buttonIndex].innerHTML;
@@ -13,6 +14,7 @@ const addListTask = () => {
         // get task content and replace placeholder field text 
         let task = rawString.split("<div ")[0].trim();
         document.getElementById("placeholder").value = task;
+        }
     });
 }
 
