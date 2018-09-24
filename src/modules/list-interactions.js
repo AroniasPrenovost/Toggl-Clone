@@ -51,6 +51,27 @@ const changeProjectNameColors = (str) => {
     });
 }
 
+const validateTimeEntry = () => {
+// check for invalid input - '80 seconds' should be 1:20, etc. 
+let time = document.getElementById("clock").value; 
+let mins = time.charAt(4); 
+let secs = time.charAt(9);
+let forbidden = ['6', '7', '8', '9']; 
+var flag = true; 
+for (let m = 0; m < 5; m++) {
+  if(forbidden[m] === mins) {
+    flag = false;
+  } 
+  if (forbidden[m] === secs) {
+      flag = false;
+  } 
+  if (time.match(/[a-z]/i)) {
+      flag = false;
+  } 
+}
+return flag;
+}
+
 // color code, normalize project tags
 const colorCodeButtons = () => {
     $(document).ready(function(){
@@ -80,70 +101,50 @@ const determineProjectTagColors = (str1, str2) => {
             currentProjectColors.push([($(this).html()), ($(this).css("background-color"))]);
         });
 
-currentProjectColors.length = h6number; // remove duplicates from array 
+        currentProjectColors.length = h6number; // remove duplicates from array 
 
-var allProjectNames = [];
-$( ".dDButton" ).each(function() {
-    allProjectNames.push([($(this).attr('id'))]);
-});
+        var allProjectNames = [];
+        $( ".dDButton" ).each(function() {
+            allProjectNames.push([($(this).attr('id'))]);
+        });
 
-let projColor = '';
-let counter = '';
-for (var o = 0; o < currentProjectColors.length; o++) {
-    if (str1 === currentProjectColors[o][0]) {
-        projColor = currentProjectColors[o][1];
-    } 
+        let projColor = '';
+        let counter = '';
+        for (var o = 0; o < currentProjectColors.length; o++) {
+            if (str1 === currentProjectColors[o][0]) {
+                projColor = currentProjectColors[o][1];
+            } 
 
-    if (str1 !== currentProjectColors[o][0]) {
-        counter++;
-    } 
-}
+            if (str1 !== currentProjectColors[o][0]) {
+                counter++;
+            } 
+        }
 
-if (counter === currentProjectColors.length) {
-    projColor = getRandomColor();
+    if (counter === currentProjectColors.length) {
+        projColor = getRandomColor();
     }
     return projColor;
     }
     return str2; 
 }
 
-const appendToList = () => {
-    $("input[type='text'").keypress(function(event){
-        if(event.which === 13){
+const projectNameAndColor = () => {
+    var projtitle = toggle.innerHTML.split(" - ").pop();
+    var color = '';
+    color = $("h6:first").css("background-color");
 
-        // grab new todo text from input
-        let todoText = $(this).val();
-        $(this).val("");
-
-        let projtitle = toggle.innerHTML.split(" - ").pop();
-
-        let color = '';
-        color = $("h6:first").css("background-color");
-
-        //  one or more li exists
-        if (typeof color === "string" || color instanceof String){
-            if (color !== "rgb(92, 107, 115)") {
-                color = determineProjectTagColors(projtitle, color);
-            } else {
-                color = color;
-            }
-        } else { 
-            color = "rgb(92, 107, 115)"; // first instance of li 
+    //  one or more li exists
+    if (typeof color === "string" || color instanceof String){
+        if (color !== "rgb(92, 107, 115)") {
+            color = determineProjectTagColors(projtitle, color);
+        } else {
+            color = color;
         }
+    } else { 
+    color = "rgb(92, 107, 115)"; // first instance of li 
+    }
 
-        let projectNameIcon = "<div class='projIcon'><h6 style='background-color:" + color + "'" + ">" + projtitle + "</h6></div>";
-        let projectBillIcon = "<div class='billIcon noselect'>$</div>";
-        let deleteLiIcon = "<span><i class='fa fa-trash'></i></span>";
-        let appendTimeIcon = "<p><i class='fa fa-hourglass'></i></p>";
-
-        // create a new li and add to ul
-        $("ul").append("<li class='listItem'>" + deleteLiIcon + appendTimeIcon + "<div class='separator'>&nbsp;_&nbsp;</div>" + "<div class='separator'>&#186;</div>" + todoText + projectNameIcon + projectBillIcon + "</li>");
-
-        // show lis + reset inputs 
-        showLis();
-        resetInputs();
-        }   
-    });
+    return [projtitle, color]; 
 }
 
-export {appendToList, colorCodeButtons};
+export {resetInputs, showLis, getRandomColor, changeProjectNameColors, validateTimeEntry, colorCodeButtons, determineProjectTagColors, projectNameAndColor};
