@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <title>Gulp, Sass, webpack and ES6 modules boilerplate</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" type="text/css" href="src/css/styles.css">
     <link rel="stylesheet" type="text/css" href="src/css/li-sort.css">
-    <link rel="stylesheet" type="text/css" href="src/css/stop-clock.css">
+    <link rel="stylesheet" type="text/css" href="src/css/play-button.css">
     <link rel="stylesheet" type="text/css" href="src/css/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="src/css/stop-clock.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" crossorigin="anonymous" />
@@ -25,13 +27,15 @@
 
     <button id="reset-btn">Clear</button>
     <div id="container">
+
         <h1>&#916;<i class="fa fa-plus"></i></h1>
+        <button id="traverse">Click me</button>
     </div>
 
     <div id="container-2">     
 
         <input type="text" id="placeholder" placeholder="Add New To-Do">
-        <button id="start-btn" class="start-btn">Start</button>
+        <button id="start-btn" class="start-btn"><i class="fa fa-play"></i></button>
 
         <!-- project dropdown --> 
         <div class="dropdown">
@@ -54,7 +58,8 @@
 
         <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>wewewwe<div class="projIcon"><h6 style="background-color:rgb(92, 107, 115)">Event Planning</h6></div><div class="billIcon noselect">$</div></li>
 
-        <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>wewewwe<div class="projIcon"><h6 style="background-color:rgb(92, 107, 115)">Proposals</h6></div><div class="billIcon noselect">$</div></li>
+        <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>wewewwe<div class="projIcon"><h6 style="background-color:rgb(92, 107, 115)">Proposals</h6></div><div class="billIcon noselect">$</div>
+        </li>
     </ul>
 
     <!-- jquery + jquery ui drag drop --> 

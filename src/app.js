@@ -1,21 +1,21 @@
-import {dragDropList} from './modules/drag-drop';
-import {listSearch} from './modules/list-search';
-import {addListTask, deleteListItem, toggleBill, hideListInput} from './modules/li-delete-hide';
-import {startTimer, trackListItemTime} from './modules/timer-components';
-import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropdown-button';
-import {resetInputs, showLis, getRandomColor, changeProjectNameColors, validateTimeEntry, colorCodeButtons, determineProjectTagColors, projectNameAndColor} from './modules/list-interactions';
+import {dragDropList} from './modules/dragDrop';
+import {listSearch} from './modules/listSearch';
+import {addListTask, deleteListItem, toggleBill, hideListInput} from './modules/liDeleteHide';
+import {startTimer, trackListItemTime} from './modules/timerComponents';
+import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
+import {resetInputs, showLis, getRandomColor, changeProjectNameColors, validateTimeEntry, colorCodeButtons, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
+import {} from './modules/traverseList';
+
+// ----- Instant Functions ----- // 
+listSearch(); 
 
 // drag drop 
 dragDropList();
 toggleBill();
 
-// <li> alphabetical search 
-listSearch(); 
-
 // li items delete, hide 
 addListTask();
 deleteListItem();
-
 hideListInput();
 trackListItemTime();
 
@@ -23,6 +23,8 @@ trackListItemTime();
 toggleProjectDropdown();
 filterFunction();
 filterEntry();
+// ----- ---------------- ----- //
+
 appendProjToButton();
 
 // initialize append 
@@ -59,4 +61,3 @@ const appendToList = () => {
 }
 // initialize <li> append
 appendToList();
-

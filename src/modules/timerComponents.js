@@ -33,12 +33,12 @@ startButton.addEventListener('click', () => {
   counter++;
   if (counter % 2 == 0) {
     intervalId = setInterval(startTimer, 1000);
-    startButton.innerHTML = 'Stop';
+    startButton.innerHTML = '<i class="fa fa-pause"></i>';
     startButton.style.backgroundColor = 'red';
   } else {
 clearInterval(intervalId); // pause timer 
-startButton.innerHTML = 'Start';
-startButton.style.backgroundColor = 'green';
+ startButton.innerHTML = '<i class="fa fa-play"></i>';
+ startButton.style.backgroundColor = 'green';
 }
 })
 
@@ -47,14 +47,9 @@ resetButton.addEventListener('click', () => {
   stopClock.value = "0 : 00 : 00";
 
 clearInterval(intervalId); // pause timer 
-startButton.innerHTML = 'Start';
-startButton.style.backgroundColor = 'green';
+ startButton.innerHTML = '<i class="fa fa-play"></i>';
+ startButton.style.backgroundColor = 'green';
 });
-
-$('span').bind('dblclick',function(){
-  $(this).attr('contentEditable',true);
-});
-
 
 const trackListItemTime = () => {
   $("ul").on("click", ".fa-hourglass", function(event){
