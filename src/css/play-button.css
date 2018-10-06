@@ -18,3 +18,10 @@ input#clock {
   height: 50px;
   width: 10%;
   display: inline-block; }
+
+.toggle-container {
+  float: right;
+  background-color: #eee;
+  height: 50px;
+  width: 1%;
+  display: inline-block; }
