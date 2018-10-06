@@ -15,9 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" crossorigin="anonymous" />
 </head>
 <body>
-    <div class="content">
 
-    </div>
     <button class="button" id="exportToExcel">Export To CSV</button>
     <div class="formbar">
 
@@ -36,11 +34,10 @@
 
         <input type="text" id="placeholder" placeholder="Add New To-Do">
         <div class="toggle-container">
-            <i class="fa fa-clock-o"></i></p>
-            <i class="fa fa-align-justify"></i></p>
+            <p class="toggle-inputs"><i class="fa fa-clock-o hover-title" title="Timer Mode"></i></p>
+            <p class="toggle-inputs"><i class="fa fa-align-justify hover-title" title="Manual Mode"></i></p>
         </div>
         <button id="start-btn" class="start-btn"><i class="fa fa-play"></i></button>
-
 
         <!-- project dropdown --> 
         <div class="dropdown">
@@ -55,6 +52,10 @@
             </div>
         </div>
         <!-- end project dropdown --> 
+
+        <div style="height:50px;position: relative;width:10%;font-size: 22px" class="billIcon noselect">$</div>
+
+        <!-- timer input --> 
         <input class="noEnterSubmit" id="clock" type="text" size="12" name="clock" value="0 : 00 : 00"/>
     </div>
 
