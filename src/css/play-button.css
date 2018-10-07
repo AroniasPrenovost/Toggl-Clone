@@ -12,6 +12,17 @@
 input#clock {
   width: 10%; }
 
+input#clock:focus {
+  border: 3px solid #eee !important; }
+
+.manual-entry {
+  width: 150px;
+  border: 3px solid #eee !important;
+  display: block; }
+
+.manual-entry:focus {
+  background-color: #eee; }
+
 .start-btn {
   float: right;
   background-color: green;
@@ -23,16 +34,22 @@ input#clock {
   float: right;
   background-color: #f7f7f7;
   max-height: 50px;
-  width: 1%;
+  width: 2%;
   display: inline-block; }
 
 .toggle-inputs {
-  margin: 0 0 0 0;
+  margin: 0 0 0 5px;
   font-size: 18px;
-  color: #7f8c8d; }
+  color: #7f8c8d;
+  height: 50%;
+  width: 100%; }
+
+.toggle-inputs:first-child {
+  color: #27ae60; }
 
 .hover-title {
-  text-decoration: none; }
+  text-decoration: none;
+  vertical-align: inherit; }
   .hover-title:hover {
     color: #27ae60;
     position: relative; }

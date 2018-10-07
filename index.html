@@ -55,8 +55,16 @@
 
         <div style="height:50px;position: relative;width:10%;font-size: 22px" class="billIcon noselect">$</div>
 
-        <!-- timer input --> 
-        <input class="noEnterSubmit" id="clock" type="text" size="12" name="clock" value="0 : 00 : 00"/>
+        <div class="clock-container">
+            <!-- timer input --> 
+            <input id="clock" type="text" size="12" name="clock" value="0 : 00 : 00"/>
+            <!-- manual time input --> 
+            <input type="text" class="manual-entry" id="manual-entry-1" name="fname">
+            <input type="text" class="manual-entry" id="manual-entry-2" name="lname">
+        </div>
+
+
+
     </div>
 
     <ul id="projects" class="droppable-area">
