@@ -123,6 +123,12 @@ li:hover span {
   font-weight: bold;
   position: fixed; }
 
+.inputBilling {
+  height: 50px;
+  position: relative;
+  width: 10%;
+  font-size: 22px; }
+
 .noselect {
   -webkit-touch-callout: none;
   /* iOS Safari */

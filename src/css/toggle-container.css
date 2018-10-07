@@ -1,0 +1,46 @@
+.toggle-container {
+  float: right;
+  background-color: #f7f7f7;
+  max-height: 50px;
+  width: 2%;
+  display: inline-block; }
+
+.toggle-inputs {
+  margin: 0 0 0 5px;
+  font-size: 18px;
+  color: #7f8c8d;
+  height: 50%;
+  width: 100%; }
+
+.toggle-inputs:first-child {
+  color: #27ae60; }
+
+.hover-title {
+  text-decoration: none;
+  vertical-align: inherit; }
+  .hover-title:hover {
+    color: #27ae60;
+    position: relative; }
+  .hover-title[title]:hover:after {
+    font-size: 12px;
+    content: attr(title);
+    padding: 12px 8px;
+    color: #333;
+    position: absolute;
+    float: left;
+    left: 0;
+    top: 100%;
+    margin-left: -90px;
+    margin-top: -20px;
+    white-space: nowrap;
+    z-index: 20px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0px 0px 4px #222;
+    -webkit-box-shadow: 0px 0px 4px #222;
+    box-shadow: 0px 0px 4px #222;
+    background-image: -webkit-linear-gradient(#eeeeee, #cccccc);
+    background-image: -moz-linear-gradient(#eeeeee, #cccccc);
+    background-image: -o-linear-gradient(#eeeeee, #cccccc);
+    background-image: linear-gradient(#eeeeee, #cccccc); }

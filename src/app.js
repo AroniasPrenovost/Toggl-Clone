@@ -5,6 +5,7 @@ import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
 import {resetInputs, showLis, getRandomColor, changeProjectNameColors, validateTimeEntry, colorCodeButtons, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
 import {} from './modules/traverseList';
+import {} from './modules/toggleInputs';
 
 // ----- Instant Functions ----- // 
 listSearch(); 

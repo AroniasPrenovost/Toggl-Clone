@@ -12,9 +12,13 @@
 input#clock {
   width: 10%; }
 
-.start-btn {
-  float: right;
-  background-color: green;
-  height: 50px;
-  width: 10%;
-  display: inline-block; }
+input#clock:focus {
+  border: 3px solid #eee !important; }
+
+.manual-entry {
+  width: 150px;
+  border: 3px solid #eee !important;
+  display: none; }
+
+.manual-entry:focus {
+  background-color: #eee; }

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <title>Gulp, Sass, webpack and ES6 modules boilerplate</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" type="text/css" href="src/css/styles.css">
     <link rel="stylesheet" type="text/css" href="src/css/li-sort.css">
     <link rel="stylesheet" type="text/css" href="src/css/play-button.css">
     <link rel="stylesheet" type="text/css" href="src/css/dropdown.css">
-    <link rel="stylesheet" type="text/css" href="src/css/stop-clock.css">
+ <link rel="stylesheet" type="text/css" href="src/css/clock-container.css">
+        <link rel="stylesheet" type="text/css" href="src/css/toggle-container.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" crossorigin="anonymous" />
@@ -25,17 +25,15 @@
 
     <button id="reset-btn">Clear</button>
     <div id="container">
-
         <h1>&#916;<i class="fa fa-plus"></i></h1>
         <button id="traverse">Click me</button>
     </div>
 
     <div id="container-2">     
-
         <input type="text" id="placeholder" placeholder="Add New To-Do">
         <div class="toggle-container">
-            <p class="toggle-inputs"><i class="fa fa-clock-o hover-title" title="Timer Mode"></i></p>
-            <p class="toggle-inputs"><i class="fa fa-align-justify hover-title" title="Manual Mode"></i></p>
+            <p id="timer" class="toggle-inputs"><i class="fa fa-clock-o hover-title" title="Timer Mode"></i></p>
+            <p id="manual" class="toggle-inputs"><i class="fa fa-align-justify hover-title" title="Manual Mode"></i></p>
         </div>
         <button id="start-btn" class="start-btn"><i class="fa fa-play"></i></button>
 
@@ -53,18 +51,14 @@
         </div>
         <!-- end project dropdown --> 
 
-        <div style="height:50px;position: relative;width:10%;font-size: 22px" class="billIcon noselect">$</div>
-
+        <div class="billIcon inputBilling noselect">$</div>
         <div class="clock-container">
             <!-- timer input --> 
             <input id="clock" type="text" size="12" name="clock" value="0 : 00 : 00"/>
             <!-- manual time input --> 
-            <input type="text" class="manual-entry" id="manual-entry-1" name="fname">
-            <input type="text" class="manual-entry" id="manual-entry-2" name="lname">
+            <input type="text" class="manual-entry" id="manual-entry-1" placeholder="Start">
+            <input type="text" class="manual-entry" id="manual-entry-2" placeholder="End">
         </div>
-
-
-
     </div>
 
     <ul id="projects" class="droppable-area">
