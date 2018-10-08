@@ -1,7 +1,7 @@
-let startButton = document.getElementById('start-btn');
-let resetButton = document.getElementById('reset-btn');
-let myInput = document.getElementById("myInput");
-let toggle = document.getElementById("toggle");
+let startButton = document.getElementById('start-btn'),
+    resetButton = document.getElementById('reset-btn'),
+    myInput = document.getElementById("myInput"),
+    toggle = document.getElementById("toggle");
 
 // reset inputs 
 const resetInputs = () => {

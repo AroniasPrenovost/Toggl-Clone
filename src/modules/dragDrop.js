@@ -1,4 +1,4 @@
-  const dragDropList = () => {
+const dragDropList = () => {
   $( ".droppable-area" ).sortable({
       connectWith: ".connected-sortable",
       stack: '.connected-sortable ul'

@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="src/css/li-sort.css">
     <link rel="stylesheet" type="text/css" href="src/css/play-button.css">
     <link rel="stylesheet" type="text/css" href="src/css/dropdown.css">
- <link rel="stylesheet" type="text/css" href="src/css/clock-container.css">
-        <link rel="stylesheet" type="text/css" href="src/css/toggle-container.css">
+    <link rel="stylesheet" type="text/css" href="src/css/clock-container.css">
+    <link rel="stylesheet" type="text/css" href="src/css/toggle-container.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" crossorigin="anonymous" />
@@ -56,10 +56,15 @@
             <!-- timer input --> 
             <input id="clock" type="text" size="12" name="clock" value="0 : 00 : 00"/>
             <!-- manual time input --> 
-            <input type="text" class="manual-entry" id="manual-entry-1" placeholder="Start">
-            <input type="text" class="manual-entry" id="manual-entry-2" placeholder="End">
+
+            <input id="manual-entry-1" class="manual-entry" type="text" placeholder="" />
+            <i id="entry-date-toggle" class="fa fa-calendar"></i>
+            <!-- appending -->
+
+            <input type="text" class="manual-entry" id="manual-entry-2" placeholder=""/>
         </div>
     </div>
+
 
     <ul id="projects" class="droppable-area">
         <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>SSPA Documents<div class="projIcon"><h6 style="background-color:rgb(92, 107, 115)">Tax Docs</h6></div><div class="billIcon noselect">$</div></li>

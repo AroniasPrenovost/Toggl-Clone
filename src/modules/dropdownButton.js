@@ -1,6 +1,6 @@
-let myInput = document.getElementById("myInput");
-let toggle = document.getElementById("toggle");
-let myDropdown = document.getElementById("myDropdown");
+let myInput = document.getElementById("myInput"),
+    toggle = document.getElementById("toggle"),
+    myDropdown = document.getElementById("myDropdown");
 
 const toggleProjectDropdown = () => {
   toggle.addEventListener("click", function(){

@@ -1,12 +1,12 @@
-let hour = 0;
-let minute = 0;
-let seconds = 0;
-let totalSeconds = 0;
+let hour = 0,
+     minute = 0,
+    seconds = 0,
+    totalSeconds = 0;
 
-let startButton = document.getElementById('start-btn');
-let resetButton = document.getElementById('reset-btn');
-let toggle = document.getElementById("toggle");
-let stopClock = document.getElementsByName("clock")[0];
+let startButton = document.getElementById('start-btn'),
+    resetButton = document.getElementById('reset-btn'),
+    toggle = document.getElementById("toggle"),
+    stopClock = document.getElementsByName("clock")[0];
 
 let intervalId = null;
 
