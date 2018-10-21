@@ -3,7 +3,8 @@ let manualModeButton = document.getElementById('manual'),
 	timerModeClock = document.getElementById('clock'),
 	manualInput1 = document.getElementById('manual-entry-1'),
 	manualInput2 = document.getElementById('manual-entry-2'),
-	dateEntryToggle = document.getElementById('entry-date-toggle');
+	datepicker = document.getElementById('datepicker');
+	// dateEntryToggle = document.getElementById('entry-date-toggle');
 
 const currentTimeManualInput = () => { 
     let d = new Date();
@@ -11,6 +12,18 @@ const currentTimeManualInput = () => {
     manualInput1.value = n;
 	manualInput2.value = n;
 }
+
+// jquery datepicker 
+$(function() {
+	$("#datepicker").datepicker();
+});
+
+function formatDate() {
+	if (datepicker.value.length > 5) {
+		datepicker.value = datepicker.value.slice(0, -1);
+	}
+}
+setInterval(formatDate, 0);
 
 manualModeButton.addEventListener('click', () => {
 	// toggle button colors 
@@ -20,7 +33,7 @@ manualModeButton.addEventListener('click', () => {
 	timerModeClock.style.display = "none";
 	manualInput1.style.display = "inline-block";
 	manualInput2.style.display = "inline-block";
-	dateEntryToggle.style.visibility = "visible";
+	//dateEntryToggle.style.visibility = "visible";
 
 	currentTimeManualInput();
 });
@@ -33,5 +46,5 @@ timerModeButton.addEventListener('click', () => {
 	timerModeClock.style.display = "inline-block"; 
 	manualInput1.style.display = "none";
 	manualInput2.style.display = "none";
-	dateEntryToggle.style.visibility = "hidden";
+	//dateEntryToggle.style.visibility = "hidden";
 });

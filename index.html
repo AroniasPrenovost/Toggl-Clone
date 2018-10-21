@@ -29,7 +29,7 @@
         <button id="traverse">Click me</button>
     </div>
 
-    <div id="container-2">     
+    <div id="container-2">
         <input type="text" id="placeholder" placeholder="Add New To-Do">
         <div class="toggle-container">
             <p id="timer" class="toggle-inputs"><i class="fa fa-clock-o hover-title" title="Timer Mode"></i></p>
@@ -58,10 +58,11 @@
             <!-- manual time input --> 
 
             <input id="manual-entry-1" class="manual-entry" type="text" placeholder="" />
-            <i id="entry-date-toggle" class="fa fa-calendar"></i>
+            <!--<i id="entry-date-toggle">Today</i>-->
+          
             <!-- appending -->
 
-            <input type="text" class="manual-entry" id="manual-entry-2" placeholder=""/>
+            <input type="text" class="manual-entry" id="manual-entry-2" style="margin-left:-3%" placeholder=""/>
         </div>
     </div>
 
@@ -75,11 +76,19 @@
         </li>
     </ul>
 
-    <!-- jquery + jquery ui drag drop --> 
+ 
+  <input class="" type="text" id="datepicker" value="Today">
+
+
+
+    <!-- jquery + jquery ui (drag drop + datepicker) --> 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
     <!-- modules --> 
     <script src="dist/bundle.js"></script>
+
+    <script>
+</script>
 </body>
 </html>

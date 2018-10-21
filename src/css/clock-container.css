@@ -10,25 +10,31 @@
   border: 3px solid rgba(0, 0, 0, 0); }
 
 input#clock {
+  min-width: 10%;
   width: 10%; }
 
 input#clock:focus {
   border: 3px solid #eee !important; }
 
 .manual-entry {
-  width: 150px;
+  min-width: 115px;
+  width: 115px;
   border: 3px solid #eee !important;
   display: none; }
+
+.manual-entry:nth-child(2) {
+  min-width: 160px; }
 
 .manual-entry:focus {
   background-color: #eee; }
 
-#entry-date-toggle {
+#datepicker {
   position: relative;
   z-index: 1;
-  left: -25px;
+  /* left: -65px; */
   top: 1px;
   color: #7B7B7B;
   cursor: pointer;
-  width: 0;
-  visibility: hidden; }
+  width: 120px;
+  /* visibility:hidden; */
+  visibility: visible; }
