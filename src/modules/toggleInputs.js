@@ -15,15 +15,15 @@ const currentTimeManualInput = () => {
 
 // jquery datepicker 
 $(function() {
-	$("#datepicker").datepicker();
+	$("#datepicker").datepicker({
+		format: "mm/dd",
+		language: "en",
+		changeMonth: true,
+		changeYear: false
+	}).on('changeDate', function(e){
+		$(this).datepicker('hide');
+	});
 });
-
-function formatDate() {
-	if (datepicker.value.length > 5) {
-		datepicker.value = datepicker.value.slice(0, -1);
-	}
-}
-setInterval(formatDate, 0);
 
 manualModeButton.addEventListener('click', () => {
 	// toggle button colors 
