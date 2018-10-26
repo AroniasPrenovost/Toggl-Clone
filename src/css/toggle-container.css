@@ -1,8 +1,8 @@
 .toggle-container {
   float: right;
-  background-color: #f7f7f7;
-  max-height: 50px;
-  width: 2%;
+  background-color: #fff;
+  width: 30px;
+  margin: 0 0 10px 0;
   display: inline-block; }
 
 .toggle-inputs {
@@ -13,16 +13,16 @@
   width: 100%; }
 
 .toggle-inputs:first-child {
-  color: #27ae60; }
+  color: #4CAF50; }
 
 .hover-title {
   text-decoration: none;
   vertical-align: inherit; }
   .hover-title:hover {
-    color: #27ae60;
+    color: #4CAF50;
     position: relative; }
   .hover-title[title]:hover:after {
-    font-size: 12px;
+    font-size: 14px;
     content: attr(title);
     padding: 12px 8px;
     color: #333;
@@ -37,10 +37,5 @@
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    -moz-box-shadow: 0px 0px 4px #222;
-    -webkit-box-shadow: 0px 0px 4px #222;
-    box-shadow: 0px 0px 4px #222;
-    background-image: -webkit-linear-gradient(#eeeeee, #cccccc);
-    background-image: -moz-linear-gradient(#eeeeee, #cccccc);
-    background-image: -o-linear-gradient(#eeeeee, #cccccc);
-    background-image: linear-gradient(#eeeeee, #cccccc); }
+    background: #fff;
+    border: 1px solid black; }

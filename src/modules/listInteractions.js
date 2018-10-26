@@ -1,14 +1,17 @@
 let startButton = document.getElementById('start-btn'),
     resetButton = document.getElementById('reset-btn'),
     myInput = document.getElementById("myInput"),
-    toggle = document.getElementById("toggle");
+    projToggle = document.getElementById("projToggle"),
+    taskInput = document.getElementById("placeholder");
 
 // reset inputs 
 const resetInputs = () => {
     startButton.click();
     resetButton.click();
+    taskInput.placeholder = "Add new to-do";
+    taskInput.value = "";
     myInput.placeholder = "Search..";
-    toggle.innerHTML = "Project Name";
+    projToggle.innerHTML = '<i class="plus">+</i> Project/task';
     $("#container input").slice(1, 2).css({"backgroundColor": "#27ae60"});
 }
 
@@ -51,27 +54,6 @@ const changeProjectNameColors = (str) => {
     });
 }
 
-const validateTimeEntry = () => {
-// check for invalid input - '80 seconds' should be 1:20, etc. 
-let time = document.getElementById("clock").value; 
-let mins = time.charAt(4); 
-let secs = time.charAt(9);
-let forbidden = ['6', '7', '8', '9']; 
-var flag = true; 
-for (let m = 0; m < 5; m++) {
-  if(forbidden[m] === mins) {
-    flag = false;
-  } 
-  if (forbidden[m] === secs) {
-      flag = false;
-  } 
-  if (time.match(/[a-z]/i)) {
-      flag = false;
-  } 
-}
-return flag;
-}
-
 // color code, normalize project tags
 const colorCodeButtons = () => {
     $(document).ready(function(){
@@ -89,7 +71,6 @@ const colorCodeButtons = () => {
 
 $(document).ready(function(){
     $("#projectStatus").click(function(){
-
     });
 });
 
@@ -129,7 +110,7 @@ const determineProjectTagColors = (str1, str2) => {
 }
 
 const projectNameAndColor = () => {
-    var projtitle = toggle.innerHTML.split(" - ").pop();
+    var projtitle = projToggle.innerHTML.split(" - ").pop();
     var color = '';
     color = $("h6:first").css("background-color");
 
@@ -147,4 +128,4 @@ const projectNameAndColor = () => {
     return [projtitle, color]; 
 }
 
-export {resetInputs, showLis, getRandomColor, changeProjectNameColors, validateTimeEntry, colorCodeButtons, determineProjectTagColors, projectNameAndColor};
+export {resetInputs, showLis, getRandomColor, changeProjectNameColors, colorCodeButtons, determineProjectTagColors, projectNameAndColor};

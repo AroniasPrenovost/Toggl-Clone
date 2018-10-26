@@ -1,5 +1,3 @@
-let toggleBilling = document.getElementById("billIcon"); 
-
 const addListTask = () => {
     $("ul").on("click", "li", function(){ 
 
@@ -27,14 +25,8 @@ const deleteListItem = () =>  {
     });
 }
 
-const toggleBill = () => {
-    document.addEventListener('click', function (event) {
-        if (event.target.classList.contains('billIcon')) {
-            event.target.classList.toggle('billIconToggle');
-        }
-    }, false);
-}
 
+/*
 const hideListInput = () => {
     $(".fa-plus").click(function(){
         $("input[type='text']").fadeToggle();
@@ -42,5 +34,6 @@ const hideListInput = () => {
         $("#start-btn").fadeToggle();
     });
 }
+*/
 
-export {addListTask, deleteListItem, toggleBill, hideListInput}; 
+export {addListTask, deleteListItem}; 

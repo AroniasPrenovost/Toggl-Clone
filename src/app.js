@@ -1,9 +1,11 @@
 import {dragDropList} from './modules/dragDrop';
-import {listSearch} from './modules/listSearch';
-import {addListTask, deleteListItem, toggleBill, hideListInput} from './modules/liDeleteHide';
+import {listSearch} from './modules/dropListSearch';
+import {addListTask, deleteListItem} from './modules/liDeleteHide';
+import {toggleBilling} from './modules/toggleBilling';
 import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
-import {resetInputs, showLis, getRandomColor, changeProjectNameColors, validateTimeEntry, colorCodeButtons, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
+import {resetInputs, showLis, getRandomColor, changeProjectNameColors, colorCodeButtons, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
+import {checkTaskInput, validateTimerModeEntry, checkAssignedProject} from './modules/timerInputValidators';
 import {} from './modules/traverseList';
 import {} from './modules/toggleInputs';
 
@@ -12,12 +14,12 @@ listSearch();
 
 // drag drop 
 dragDropList();
-toggleBill();
+
+toggleBilling();
 
 // li items delete, hide 
 addListTask();
 deleteListItem();
-hideListInput();
 trackListItemTime();
 
 // choose project dropdown 
@@ -34,8 +36,8 @@ colorCodeButtons();
 const appendToList = () => {
     $("input[type='text'").keypress(function(event){
         if(event.which === 13){
-            if (validateTimeEntry() === true) {
-
+            if (checkTaskInput() == true && validateTimerModeEntry() === true && checkAssignedProject() === true) {
+                   
             // grab new todo text from input
             let todoText = $(this).val();
             $(this).val(""); 

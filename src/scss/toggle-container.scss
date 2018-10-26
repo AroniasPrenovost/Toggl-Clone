@@ -1,39 +1,43 @@
+$light-grey: #fff;
+$dark-grey: #f7f7f7;
+$toggle-grey: #7f8c8d;
+$green: #4CAF50;
+$dark: #333;
 
 .toggle-container {
   float: right;
-  background-color: #f7f7f7;
-  max-height: 50px;
-  width: 2%;
-  display: inline-block; 
+  background-color: $light-grey;
+  width: 30px;
+  margin: 0 0 10px 0;
+  display: inline-block;
 }
 
 .toggle-inputs {
   margin: 0 0 0 5px;
   font-size:18px;
-  color:#7f8c8d;
+  color: $toggle-grey;
   height:50%;
   width:100%;
 }
 
 .toggle-inputs:first-child {
-  color:#27ae60;
+  color:$green;
 }
 
 .hover-title {
   text-decoration: none;
   vertical-align:inherit;
 
-
   &:hover {
-    color: #27ae60;
+    color: $green;
     position: relative;
   }
 
   &[title]:hover:after {
-    font-size:12px;
+    font-size:14px;
     content: attr(title);
     padding: 12px 8px;
-    color: #333;
+    color: $dark;
     position: absolute;
     float:left;
     left: 0;
@@ -45,12 +49,7 @@
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    -moz-box-shadow: 0px 0px 4px #222;
-    -webkit-box-shadow: 0px 0px 4px #222;
-    box-shadow: 0px 0px 4px #222;
-    background-image: -webkit-linear-gradient(#eeeeee, #cccccc);
-    background-image: -moz-linear-gradient(#eeeeee, #cccccc);
-    background-image: -o-linear-gradient(#eeeeee, #cccccc);
-    background-image: linear-gradient(#eeeeee, #cccccc);
+    background: $light-grey;
+    border: 1px solid black;
   }
 }

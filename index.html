@@ -2,94 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Gulp, Sass, webpack and ES6 modules boilerplate</title>
+    <title>Timer App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="src/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="src/css/timesheet-header.css">
     <link rel="stylesheet" type="text/css" href="src/css/li-sort.css">
-    <link rel="stylesheet" type="text/css" href="src/css/play-button.css">
     <link rel="stylesheet" type="text/css" href="src/css/dropdown.css">
-    <link rel="stylesheet" type="text/css" href="src/css/clock-container.css">
+    <link rel="stylesheet" type="text/css" href="src/css/timer-container.css">
     <link rel="stylesheet" type="text/css" href="src/css/toggle-container.css">
+    <link rel="stylesheet" type="text/css" href="src/css/footer.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" crossorigin="anonymous" />
 </head>
 <body>
 
-    <button class="button" id="exportToExcel">Export To CSV</button>
-    <div class="formbar">
+    <div class="timer-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <input class="timer-input" type="text" id="placeholder" placeholder="Add new to-do">
+                    <div class="toggle-container timer-input">
+                        <p id="timer" class="toggle-inputs"><i class="fa fa-clock-o hover-title" title="Timer Mode"></i></p>
+                        <p id="manual" class="toggle-inputs"><i class="fa fa-align-justify hover-title" title="Manual Mode"></i></p>
+                    </div>
+                    <button id="start-btn" class="start-btn"><i class="fa fa-play"></i></button>
 
-    </div>
-    <button class="button" style="float:none;" id="colorCode">Color Code</button>
-    <button class="button" style="float:none;" id="colorNormal">Color Normal</button>
+                    <!-- project dropdown --> 
+                    <div class="dropdown">
+                        <button id="projToggle" class="dropbtn timer-input"><i class="plus">+</i> Project/task</button>
+                        <div id="myDropdown" class="dropdown-content">
+                            <input type="text" placeholder="Search.." id="myInput">
+                            <a id='Proposals' class='dDButton'>Proposals</a>
+                            <a id='Field Word' class='dDButton'>Field Word</a>
+                            <a id='Tax Docs' class='dDButton'>Tax Docs</a>
+                            <a id='Event Planning' class='dDButton'>Event Planning</a>
+                            <a id='Internal' class='dDButton'>Internal</a>
+                        </div>
+                    </div>
+                    <!-- end project dropdown --> 
 
-    <button id="reset-btn">Clear</button>
-    <div id="container">
-        <h1>&#916;<i class="fa fa-plus"></i></h1>
-        <button id="traverse">Click me</button>
-    </div>
+                    <div class="billIcon inputBilling noselect">$</div>
 
-    <div id="container-2">
-        <input type="text" id="placeholder" placeholder="Add New To-Do">
-        <div class="toggle-container">
-            <p id="timer" class="toggle-inputs"><i class="fa fa-clock-o hover-title" title="Timer Mode"></i></p>
-            <p id="manual" class="toggle-inputs"><i class="fa fa-align-justify hover-title" title="Manual Mode"></i></p>
-        </div>
-        <button id="start-btn" class="start-btn"><i class="fa fa-play"></i></button>
+                    <div class="clock-container">
+                        <!-- timer input --> 
+                        <input class="timer-input" id="clock" type="text" size="12" name="clock" value="0 : 00 : 00"/>
 
-        <!-- project dropdown --> 
-        <div class="dropdown">
-            <button id="toggle" class="dropbtn">Project Name</button>
-            <div id="myDropdown" class="dropdown-content">
-                <input type="text" placeholder="Search.." id="myInput">
-                <a id='Proposals' class='dDButton'>Proposals</a>
-                <a id='Field Word' class='dDButton'>Field Word</a>
-                <a id='Tax Docs' class='dDButton'>Tax Docs</a>
-                <a id='Event Planning' class='dDButton'>Event Planning</a>
-                <a id='Internal' class='dDButton'>Internal</a>
+                        <!-- manual time input --> 
+                        <input id="manual-entry-1" class="manual-entry timer-input" type="text" placeholder="" />
+                        <input class="manual-entry timer-input" type="text" id="datepicker" value="Today" readonly="readonly">
+                        <input type="text" class="manual-entry timer-input" id="manual-entry-2" placeholder=""/>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- end project dropdown --> 
+    </div>
 
-        <div class="billIcon inputBilling noselect">$</div>
-        <div class="clock-container">
-            <!-- timer input --> 
-            <input id="clock" type="text" size="12" name="clock" value="0 : 00 : 00"/>
-            <!-- manual time input --> 
-
-            <input id="manual-entry-1" class="manual-entry" type="text" placeholder="" />
-            <!--<i id="entry-date-toggle">Today</i>-->
-          
-            <!-- appending -->
-
-            <input type="text" class="manual-entry" id="manual-entry-2" style="margin-left:-3%" placeholder=""/>
+    <div class="timesheet-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="button-container">
+                        <div class="icon">
+                            <i id="colorCode">Color Code </i>
+                        </div>
+                        <div class="icon">
+                            <i id="colorNormal">Color Normal</i>
+                        </div>
+                        <div class="icon">
+                            <i id="reset-btn">Reset Input</i>
+                        </div>
+                        <div class="icon">
+                            <i id="traverse">Traverse List</i>
+                        </div>
+                        <div class="icon">
+                            <i id="exportToExcel">Excel Export </i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-
     <ul id="projects" class="droppable-area">
-        <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>SSPA Documents<div class="projIcon"><h6 style="background-color:rgb(92, 107, 115)">Tax Docs</h6></div><div class="billIcon noselect">$</div></li>
+        <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>SSPA Documents<div class="projIcon"><h6>Tax Docs</h6></div><div class="billIcon noselect">$</div></li>
 
-        <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>Content organization<div class="projIcon"><h6 style="background-color:rgb(92, 107, 115)">Event Planning</h6></div><div class="billIcon noselect">$</div></li>
+        <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>Content organization<div class="projIcon"><h6>Event Planning</h6></div><div class="billIcon noselect">$</div></li>
 
-        <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>Paperwork<div class="projIcon"><h6 style="background-color:rgb(92, 107, 115)">Proposals</h6></div><div class="billIcon noselect">$</div>
+        <li class="listItem" style=""><span><i class="fa fa-trash"></i></span><p><i class="fa fa-hourglass"></i></p><div class="separator">&nbsp;_&nbsp;</div><div class="separator">º</div>Paperwork<div class="projIcon"><h6>Proposals</h6></div><div class="billIcon noselect">$</div>
         </li>
     </ul>
 
- 
-  <input class="" type="text" id="datepicker" value="Today">
-
-
+    <footer class="footer-container fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>test</h1>
+                </div>
+            </div>
+        </div>   
+    </div>
 
     <!-- jquery + jquery ui (drag drop + datepicker) --> 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+
     <!-- modules --> 
     <script src="dist/bundle.js"></script>
 
-    <script>
-</script>
 </body>
 </html>

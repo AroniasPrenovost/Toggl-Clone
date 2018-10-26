@@ -1,9 +1,9 @@
 let myInput = document.getElementById("myInput"),
-    toggle = document.getElementById("toggle"),
+    projToggle = document.getElementById("projToggle"),
     myDropdown = document.getElementById("myDropdown");
 
 const toggleProjectDropdown = () => {
-  toggle.addEventListener("click", function(){
+  projToggle.addEventListener("click", function(){
     myDropdown.classList.toggle("show");
   });
 }
@@ -30,7 +30,7 @@ const appendProjToButton = () => {
     var projtitle = "";
     myInput.placeholder = "Search..";
     projtitle = $(this).attr('id');
-    toggle.innerHTML = "Project - " + projtitle;
+    projToggle.innerHTML = "Project - " + projtitle;
     myDropdown.classList.toggle("show");
   });
 }

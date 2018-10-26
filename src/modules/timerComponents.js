@@ -5,7 +5,7 @@ let hour = 0,
 
 let startButton = document.getElementById('start-btn'),
     resetButton = document.getElementById('reset-btn'),
-    toggle = document.getElementById("toggle"),
+    projToggle = document.getElementById("projToggle"),
     stopClock = document.getElementsByName("clock")[0];
 
 let intervalId = null;
@@ -67,7 +67,7 @@ let task = rawString.split("<div ")[0].trim();
 document.getElementById("placeholder").value = task;
 
 let project = rawString.split("</h6>")[0].trim().split(")\">").pop();
-toggle.innerHTML = "Project - " + project;
+projToggle.innerHTML = "Project - " + project;
 
 // start timer 
 resetButton.click();
