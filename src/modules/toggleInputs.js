@@ -2,6 +2,7 @@ let manualModeButton = document.getElementById('manual'),
 	timerModeButton = document.getElementById('timer'),
 	timerModeClock = document.getElementById('clock'),
 	manualInput1 = document.getElementById('manual-entry-1'),
+	arrow = document.getElementById('arrow'),
 	datepickerInput = document.getElementById('datepicker'),
 	manualInput2 = document.getElementById('manual-entry-2');
 
@@ -43,6 +44,7 @@ manualModeButton.addEventListener('click', () => {
 	timerModeClock.style.display = "none";
 	manualInput1.style.display = "inline-block";
 	datepickerInput.style.display = "inline-block";
+	arrow.style.display = "inline-block";
 	manualInput2.style.display = "inline-block";
 
 	currentTimeManualInput();
@@ -56,5 +58,20 @@ timerModeButton.addEventListener('click', () => {
 	timerModeClock.style.display = "inline-block"; 
 	manualInput1.style.display = "none";
 	datepickerInput.style.display = "none";
+	arrow.style.display = "none";
 	manualInput2.style.display = "none";
 });
+
+let toggleBill = document.getElementById("billIcon"); 
+
+const checkManualInputModeToggle = () => {
+	if(manualInput1.style.display == "" || manualInput1.style.display == "none"){ 
+		return true;
+	}
+	if(manualInput2.style.display == "" || manualInput2.style.display == "none"){ 
+		return true;
+	}
+	return false;
+}
+
+export {checkManualInputModeToggle};

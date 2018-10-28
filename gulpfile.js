@@ -1,6 +1,6 @@
 var gulp = require('gulp'),
-	 sass = require('gulp-sass'),
-	 browserSync = require('browser-sync').create();
+sass = require('gulp-sass'),
+browserSync = require('browser-sync').create();
 
 
 gulp.task('hello', function() {
@@ -13,21 +13,22 @@ gulp.task('sass', function() {
     .pipe(sass())
     .pipe(gulp.dest('src/css'))
     .pipe(browserSync.reload({
-      stream: true
-    }))
+  stream: true
+  }))
 });
 
 
 gulp.task('browserSync', function() {
-        browserSync.init({
+  browserSync.init({
     server: {
       baseDir: './' // root folder
-    },
-  })
+      },
+      port: 8080
+    })
 })
 
 
 gulp.task('watch', ['browserSync', 'sass'], function (){
   gulp.watch('src/scss/**/*.scss', ['sass']); 
-  // Other watchers
+// Other watchers
 });

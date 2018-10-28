@@ -52,27 +52,27 @@ clearInterval(intervalId); // pause timer
 });
 
 const trackListItemTime = () => {
-  $("ul").on("click", ".fa-hourglass", function(event){
+  $("ul").on("click", ".fa-play", function(event){
 
-// index of button clicked
-let buttonIndex = $(this).parents('li').index();
+  // index of button clicked
+  let buttonIndex = $(this).parents('li').index();
 
-let li = document.getElementById('projects').getElementsByClassName('listItem')[buttonIndex].innerHTML;
+  let li = document.getElementById('projects').getElementsByClassName('listItem')[buttonIndex].innerHTML;
 
-// remove everything up to second instance of <div> 
-let rawString = li.substring(li.indexOf("º") + 7);
+  // remove everything up to second instance of <div> 
+  let rawString = li.substring(li.indexOf("º") + 7);
 
-// get task content and replace placeholder field text 
-let task = rawString.split("<div ")[0].trim();
-document.getElementById("placeholder").value = task;
+  // get task content and replace placeholder field text 
+  let task = rawString.split("<div ")[0].trim();
+  document.getElementById("placeholder").value = task;
 
-let project = rawString.split("</h6>")[0].trim().split(")\">").pop();
-projToggle.innerHTML = "Project - " + project;
+  let project = rawString.split("</h6>")[0].trim().split(")\">").pop();
+  projToggle.innerHTML = "Project - " + project;
 
-// start timer 
-resetButton.click();
-startButton.click();
-});
+  // start timer 
+  resetButton.click();
+  startButton.click();
+  });
 }
 
 export {startTimer, trackListItemTime};

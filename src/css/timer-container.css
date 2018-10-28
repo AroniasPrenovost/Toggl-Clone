@@ -1,9 +1,15 @@
 .timer-container {
   width: 100%;
   height: 70px;
-  margin: 0px auto;
+  margin: 5px auto;
   background: white;
-  border-bottom: 3px solid #bdc3c7; }
+  border-bottom: 1px solid #bdc3c7;
+  /* place above tasksheet header */
+  z-index: 2;
+  position: relative; }
+
+.timer-container .container {
+  width: auto; }
 
 .timer-input {
   height: 60px;
@@ -53,16 +59,6 @@ input#clock {
 input#clock:focus {
   background-color: #f7f7f7; }
 
-input#datepicker {
-  min-width: 75px;
-  width: 75px;
-  font-size: 16px;
-  color: gray;
-  cursor: pointer; }
-
-input#datepicker:focus {
-  cursor: pointer; }
-
 .manual-entry {
   min-width: 120px;
   width: 120px;
@@ -72,6 +68,22 @@ input#datepicker:focus {
 
 .manual-entry:focus {
   background-color: #f7f7f7; }
+
+input#datepicker {
+  min-width: 75px;
+  width: 75px;
+  font-size: 16px;
+  color: gray;
+  cursor: pointer;
+  border-left: none;
+  margin-left: -12px; }
+
+input#datepicker:focus {
+  cursor: pointer; }
+
+#arrow {
+  display: none;
+  font-size: 18px; }
 
 .start-btn {
   float: right;

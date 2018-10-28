@@ -8,8 +8,9 @@ $dark: #333;
   float: right;
   background-color: $light-grey;
   width: 30px;
-  margin: 0 0 10px 0;
+  margin: 6px 0 0 0;
   display: inline-block;
+  height: -webkit-fill-available;
 }
 
 .toggle-inputs {

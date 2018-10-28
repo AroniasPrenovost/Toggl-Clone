@@ -3,63 +3,66 @@ $light-grey: #fff;
 $dark-grey: #f7f7f7;
 $default-project-tag: #5C6B73;
 $hourglass-green: #27ae60;
-$delete-item: #e74c3c;
 
 body {
-    background: $light-grey;
-}
-
-/* li hover buttons */
-span {
-    background-color: $delete-item;
-    height: 40px;
-    margin-right: 0px;
-    text-align: center;
-    color: white;
-    width: 10px;
-    display: inline-block;
-    transition: 0.2s linear;
-    opacity: 1;
+    background-color: #f7f7f7 !important;
+    height:100%;
 }
 
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 
 li {
     height: 40px;
     line-height: 40px;
     font-size: 20px;
-    background: $light-grey; 
+    background: $light-grey;
+
 }
 
-li:nth-child(odd) { 
-    background: $dark-grey; 
+/* font-awesome delete + append icons */
+.fa.fa-trash, .fa.fa-play{
+    font-size: 16px !important;
 }
 
-li p {
-    background-color: $hourglass-green;
-    height: 40px;
-    margin-right: 0px;
+span {
+    margin-left:10px;
+    background-color: transparent;
     text-align: center;
-    color: white;
-    width: 10px;
+    color: #bdc3c7;
+    width: 18px;
     display: inline-block;
-    transition: 0.2s linear;
+    -webkit-transition: 0.1s linear;
     opacity: 0;
 }
 
-li:hover p {
-    width: 40px;
+li:hover span {
     opacity: 1.0;
-    margin-right:18px;
+    -webkit-transition: 0.1s linear;
 }
 
-li:hover span {
-    width: 40px;
-    opacity: 1.0;
+/*
+li:nth-child(even) { 
+    background: $dark-grey; 
+}
+*/
+
+.listIconsRight {
+    display:inline-block;
+    float:right;
+}
+
+.listClockTime {
+    display: inline-block;
+}
+
+.deleteIcons { 
+    display: inline-block;
+    float:right;
 }
 
 .projIcon { 
@@ -78,7 +81,6 @@ li:hover span {
     font-weight:normal;
     color:black;
     background-color:transparent;
-    position:absolute;
     display:inline-block;
 }
 
@@ -110,11 +112,3 @@ li:hover span {
     float:right;
 }
 
-.separator {
-    color:transparent; 
-    display:inline-block;
-}
-
-li:nth-child(odd) { 
-    background: $dark-grey; 
-}

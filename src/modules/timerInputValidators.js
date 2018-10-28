@@ -28,20 +28,20 @@ function checkForbidden(index1, index2) {
   }
 }
 
-if (time.length === 11) {
-  checkForbidden(4, 9);
-}
+  if (time.length === 11) {
+    checkForbidden(4, 9);
+  }
 
-if (time.length === 12) {
-  checkForbidden(5, 10);
-}
+  if (time.length === 12) {
+    checkForbidden(5, 10);
+  }
 
-if (time.match(/[a-z]/i)) {
-  timeEntryFlag = false;
-}
-if (time.length < 11 || time.length > 12) {
-  timeEntryFlag = false;
-} 
+  if (time.match(/[a-z]/i)) {
+    timeEntryFlag = false;
+  }
+  if (time.length < 11 || time.length > 12) {
+    timeEntryFlag = false;
+  } 
 
 return timeEntryFlag;
 }

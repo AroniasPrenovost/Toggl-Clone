@@ -8,12 +8,11 @@ const toggleBilling = () => {
     }, false);
 }
 
-const checkBillingToggled = () => {
-
-	// if element is active, append below as active 
-
-	// note that in the data 
-
+const checkBillingToggle = () => {
+	if (document.querySelector(".billIcon").classList.contains("billIconToggle")) {
+		return true;
+	}
+	return false;
 }
 
-export {toggleBilling};
+export {toggleBilling, checkBillingToggle};

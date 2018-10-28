@@ -1,8 +1,10 @@
 let startButton = document.getElementById('start-btn'),
     resetButton = document.getElementById('reset-btn'),
-    myInput = document.getElementById("myInput"),
-    projToggle = document.getElementById("projToggle"),
-    taskInput = document.getElementById("placeholder");
+    myInput = document.getElementById('myInput'),
+    projToggle = document.getElementById('projToggle'),
+    taskInput = document.getElementById('placeholder'),
+    colorCodeButton = document.getElementById('colorCode'),
+    colorNormalButton = document.getElementById('colorNormal');
 
 // reset inputs 
 const resetInputs = () => {
@@ -53,26 +55,6 @@ const changeProjectNameColors = (str) => {
         }
     });
 }
-
-// color code, normalize project tags
-const colorCodeButtons = () => {
-    $(document).ready(function(){
-        $("#colorCode").click(function(){
-            changeProjectNameColors("randomize");
-        });
-    });
-
-    $(document).ready(function(){
-        $("#colorNormal").click(function(){
-            changeProjectNameColors("normalize");
-        });
-    });
-}  
-
-$(document).ready(function(){
-    $("#projectStatus").click(function(){
-    });
-});
 
 const determineProjectTagColors = (str1, str2) => {
     if (str2 !== "rgb(92, 107, 115)") {
@@ -128,4 +110,26 @@ const projectNameAndColor = () => {
     return [projtitle, color]; 
 }
 
-export {resetInputs, showLis, getRandomColor, changeProjectNameColors, colorCodeButtons, determineProjectTagColors, projectNameAndColor};
+// color code, normalize project tags
+colorCodeButton.addEventListener('click', () => {
+    changeProjectNameColors("randomize");
+});
+
+colorNormalButton.addEventListener('click', () => {
+    changeProjectNameColors("normalize");
+});
+
+
+const getTaskInput = () => {
+    let taskInput = document.getElementById("placeholder").value;
+    return taskInput 
+}
+
+
+const getClockTimer = () => {
+    let clockTimer = document.getElementById("clock").value;
+    return clockTimer;
+}
+
+
+export {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor, getTaskInput, getClockTimer};
