@@ -1,24 +1,25 @@
 import {dragDropList} from './modules/dragDrop';
 import {listSearch} from './modules/dropListSearch';
-import {addListTask, deleteListItem} from './modules/liDeleteHide';
+import {appendTaskToInput, deleteListItem} from './modules/liDeleteHide';
 import {toggleBilling, checkBillingToggle} from './modules/toggleBilling';
 import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
-import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor, getTaskInput, getClockTimer} from './modules/listInteractions';
-import {checkTaskInput, validateTimerModeEntry, checkAssignedProject} from './modules/timerInputValidators';
+import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
+import {getTaskInput, checkTaskInput, validateTimerModeEntry, checkAssignedProject} from './modules/timerInputValidators';
+
 // import {} from './modules/traverseList';
 import {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle} from './modules/toggleInputs';
+import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital} from './modules/timeConversion';
 
 // ----- Instant Functions ----- // 
 listSearch(); 
 
 // drag drop 
 dragDropList();
-
 toggleBilling();
 
 // li items delete, hide 
-addListTask();
+appendTaskToInput();
 deleteListItem();
 trackListItemTime();
 
@@ -37,7 +38,7 @@ const appendToList = () => {
         let task = getTaskInput(); 
 
         // get timer input
-        let clockTimer = getClockTimer(),
+        let clockTimer = genDigitalTime(),
         clockTimerElement = "<div class='listClockTime'>" + clockTimer + "</div>";
 
         // manual input 
@@ -54,7 +55,7 @@ const appendToList = () => {
         }
 
         if (checkManualInputModeToggle() == false) {
-                alert(assumeTodaysDate + "  " + currentTime);
+              //  alert(assumeTodaysDate + "  " + currentTime);
         }
 
         // toggle billable hours 

@@ -9,6 +9,11 @@ const checkTaskInput = () => {
   return checkTaskFlag;
 }
 
+// get task input
+const getTaskInput = () => {
+  return taskInput.value; 
+}
+
 const validateTimerModeEntry = () => {
 // check for invalid input - '80 seconds' should be 1:20, etc. 
 let time = document.getElementById("clock").value; 
@@ -54,4 +59,4 @@ const checkAssignedProject = () => {
   return checkProjectFlag;
 }
 
-export {checkTaskInput, validateTimerModeEntry, checkAssignedProject};
+export {getTaskInput, checkTaskInput, validateTimerModeEntry, checkAssignedProject};

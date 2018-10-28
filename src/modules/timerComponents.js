@@ -1,5 +1,5 @@
 let hour = 0,
-     minute = 0,
+    minute = 0,
     seconds = 0,
     totalSeconds = 0;
 

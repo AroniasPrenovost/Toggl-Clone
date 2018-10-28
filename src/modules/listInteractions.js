@@ -119,17 +119,4 @@ colorNormalButton.addEventListener('click', () => {
     changeProjectNameColors("normalize");
 });
 
-
-const getTaskInput = () => {
-    let taskInput = document.getElementById("placeholder").value;
-    return taskInput 
-}
-
-
-const getClockTimer = () => {
-    let clockTimer = document.getElementById("clock").value;
-    return clockTimer;
-}
-
-
-export {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor, getTaskInput, getClockTimer};
+export {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor};
