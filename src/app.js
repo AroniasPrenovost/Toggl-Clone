@@ -7,7 +7,7 @@ import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} 
 import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor, getTaskInput, getClockTimer} from './modules/listInteractions';
 import {checkTaskInput, validateTimerModeEntry, checkAssignedProject} from './modules/timerInputValidators';
 // import {} from './modules/traverseList';
-import {checkManualInputModeToggle} from './modules/toggleInputs';
+import {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle} from './modules/toggleInputs';
 
 // ----- Instant Functions ----- // 
 listSearch(); 
@@ -41,17 +41,24 @@ const appendToList = () => {
         clockTimerElement = "<div class='listClockTime'>" + clockTimer + "</div>";
 
         // manual input 
-        let manualTime1 = document.getElementById("manual-entry-1").value,
-        manualTime2 = document.getElementById("manual-entry-2").value,
-        chosenDateNoYear = document.getElementById("datepicker").value,
-        chosenYear = $( "#datepicker" ).datepicker( "getDate" ).getFullYear(),
-        currentYear = (new Date()).getFullYear();
+        let currentYear = (new Date()).getFullYear(),
+        assumeTodaysDate = generateTodaysDate(),
+        currentTime = generateCurrentTime();
+
+        // if time entry disabled/enabled
+        if (checkManualInputModeToggle() == true) {
+            var manualTime1 = document.getElementById("manual-entry-1").value,
+            manualTime2 = document.getElementById("manual-entry-2").value,
+            chosenDateNoYear = document.getElementById("datepicker").value,
+            chosenYear = $( "#datepicker" ).datepicker( "getDate" ).getFullYear();
+        }
+
+        if (checkManualInputModeToggle() == false) {
+                alert(assumeTodaysDate + "  " + currentTime);
+        }
 
         // toggle billable hours 
         let billingToggle = checkBillingToggle();
-
-        // check input mode used, returns true if manual 
-        let manualInputMode = checkManualInputModeToggle();
 
         // begin builing li components 
         let deleteLiIcon = "<span><i class='fa fa-trash'></i></span>";

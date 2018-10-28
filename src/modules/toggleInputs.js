@@ -18,10 +18,34 @@ const formatAMPM = (date) => {
 	return strTime;
 }
 
+const generateTodaysDate = () => {
+	let todaysDate = new Date(),
+	dd = todaysDate.getDate(),
+	mm = todaysDate.getMonth()+1, //January is 0
+	yyyy = todaysDate.getFullYear();
+
+	if(dd<10) {
+	    dd = '0'+dd
+	} 
+
+	if(mm<10) {
+	    mm = '0'+mm
+	} 
+
+	todaysDate = mm + '/' + dd + yyyy;
+	return todaysDate;
+} 
+
+const generateCurrentTime = () => {
+	let date = new Date();
+	let currentTime = formatAMPM(date);
+
+	return currentTime; 
+}
+
 const currentTimeManualInput = () => { 
-	let date = new Date(); 
-	manualInput1.value = formatAMPM(date); 
-	manualInput2.value = formatAMPM(date);
+	manualInput1.value = generateCurrentTime(); 
+	manualInput2.value = generateCurrentTime();
 }
 
 // jquery datepicker 
@@ -66,12 +90,14 @@ let toggleBill = document.getElementById("billIcon");
 
 const checkManualInputModeToggle = () => {
 	if(manualInput1.style.display == "" || manualInput1.style.display == "none"){ 
-		return true;
+		return false;
 	}
 	if(manualInput2.style.display == "" || manualInput2.style.display == "none"){ 
-		return true;
+		return false;
 	}
-	return false;
+	return true;
 }
 
-export {checkManualInputModeToggle};
+
+
+export {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle};
