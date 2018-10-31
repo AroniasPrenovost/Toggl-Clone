@@ -32,7 +32,22 @@ filterEntry();
 appendProjToButton();
 
 const appendToList = () => {
-    if (checkTaskInput() == true && validateTimerModeEntry() === true && checkAssignedProject() === true) {
+
+    // check task and project is assigned 
+    if (checkTaskInput() == true && checkAssignedProject() === true && validateTimerModeEntry() === true) {
+
+        // if timer mode is enabled 
+        if (checkManualInputModeToggle() == false) {
+            
+        }
+                
+
+        // grab inputs if manual time entry enabled
+        if (checkManualInputModeToggle() == true) {
+           var manInputVals = manualInputs();
+           // manInputVals[3])
+        }
+
 
         // get task input  
         let task = getTaskInput(); 
@@ -45,12 +60,6 @@ const appendToList = () => {
         let currentYear = (new Date()).getFullYear(),
         assumeTodaysDate = generateTodaysDate(),
         currentTime = generateCurrentTime();
-
-        // grab inputs if time entry enabled
-        if (checkManualInputModeToggle() == true) {
-           var manInputVals = manualInputs();
-           // manInputVals[3])
-        }
 
         // toggle billable hours 
         let billingToggle = checkBillingToggle();

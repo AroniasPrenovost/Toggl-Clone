@@ -14,8 +14,12 @@ const getTaskInput = () => {
   return taskInput.value; 
 }
 
-const validateTimerModeEntry = () => {
+const validateManualTimeEntryMode = () => {
+
+}
+
 // check for invalid input - '80 seconds' should be 1:20, etc. 
+const validateTimerModeEntry = () => {
 let time = document.getElementById("clock").value; 
 let forbidden = ['6', '7', '8', '9']; 
 var timeEntryFlag = true;
@@ -32,6 +36,9 @@ function checkForbidden(index1, index2) {
     } 
   }
 }
+  if (time === "0 : 00 : 00" || time === "00 : 00 : 00") { 
+    timeEntryFlag = false;
+  }
 
   if (time.length === 11) {
     checkForbidden(4, 9);
@@ -48,7 +55,7 @@ function checkForbidden(index1, index2) {
     timeEntryFlag = false;
   } 
 
-return timeEntryFlag;
+  return timeEntryFlag;
 }
 
 const checkAssignedProject = () => {
