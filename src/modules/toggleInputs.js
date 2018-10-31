@@ -6,6 +6,14 @@ let manualModeButton = document.getElementById('manual'),
 	datepickerInput = document.getElementById('datepicker'),
 	manualInput2 = document.getElementById('manual-entry-2');
 
+// get manual inputs 
+const manualInputs = () => {
+	let chosenDateNoYear = document.getElementById("datepicker").value,
+	chosenDateYear = $( "#datepicker" ).datepicker( "getDate" ).getFullYear();
+
+	return [manualInput1.value, manualInput2.value, datepickerInput.value, chosenDateYear];
+}
+
 // convert time to 12 hour AM/PM format
 const formatAMPM = (date) => { 
 	let hours = date.getHours();
@@ -98,6 +106,4 @@ const checkManualInputModeToggle = () => {
 	return true;
 }
 
-
-
-export {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle};
+export {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle, manualInputs};

@@ -8,8 +8,8 @@ import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determine
 import {getTaskInput, checkTaskInput, validateTimerModeEntry, checkAssignedProject} from './modules/timerInputValidators';
 
 // import {} from './modules/traverseList';
-import {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle} from './modules/toggleInputs';
-import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital} from './modules/timeConversion';
+import {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle, manualInputs} from './modules/toggleInputs';
+import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 
 // ----- Instant Functions ----- // 
 listSearch(); 
@@ -46,16 +46,10 @@ const appendToList = () => {
         assumeTodaysDate = generateTodaysDate(),
         currentTime = generateCurrentTime();
 
-        // if time entry disabled/enabled
+        // grab inputs if time entry enabled
         if (checkManualInputModeToggle() == true) {
-            var manualTime1 = document.getElementById("manual-entry-1").value,
-            manualTime2 = document.getElementById("manual-entry-2").value,
-            chosenDateNoYear = document.getElementById("datepicker").value,
-            chosenYear = $( "#datepicker" ).datepicker( "getDate" ).getFullYear();
-        }
-
-        if (checkManualInputModeToggle() == false) {
-              //  alert(assumeTodaysDate + "  " + currentTime);
+           var manInputVals = manualInputs();
+           // manInputVals[3])
         }
 
         // toggle billable hours 
