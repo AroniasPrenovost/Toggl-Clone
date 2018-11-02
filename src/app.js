@@ -5,10 +5,10 @@ import {toggleBilling, checkBillingToggle} from './modules/toggleBilling';
 import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
 import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
-import {getTaskInput, checkTaskInput, validateTimerModeEntry, checkAssignedProject} from './modules/timerInputValidators';
+import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject} from './modules/timerInputValidators';
 
 // import {} from './modules/traverseList';
-import {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle, manualInputs} from './modules/toggleInputs';
+import {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 
 // ----- Instant Functions ----- // 
@@ -34,20 +34,29 @@ appendProjToButton();
 const appendToList = () => {
 
     // check task and project is assigned 
-    if (checkTaskInput() == true && checkAssignedProject() === true && validateTimerModeEntry() === true) {
+    if (checkTaskInput() == true && checkAssignedProject() === true) {
 
-        // if timer mode is enabled 
-        if (checkManualInputModeToggle() == false) {
-            
+        // if timer mode enabled and digital entry invalid 
+        if (checkManualInput() == false && validateTimerModeEntry() === false) {
+            return false;     
+        }
+
+        // if manual entry enabled and manual entry invalid 
+        if (checkManualInput() === true && validateManualModeEntry() === false) {
+           return false; 
+        }
+
+        // if timer mode enabled and digital entry valid
+        if (checkManualInput() == false && validateTimerModeEntry() === true) {
+           //
+
         }
                 
-
-        // grab inputs if manual time entry enabled
-        if (checkManualInputModeToggle() == true) {
-           var manInputVals = manualInputs();
-           // manInputVals[3])
+        // if manual entry enabled and manual entry valid 
+        if (checkManualInput() === true && validateManualModeEntry() === true) {
+           var manInputVals = getManualInputs();
+           // alert(manInputVals[3]);    
         }
-
 
         // get task input  
         let task = getTaskInput(); 
@@ -56,7 +65,7 @@ const appendToList = () => {
         let clockTimer = genDigitalTime(),
         clockTimerElement = "<div class='listClockTime'>" + clockTimer + "</div>";
 
-        // manual input 
+        // current time  
         let currentYear = (new Date()).getFullYear(),
         assumeTodaysDate = generateTodaysDate(),
         currentTime = generateCurrentTime();
@@ -81,6 +90,7 @@ const appendToList = () => {
         // show lis + reset inputs 
         showLis();
         resetInputs();
+        
     } 
 }
 

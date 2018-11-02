@@ -7,10 +7,9 @@ let manualModeButton = document.getElementById('manual'),
 	manualInput2 = document.getElementById('manual-entry-2');
 
 // get manual inputs 
-const manualInputs = () => {
+const getManualInputs = () => {
 	let chosenDateNoYear = document.getElementById("datepicker").value,
 	chosenDateYear = $( "#datepicker" ).datepicker( "getDate" ).getFullYear();
-
 	return [manualInput1.value, manualInput2.value, datepickerInput.value, chosenDateYear];
 }
 
@@ -94,16 +93,16 @@ timerModeButton.addEventListener('click', () => {
 	manualInput2.style.display = "none";
 });
 
-let toggleBill = document.getElementById("billIcon"); 
 
-const checkManualInputModeToggle = () => {
+const checkManualInput = () => {
+	var manInputFlag = true;
 	if(manualInput1.style.display == "" || manualInput1.style.display == "none"){ 
-		return false;
+		manInputFlag = false;
 	}
 	if(manualInput2.style.display == "" || manualInput2.style.display == "none"){ 
-		return false;
+		manInputFlag = false;
 	}
-	return true;
+	return manInputFlag;
 }
 
-export {generateTodaysDate, generateCurrentTime, checkManualInputModeToggle, manualInputs};
+export {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs};

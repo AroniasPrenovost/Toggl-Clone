@@ -14,10 +14,6 @@ const getTaskInput = () => {
   return taskInput.value; 
 }
 
-const validateManualTimeEntryMode = () => {
-
-}
-
 // check for invalid input - '80 seconds' should be 1:20, etc. 
 const validateTimerModeEntry = () => {
 let time = document.getElementById("clock").value; 
@@ -58,6 +54,33 @@ function checkForbidden(index1, index2) {
   return timeEntryFlag;
 }
 
+const validateManualModeEntry = () => {
+  let m1 = document.getElementById('manual-entry-1').value,
+      dp = document.getElementById('datepicker').value,
+      m2 = document.getElementById('manual-entry-2').value,
+      chosenDateYear = $( "#datepicker" ).datepicker( "getDate" ).getFullYear(),
+      currentYear = (new Date()).getFullYear();
+
+      // create AM/PM variable
+      let ampm1 = m1.toLowerCase().substr(m2.length - 3).trim(),
+          ampm2 = m2.toLowerCase().substr(m2.length - 3).trim();
+
+      if (ampm1 !== 'pm' && ampm1 !== 'am') {
+        return false;
+      }
+
+      if (ampm2 !== 'pm' && ampm2 !== 'am') {
+        return false; 
+      }
+
+      // ensure date isn't in future
+      if (currentYear < chosenDateYear) {
+        return false; 
+      }
+
+      return true;
+}
+
 const checkAssignedProject = () => {
   var checkProjectFlag = true; 
   if (projToggle.innerHTML === '<i class="plus">+</i> Project/task') {
@@ -66,4 +89,4 @@ const checkAssignedProject = () => {
   return checkProjectFlag;
 }
 
-export {getTaskInput, checkTaskInput, validateTimerModeEntry, checkAssignedProject};
+export {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject};
