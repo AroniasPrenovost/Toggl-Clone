@@ -11,7 +11,6 @@ import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualMode
 import {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 
-// ----- Instant Functions ----- // 
 listSearch(); 
 
 // drag drop 
@@ -27,7 +26,6 @@ trackListItemTime();
 toggleProjectDropdown();
 filterFunction();
 filterEntry();
-// ----- ---------------- ----- //
 
 appendProjToButton();
 
@@ -56,6 +54,7 @@ const appendToList = () => {
         if (checkManualInput() === true && validateManualModeEntry() === true) {
            var manInputVals = getManualInputs();
            // alert(manInputVals[3]);    
+           validateManualModeEntry();
         }
 
         // get task input  

@@ -73,6 +73,13 @@ const validateManualModeEntry = () => {
         return false; 
       }
 
+      // invalid pm to am time 
+      if (dp == 'Today') {
+        if (ampm1 == 'pm' && ampm2 == 'am') {
+        return false;
+        }
+      }
+
       // ensure date isn't in future
       if (currentYear < chosenDateYear) {
         return false; 
