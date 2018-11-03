@@ -61,7 +61,41 @@ const validateManualModeEntry = () => {
       chosenDateYear = $( "#datepicker" ).datepicker( "getDate" ).getFullYear(),
       currentYear = (new Date()).getFullYear();
 
-      // create AM/PM variable
+      function checkFormat(str) {
+        String.prototype.isNumber = function(){return /^\d+$/.test(this);}
+
+        let a = 4,
+            b = 1;
+
+        if (str.length === 8) {
+          a = 5,
+          b = 2;
+        }
+
+        let s = str.substring(0, a);
+
+        if (s.charAt(b) !== ':') {
+          return false;
+        } else {
+          s = s.slice(0, b) + s.slice(b+1);
+            if (s.isNumber() === false) {
+              return false;
+            }
+        }
+      }
+    
+      if (checkFormat(m1) === false) {
+        return false;
+      }
+
+      if (checkFormat(m2) === false) {
+        return false;
+      }
+
+      // need to check for both AM, today, and maninput2 is earlier time
+      // write code... 
+
+      // create + check AM/PM variables
       let ampm1 = m1.toLowerCase().substr(m2.length - 3).trim(),
           ampm2 = m2.toLowerCase().substr(m2.length - 3).trim();
 
