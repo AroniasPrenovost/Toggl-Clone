@@ -21,6 +21,7 @@ const startTimer = () => {
   }
 
   stopClock.value = ((hour<=9) ? "0"+hour : hour) + " : " + ((minute<=9) ? "0" + minute : minute) + " : " + seconds;
+  document.title = "Timer - " + stopClock.value; // show timer in <title> 
 
   if(stopClock.value.charAt(0) === '0'){
     stopClock.value = stopClock.value.substr(1);
