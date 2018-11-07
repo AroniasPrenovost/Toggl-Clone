@@ -2,11 +2,10 @@ let projToggle = document.getElementById("projToggle"),
 taskInput = document.getElementById("placeholder");
 
 const checkTaskInput = () => {
-  var checkTaskFlag = true; 
   if (taskInput.value === '') {
-    checkTaskFlag = false; 
+    return false; 
   }
-  return checkTaskFlag;
+  return true;
 }
 
 // get task input
@@ -18,22 +17,21 @@ const getTaskInput = () => {
 const validateTimerModeEntry = () => {
 let time = document.getElementById("clock").value; 
 let forbidden = ['6', '7', '8', '9']; 
-var timeEntryFlag = true;
 
-function checkForbidden(index1, index2) {
-  let mins = time.charAt(index1); 
-  let secs = time.charAt(index2);
-  for (let m = 0; m < 5; m++) {
-    if(forbidden[m] === mins) {
-      timeEntryFlag = false;
-    } 
-    if (forbidden[m] === secs) {
-      timeEntryFlag = false;
-    } 
+  function checkForbidden(index1, index2) {
+    let mins = time.charAt(index1); 
+    let secs =   time.charAt(index2);
+    for (let m = 0; m < 5; m++) {
+      if(forbidden[m] === mins) {
+        return false;
+      } 
+      if (forbidden[m] === secs) {
+        return false;
+      } 
+    }
   }
-}
   if (time === "0 : 00 : 00" || time === "00 : 00 : 00") { 
-    timeEntryFlag = false;
+    return false;
   }
 
   if (time.length === 11) {
@@ -45,13 +43,13 @@ function checkForbidden(index1, index2) {
   }
 
   if (time.match(/[a-z]/i)) {
-    timeEntryFlag = false;
+    return false;
   }
   if (time.length < 11 || time.length > 12) {
-    timeEntryFlag = false;
+    return false;
   } 
 
-  return timeEntryFlag;
+  return true;
 }
 
 const validateManualModeEntry = () => {
@@ -92,11 +90,8 @@ const validateManualModeEntry = () => {
         return false;
       }
 
-      // need to check for both AM, today, and maninput2 is earlier time
-      // write code... 
-
       // create + check AM/PM variables
-      let ampm1 = m1.toLowerCase().substr(m2.length - 3).trim(),
+      let ampm1 = m1.toLowerCase().substr(m1.length - 3).trim(),
           ampm2 = m2.toLowerCase().substr(m2.length - 3).trim();
 
       if (ampm1 !== 'pm' && ampm1 !== 'am') {
@@ -122,12 +117,11 @@ const validateManualModeEntry = () => {
       return true;
 }
 
-const checkAssignedProject = () => {
-  var checkProjectFlag = true; 
+const checkAssignedProject = () => { 
   if (projToggle.innerHTML === '<i class="plus">+</i> Project/task') {
-    checkProjectFlag = false; 
+    return false; 
   }
-  return checkProjectFlag;
+  return true;
 }
 
 export {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject};

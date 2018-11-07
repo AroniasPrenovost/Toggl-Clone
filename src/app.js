@@ -6,8 +6,6 @@ import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
 import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
 import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject} from './modules/timerInputValidators';
-
-// import {} from './modules/traverseList';
 import {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 
@@ -58,10 +56,10 @@ const appendToList = () => {
         }
 
         // get task input  
-        let task = getTaskInput(); 
+        var task = getTaskInput(); 
 
         // get timer input
-        let clockTimer = genDigitalTime(),
+        var clockTimer = genDigitalTime(),
         clockTimerElement = "<div class='listClockTime'>" + clockTimer + "</div>";
 
         // current time  
@@ -83,8 +81,17 @@ const appendToList = () => {
         let projectNameIcon = "<div class='projIcon'><h6 style='background-color:" + iconColor + "'" + ">" + projtitle + "</h6></div>";
         let projectBillIcon = "<div class='billIcon noselect'>$</div>";
 
-        // create a new li and add to ul
-        $("ul").append("<li class='listItem ui-sortable-handle' style='display: list-item'>" + task + "   " + projectNameIcon + "<div class='listIconsRight'>" + projectBillIcon + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>" + "</li>");
+        // list item data  
+        let listItemData = task + "   " + projectNameIcon + "<div class='listIconsRight'>" + projectBillIcon + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>";
+     
+        // declare node, add classes + list data  
+        var node = document.createElement("li"); 
+        let classesToAdd = [ 'listItem', 'ui-sortable-handle' ];
+        node.classList.add(...classesToAdd);
+        node.innerHTML = listItemData;               
+
+        // add element to list item 
+        document.getElementById("projects").appendChild(node);
 
         // show lis + reset inputs 
         showLis();
@@ -99,4 +106,3 @@ let testappend = document.getElementById('testappend');
 testappend.addEventListener('click', () => {
     appendToList();
 });
-
