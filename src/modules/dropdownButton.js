@@ -1,6 +1,4 @@
-let myInput = document.getElementById("myInput"),
-    projToggle = document.getElementById("projToggle"),
-    myDropdown = document.getElementById("myDropdown");
+import {myInput, projToggle, myDropdown} from "./globalVars";
 
 const toggleProjectDropdown = () => {
   projToggle.addEventListener("click", function(){

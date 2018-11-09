@@ -18,18 +18,17 @@ function getRawNum(str) {
   }
 }
 
-
 function timesToSeconds(str1, str2) {
   let start = str1,
-    	end = str2;
+    end = str2;
 
   // add date and convert to unix timestamp 
   start = new Date('01.01.1970 ' + start).getTime() / 1000;
   end = new Date('01.01.1970 ' + end).getTime() / 1000;
 
   // time diff in minutes
-  let mins = Math.abs(end - start) / 60;
-  const dayMinutes = 24 * 60;
+  let mins = Math.abs(end - start) / 60,
+    dayMinutes = 24 * 60;
 
   // if PM - PM or AM - AM left is larger 
   // compare start time and end time 
@@ -40,50 +39,51 @@ function timesToSeconds(str1, str2) {
   let ampm1 = str1.toLowerCase().substr(str1.length - 3).trim();
   let ampm2 = str2.toLowerCase().substr(str2.length - 3).trim();
 
-  // check if hour matches 
-  let hour1 = + str1.split(":")[0];
-  let hour2 = str2.split(":")[0];
-  let min1 = str1.split(':').pop();
-  let min2 = str2.split(':').pop();
-
-  // am/pm is the same and start time later than end time 
-  if (ampm1 === ampm2) {
+  // pm/pm is true and start time later than end time [works]
+  if (ampm1 === 'pm' && ampm2 === 'pm') {
     if (Number(rawNum1) > Number(rawNum2)) {
-      if (Number(hour1) === Number(hour2)) {
-        if (min1 > min2) {
-          let leftoverMins = min1.substring(0, min2.length - 2).trim();
-          leftoverMins = 60 - Number(leftoverMins);
-          let addedMins = min2.substring(0, min2.length - 2).trim();
-
-          let totalMins = Number(dayMinutes) + Number(leftoverMins) + Number(addedMins);
-          let seconds = totalMins * 60;
-          console.log('flag __0__')
-          return seconds;
-        }
-      }
-
       let minuteDiff = dayMinutes - mins;
       let thismins = minuteDiff + dayMinutes; // + 24 hours
-      seconds = thismins * 60;
-      seconds = seconds / 2;
-
-      return seconds + "   __|| seconds";
+      seconds = thismins * 60 / 2;
+      return seconds;
     } else if (Number(rawNum1) === Number(rawNum2)) { // entry time is zero 
-      let seconds = 0;
+      let seconds = dayMinutes * 60;
+      return seconds;
+    } else {
+      // proceed as normal 
+      let seconds = mins * 60;
+      return seconds;
+    }
+  }
+
+  // am/am is true 
+  if (ampm1 === 'am' && ampm2 === 'am') {
+    if (Number(rawNum1) > Number(rawNum2)) {
+      let minuteDiff = dayMinutes - mins;
+      let thismins = minuteDiff + dayMinutes; // + 24 hours
+      seconds = thismins * 60 / 2;
+      return seconds;
+    } else if (Number(rawNum1) === Number(rawNum2)) { // entry time is zero 
+      let seconds = dayMinutes * 60;
       return seconds;
       // return false 
     } else {
       // proceed as normal 
       let seconds = mins * 60;
-      return seconds + " ___";
+      return seconds;
     }
   }
 
   // am/pm are different and start time earlier than end time 
   if (ampm1 === 'pm' && ampm2 === 'am') {
+    // if time matches 
+    if (Number(rawNum1) === Number(rawNum2)) {
+      let seconds = dayMinutes * 60 / 2;
+      return seconds;
+    }
+
     if (Number(rawNum1) < Number(rawNum2)) {
 
-      // THIS NUMBER THING IS VALID 
       str1 = str1.slice(0, -2) + 'am';
       str2 = str2.slice(0, -2) + 'pm';
 
@@ -96,64 +96,73 @@ function timesToSeconds(str1, str2) {
 
       let mins = Math.abs(end - start) / 60,
         seconds = mins * 60;
-      console.log(seconds)
       return seconds;
     }
   }
-
-
-
-
-  // check to see if hour comparison even matters 
-  if (ampm1 === 'am' && ampm2 === 'pm') { // ---
-    if (Number(hour1) < Number(hour2)) {
-
-      let mins = Math.abs(end - start) / 60
-      let seconds = mins * 60 + "  " + 'test';
+  if (ampm1 === 'am' && ampm2 === 'pm') {
+    // if time matches 
+    if (Number(rawNum1) === Number(rawNum2)) {
+      let seconds = dayMinutes * 60 / 2;
       return seconds;
     }
-    if (Number(hour1) > Number(hour2)) { // -----
 
-      let mins = Math.abs(end - start) / 60
-      let seconds = mins * 60 + "  " + 'BEST';
+    if (Number(rawNum1) < Number(rawNum2)) {
+
+      str1 = str1.slice(0, -2) + 'am';
+      str2 = str2.slice(0, -2) + 'pm';
+
+      let start = str1,
+        end = str2;
+
+      // add date and convert to unix timestamp 
+      start = new Date('01.01.1970 ' + start).getTime() / 1000;
+      end = new Date('01.01.1970 ' + end).getTime() / 1000;
+
+      let mins = Math.abs(end - start) / 60,
+        seconds = mins * 60;
       return seconds;
     }
   }
-
-
-
-
-  return seconds;
+  // return seconds;
 }
 
-timesToSeconds("12:40 AM", "12:10 AM");
+timesToSeconds("12:06 PM", "12:09 PM");
 
-// timesToSeconds("12:40 AM", "12:10 AM");
-// 1470
-// 24:30:00
+// ("4:02 AM", "3:01 AM");
+// 84570 
+// 23.491667
 
-// timesToSeconds("2:02 AM", "12:09 AM");
-// 
-// 21:59:00
-
-// timesToSeconds("2:02 PM", "6:01 AM");
+// ("2:02 PM", "6:01 AM");
 // 57540
-// 15:59:00.
+// 15:59:00
 
 
-// timesToSeconds("4:02 AM", "3:01 AM");
-// 84570 secs
-// 
-// 23:29:30
+// ("2:02 AM", "6:01 AM");
+// 3.9833333
+// 14340
+
+// ("2:00 PM", "6:00 PM");
+// 14400
+// 4:00:00 
 
 
-// timesToSeconds("2:01 PM", "4:01 AM");
-// 50400 secs
-// 14 hrs
-// 13:59:00 
+// ("2:02 PM", "2:10 PM");
+// 480
+// 0 : 08: 00 
+// 8 mins 
+
+// ("2:06 PM", "2:04 PM");
+// 86340
+//
+
+//("12:06 PM", "12:09 PM");
+// 180
+
+// ("12:06 PM", "12:04 PM");
+// 86340
 
 
-// timesToSeconds("2:01 AM", "4:01 PM");
-// 50400 secs
-// 14 hrs
-// 13:59:00
+// ("11:12 PM", "11:11 PM");
+
+
+// ("11:12 PM", "11:13 PM");

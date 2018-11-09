@@ -1,5 +1,4 @@
-let projToggle = document.getElementById("projToggle"),
-taskInput = document.getElementById("placeholder");
+import {projToggle, taskInput} from "./globalVars";
 
 const checkTaskInput = () => {
   if (taskInput.value === '') {

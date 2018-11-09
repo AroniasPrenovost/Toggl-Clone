@@ -1,4 +1,4 @@
-let toggleBill = document.getElementById("billIcon"); 
+import {toggleBill} from "./toggleInputs";
 
 const toggleBilling = () => {
     document.addEventListener('click', function (event) {

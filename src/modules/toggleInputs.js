@@ -105,4 +105,4 @@ const checkManualInput = () => {
 	return manInputFlag;
 }
 
-export {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs};
+export {generateTodaysDate, formatAMPM, generateCurrentTime, checkManualInput, getManualInputs};

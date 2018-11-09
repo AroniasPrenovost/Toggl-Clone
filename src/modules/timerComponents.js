@@ -1,3 +1,5 @@
+import {formatAMPM} from "./toggleInputs";
+
 let hour = 0,
     minute = 0,
     seconds = 0,
@@ -10,7 +12,20 @@ let startButton = document.getElementById('start-btn'),
 
 let intervalId = null;
 
+function generateCurrentTime() {
+  let date = new Date(),
+      currentTime = formatAMPM(date),
+      month = date.getMonth() + 1,
+      day = date.getDate(),
+      year = date.getFullYear();
+
+  let dateStamp = month + "/" + day + "/" + year; 
+  return [currentTime, dateStamp];
+}
+
 const startTimer = () => {
+  
+  // start timer 
   ++totalSeconds;
   hour = Math.floor(totalSeconds /3600);
   minute = Math.floor((totalSeconds - hour*3600)/60);
@@ -26,7 +41,6 @@ const startTimer = () => {
   if(stopClock.value.charAt(0) === '0'){
     stopClock.value = stopClock.value.substr(1);
   }
-
 }
 
 var counter = 1;

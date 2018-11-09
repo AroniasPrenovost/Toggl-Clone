@@ -1,10 +1,4 @@
-let startButton = document.getElementById('start-btn'),
-    resetButton = document.getElementById('reset-btn'),
-    myInput = document.getElementById('myInput'),
-    projToggle = document.getElementById('projToggle'),
-    taskInput = document.getElementById('placeholder'),
-    colorCodeButton = document.getElementById('colorCode'),
-    colorNormalButton = document.getElementById('colorNormal');
+import {startButton, resetButton, myInput, projToggle, taskInput, colorCodeButton, colorNormalButton} from "./globalVars";
 
 // reset inputs 
 const resetInputs = () => {
