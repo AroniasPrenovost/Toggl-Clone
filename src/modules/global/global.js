@@ -2,6 +2,9 @@ var startButton = document.getElementById('start-btn'),
     resetButton = document.getElementById('reset-btn'),
     myInput = document.getElementById('myInput'),
     projToggle = document.getElementById('projToggle'),
+    manualModeButton = document.getElementById('manual'),
+    timerModeButton = document.getElementById('timer'),
+	timerModeClock = document.getElementById('clock'),
     taskInput = document.getElementById('placeholder'),
     colorCodeButton = document.getElementById('colorCode'),
     colorNormalButton = document.getElementById('colorNormal'),
@@ -16,6 +19,9 @@ export {startButton,
 		resetButton,
 		myInput,
 		projToggle,
+		manualModeButton,  
+		timerModeButton,
+		timerModeClock,
 		taskInput,
 		colorCodeButton,
 		colorNormalButton,
@@ -26,5 +32,6 @@ export {startButton,
 		manualInput2,
 		toggleBill
 	}; 
+
 
 

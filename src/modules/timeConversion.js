@@ -1,4 +1,4 @@
-import {manualModeButton, timerModeButton, timerModeClock, manualInput1, arrow, datepickerInput, manualInput2} from "./globalVars";
+import {manualModeButton, timerModeButton, timerModeClock, manualInput1, arrow, datepickerInput, manualInput2} from './global/global';
 
 // get timer input value 
 function genDigitalTime() {

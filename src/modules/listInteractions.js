@@ -1,4 +1,4 @@
-import {startButton, resetButton, myInput, projToggle, taskInput, colorCodeButton, colorNormalButton} from "./globalVars";
+import {startButton, resetButton, myInput, projToggle, taskInput, colorCodeButton, colorNormalButton} from './global/global';
 
 // reset inputs 
 const resetInputs = () => {

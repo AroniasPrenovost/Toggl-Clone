@@ -1,4 +1,4 @@
-import {projToggle, taskInput} from "./globalVars";
+import {projToggle, taskInput} from './global/global';
 
 const checkTaskInput = () => {
   if (taskInput.value === '') {

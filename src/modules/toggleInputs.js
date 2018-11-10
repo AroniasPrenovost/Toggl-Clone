@@ -1,10 +1,4 @@
-let manualModeButton = document.getElementById('manual'),
-	timerModeButton = document.getElementById('timer'),
-	timerModeClock = document.getElementById('clock'),
-	manualInput1 = document.getElementById('manual-entry-1'),
-	arrow = document.getElementById('arrow'),
-	datepickerInput = document.getElementById('datepicker'),
-	manualInput2 = document.getElementById('manual-entry-2');
+import {manualModeButton, timerModeButton, timerModeClock, manualInput1, arrow, datepickerInput, manualInput2} from './global/global';
 
 // get manual inputs 
 const getManualInputs = () => {

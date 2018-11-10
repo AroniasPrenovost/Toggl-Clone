@@ -1,4 +1,4 @@
-import {projToggle} from "./globalVars";
+import {projToggle} from './global/global';
 
 const appendTaskToInput = () => {
     $("ul").on("click", "li", function(){ 
