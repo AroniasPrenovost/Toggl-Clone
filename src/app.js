@@ -8,7 +8,7 @@ import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determine
 import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject} from './modules/timerInputValidators';
 import {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
-import {genTimerModeManualTimeStamp} from './modules/timeStampConvert';
+import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 listSearch(); 
 
 // drag drop 
@@ -42,19 +42,27 @@ const appendToList = () => {
            return false; 
         }
 
+        var timeStamp = ''; 
         // if timer mode enabled and digital entry valid
         if (checkManualInput() == false && validateTimerModeEntry() === true) {
-            var timeStamp = genTimerModeManualTimeStamp();
-            // alert(timeStamp)
+
+            // create timestamp 
+             timeStamp = genTimerModeManualTimeStamp();
         }
-                
+            
         // if manual entry enabled and manual entry valid 
         if (checkManualInput() === true && validateManualModeEntry() === true) {
            var manInputVals = getManualInputs();
-           // alert(manInputVals[3]);    
-           validateManualModeEntry();
+           
+            // get seconds difference, and then convert to digital time 
+            manInputVals = timesToSeconds(manInputVals[0], manInputVals[1]);
+            
+            // create timestamp
+            timeStamp = secondsToDigital(manInputVals);
+           
+            // validateManualModeEntry(); - this may be important 
         }
-       
+
         // get task input  
         var task = getTaskInput(); 
 
