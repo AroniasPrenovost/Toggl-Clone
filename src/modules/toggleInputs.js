@@ -39,9 +39,8 @@ const generateTodaysDate = () => {
 
 const generateCurrentTime = () => {
 	let date = new Date();
-	let currentTime = formatAMPM(date);
-
-	return currentTime; 
+	let currentTime = formatAMPM(date); 
+	return currentTime;
 }
 
 const currentTimeManualInput = () => { 

@@ -1,27 +1,12 @@
-import {formatAMPM} from "./toggleInputs";
+import {startButton, resetButton, projToggle, stopClock} from './global/global';
+import {generateCurrentTime} from "./toggleInputs";
 
 let hour = 0,
     minute = 0,
     seconds = 0,
     totalSeconds = 0;
 
-let startButton = document.getElementById('start-btn'),
-    resetButton = document.getElementById('reset-btn'),
-    projToggle = document.getElementById("projToggle"),
-    stopClock = document.getElementsByName("clock")[0];
-
 let intervalId = null;
-
-function generateCurrentTime() {
-  let date = new Date(),
-      currentTime = formatAMPM(date),
-      month = date.getMonth() + 1,
-      day = date.getDate(),
-      year = date.getFullYear();
-
-  let dateStamp = month + "/" + day + "/" + year; 
-  return [currentTime, dateStamp];
-}
 
 const startTimer = () => {
   
@@ -55,7 +40,24 @@ clearInterval(intervalId); // pause timer
  startButton.innerHTML = '<i class="fa fa-play"></i>';
  startButton.style.backgroundColor = 'green';
 }
-})
+});
+
+// store start and stop times of timer 
+var timeStamps = [];
+var count2 = 1;
+
+startButton.addEventListener('click', () => {
+    if (timeStamps.length === 2) {
+      timeStamps.splice(-2);
+    }
+    count2++;
+    if (count2 % 2 == 0) {     
+      timeStamps.push(generateCurrentTime());
+    } else { 
+      timeStamps.push(generateCurrentTime());
+    }
+});
+
 
 resetButton.addEventListener('click', () => {
   totalSeconds = 0;
@@ -90,4 +92,4 @@ const trackListItemTime = () => {
   });
 }
 
-export {startTimer, trackListItemTime};
+export {startTimer, trackListItemTime, timeStamps};
