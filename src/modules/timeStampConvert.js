@@ -170,8 +170,11 @@ import {timerModeClock} from './global/global';
 import {generateCurrentTime} from "./toggleInputs";
 import {digitalTimeToSeconds, secondsToDigital} from './timeConversion';
 
-// create END time stamp, use current time 
-var endStamp = generateCurrentTime()
+// generate timer mode manual input timestamps
+const genTimerModeManualTimeStamp = () => {
+// create END timestamp, use current time 
+var endStamp = generateCurrentTime(),
+    endTimeFormat = generateCurrentTime();
 
 // store current am/pm 
 var ampm = endStamp.slice(-2);
@@ -203,7 +206,7 @@ if (endStamp.charAt(6) === 'p') {
 let endStampSeconds = digitalTimeToSeconds(endStamp);
 
 // convert input to seconds
-let timerSeconds = '07 : 54 : 00'; //timerModeClock.value; test '07 : 54 : 00';
+let timerSeconds = timerModeClock.value; // test '07 : 54 : 00';
 if (timerSeconds.length === 11) {
   timerSeconds = '0' + timerSeconds;
 }
@@ -228,7 +231,7 @@ if (ampm = 'pm') { // toggle AM/PM
   differSeconds = 43200;
 }
 
-// convert result to START time stamp - returns '03 : 26 : 00'
+// convert result to START timestamp - returns '03 : 26 : 00'
 var startTime = secondsToDigital(differSeconds);
 
 // format to '4:33 pm' 
@@ -247,9 +250,11 @@ if (startTimeFormat.charAt(0) === '0') {
 
 // remove empty spaces 
 startTimeFormat = startTimeFormat.replace(/\s/g, '');
-
 startTimeFormat = startTimeFormat + ' ' + ampm; 
 
-// alert(startTimeFormat);
+// create final timestamp 
+var timerModeManualStamps = startTimeFormat + " - " + endTimeFormat
+return timerModeManualStamps;
+}
 
-export {}; 
+export {genTimerModeManualTimeStamp}; 

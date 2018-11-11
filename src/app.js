@@ -2,13 +2,13 @@ import {dragDropList} from './modules/dragDrop';
 import {listSearch} from './modules/dropListSearch';
 import {appendTaskToInput, deleteListItem} from './modules/liDeleteHide';
 import {toggleBilling, checkBillingToggle} from './modules/toggleBilling';
-import {startTimer, trackListItemTime, timeStamps} from './modules/timerComponents';
+import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
 import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
 import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject} from './modules/timerInputValidators';
 import {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
-import {} from './modules/timeStampConvert';
+import {genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 listSearch(); 
 
 // drag drop 
@@ -44,8 +44,8 @@ const appendToList = () => {
 
         // if timer mode enabled and digital entry valid
         if (checkManualInput() == false && validateTimerModeEntry() === true) {
-           //
-
+            var timeStamp = genTimerModeManualTimeStamp();
+            // alert(timeStamp)
         }
                 
         // if manual entry enabled and manual entry valid 
@@ -54,8 +54,7 @@ const appendToList = () => {
            // alert(manInputVals[3]);    
            validateManualModeEntry();
         }
-        // alert(timeStamps);
-
+       
         // get task input  
         var task = getTaskInput(); 
 

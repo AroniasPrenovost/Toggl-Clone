@@ -42,23 +42,6 @@ clearInterval(intervalId); // pause timer
 }
 });
 
-// store start and stop times of timer 
-var timeStamps = [];
-var count2 = 1;
-
-startButton.addEventListener('click', () => {
-    if (timeStamps.length === 2) {
-      timeStamps.splice(-2);
-    }
-    count2++;
-    if (count2 % 2 == 0) {     
-      timeStamps.push(generateCurrentTime());
-    } else { 
-      timeStamps.push(generateCurrentTime());
-    }
-});
-
-
 resetButton.addEventListener('click', () => {
   totalSeconds = 0;
   stopClock.value = "0 : 00 : 00";
@@ -92,4 +75,4 @@ const trackListItemTime = () => {
   });
 }
 
-export {startTimer, trackListItemTime, timeStamps};
+export {startTimer, trackListItemTime};
