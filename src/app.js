@@ -42,33 +42,34 @@ const appendToList = () => {
            return false; 
         }
 
-        var timeStamp = ''; 
+        var timeStamp = '';
+        var clockTimer = ''; 
         // if timer mode enabled and digital entry valid
         if (checkManualInput() == false && validateTimerModeEntry() === true) {
-
-            // create timestamp 
+             
              timeStamp = genTimerModeManualTimeStamp();
+
+             // grab digital time 
+             clockTimer = genDigitalTime();
         }
             
         // if manual entry enabled and manual entry valid 
         if (checkManualInput() === true && validateManualModeEntry() === true) {
            var manInputVals = getManualInputs();
-           
+
+            // create timestamp
+            timeStamp = manInputVals[0] + " - " + manInputVals[1];
+          
             // get seconds difference, and then convert to digital time 
             manInputVals = timesToSeconds(manInputVals[0], manInputVals[1]);
-            
-            // create timestamp
-            timeStamp = secondsToDigital(manInputVals);
-           
-            // validateManualModeEntry(); - this may be important 
+            clockTimer = secondsToDigital(manInputVals);
         }
 
         // get task input  
         var task = getTaskInput(); 
 
-        // get timer input
-        var clockTimer = genDigitalTime(),
-        clockTimerElement = "<div class='listClockTime'>" + clockTimer + "</div>";
+        // create digital time component 
+        var clockTimerElement = "<div class='listClockTime'>" + clockTimer + "</div>";
 
         // current time  
         let currentYear = (new Date()).getFullYear(),
@@ -89,8 +90,10 @@ const appendToList = () => {
         let projectNameIcon = "<div class='projIcon'><h6 style='background-color:" + iconColor + "'" + ">" + projtitle + "</h6></div>";
         let projectBillIcon = "<div class='billIcon noselect'>$</div>";
 
+        let taskTimeStamp = "<div class='timestamp'>" + timeStamp + "</div>";
+
         // list item data  
-        let listItemData = task + "   " + projectNameIcon + "<div class='listIconsRight'>" + projectBillIcon + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>";
+        let listItemData = task + "   " + projectNameIcon + "<div class='listIconsRight'>" + projectBillIcon + taskTimeStamp + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>";
      
         // declare node, add classes + list data  
         var node = document.createElement("li"); 

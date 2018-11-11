@@ -100,7 +100,7 @@ function timesToSeconds(str1, str2) {
   }
   if (ampm1 === 'am' && ampm2 === 'pm') {
   // if time matches 
-  if (Number(rawNum1) === Number(rawNum2)) {
+  if (rawNum1 === rawNum2) {
     let seconds = dayMinutes * 60 / 2;
     return seconds;
   }
@@ -254,6 +254,7 @@ const genTimerModeManualTimeStamp = () => {
 
   // create final timestamp 
   var timerModeManualStamps = startTimeFormat + " - " + endTimeFormat
+
   return timerModeManualStamps;
 }
 

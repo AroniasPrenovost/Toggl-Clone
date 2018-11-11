@@ -41,6 +41,9 @@ li:nth-child(even) {
   display: inline-block;
   float: right; }
 
+.timestamp {
+  display: inline-block; }
+
 .listClockTime {
   display: inline-block; }
 
