@@ -93,7 +93,7 @@ const appendToList = () => {
         let taskTimeStamp = "<div class='timestamp'>" + timeStamp + "</div>";
 
         // list item data  
-        let listItemData = task + "   " + projectNameIcon + "<div class='listIconsRight'>" + projectBillIcon + taskTimeStamp + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>";
+        let listItemData = task + "   " + projectNameIcon + taskTimeStamp + "<div class='listIconsRight'>" + projectBillIcon + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>";
      
         // declare node, add classes + list data  
         var node = document.createElement("li"); 
