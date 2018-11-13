@@ -21,7 +21,7 @@ li {
     line-height: 40px;
     font-size: 20px;
     background: $light-grey;
-
+    width:100%;
 }
 
 /* font-awesome delete + append icons */
@@ -85,6 +85,7 @@ li:nth-child(even) {
     background-color: $default-project-tag; 
     padding:3px 6px 3px 6px;
     font-size:14px;
+    margin-right:10px;
     display:inline;
 }
 
@@ -93,15 +94,32 @@ li:nth-child(even) {
     color:black;
     background-color:transparent;
     display:inline-block;
+    position: relative;
+    margin-right:10px;
+    opacity: 0;
 }
 
 .billIconToggle {
     font-weight:bold;
+    position: relative;
+    opacity: 0;
+}
+
+li:hover .billIcon {
+    color: #bdc3c7;
+    opacity: 1.0;
+    -webkit-transition: 0.1s linear;
+}
+
+li:hover.billIconToggle {
+    color: #bdc3c7;
+    opacity: 1.0;
+    -webkit-transition: 0.1s linear;
 }
 
 .inputBilling {
-    height:50px;position: 
-    relative;
+    height:50px;
+    position: relative;
     width:auto;
     font-size: 22px
 }

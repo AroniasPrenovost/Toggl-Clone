@@ -65,21 +65,27 @@ const appendToList = () => {
             clockTimer = secondsToDigital(manInputVals);
         }
 
-        // get task input  
-        var task = getTaskInput(); 
-
-        // create digital time component 
-        var clockTimerElement = "<div class='listClockTime'>" + clockTimer + "</div>";
-
-        // current time  
+        // generate current time  
         let currentYear = (new Date()).getFullYear(),
         assumeTodaysDate = generateTodaysDate(),
         currentTime = generateCurrentTime();
 
+        // begin builing list item components
+
+        // get task and create item  
+        const task = getTaskInput(); 
+        const taskNode = document.createElement("div");
+              taskNode.className = "listTask";
+              taskNode.innerHTML = task;
+
+        // create digital time component 
+        const clockTimerElementNode = document.createElement("div");
+              clockTimerElementNode.className = "listClockTime";
+              clockTimerElementNode.innerHTML = clockTimer;
+
         // toggle billable hours 
         let billingToggle = checkBillingToggle();
 
-        // begin builing li components 
         let deleteLiIcon = "<span><i class='fa fa-trash'></i></span>";
         let appendTimeIcon = "<span><i class='fa fa-play'></i></span>";
 
@@ -90,18 +96,31 @@ const appendToList = () => {
         let projectNameIcon = "<div class='projIcon'><h6 style='background-color:" + iconColor + "'" + ">" + projtitle + "</h6></div>";
         let projectBillIcon = "<div class='billIcon noselect'>$</div>";
 
-        let taskTimeStamp = "<div class='timestamp'>" + timeStamp + "</div>";
+        const taskTimeStampNode = document.createElement("div");
+              taskTimeStampNode.className = "timestamp";
+              taskTimeStampNode.innerHTML = timeStamp;
 
         // list item data  
-        let listItemData = task + "   " + projectNameIcon + taskTimeStamp + "<div class='listIconsRight'>" + projectBillIcon + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>";
-     
-        // declare node, add classes + list data  
+        let listItemData = ''; //task + "   " + projectNameIcon + projectBillIcon + taskTimeStamp + "<div class='listIconsRight'>" + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>";
+        
+       
+        // declare new li node, add list data  
         var node = document.createElement("li"); 
         let classesToAdd = [ 'listItem', 'ui-sortable-handle' ];
         node.classList.add(...classesToAdd);
-        node.innerHTML = listItemData;               
 
-        // add element to list item 
+
+        // node.innerHTML = listItemData;
+
+        // add list items to li node                
+        node.appendChild(taskNode);
+
+
+        node.appendChild(taskTimeStampNode);
+        
+        node.appendChild(clockTimerElementNode);
+
+        // add li element to list 
         document.getElementById("projects").appendChild(node);
 
         // show lis + reset inputs 
