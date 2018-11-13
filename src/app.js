@@ -9,6 +9,7 @@ import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualMode
 import {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
+
 listSearch(); 
 
 // drag drop 
@@ -67,10 +68,10 @@ const appendToList = () => {
 
         // generate current time  
         let currentYear = (new Date()).getFullYear(),
-        assumeTodaysDate = generateTodaysDate(),
-        currentTime = generateCurrentTime();
+            assumeTodaysDate = generateTodaysDate(),
+            currentTime = generateCurrentTime();
 
-        // begin builing list item components
+    // begin builing list item components
 
         // get task and create item  
         const task = getTaskInput(); 
@@ -86,47 +87,72 @@ const appendToList = () => {
         // toggle billable hours 
         let billingToggle = checkBillingToggle();
 
-        let deleteLiIcon = "<span><i class='fa fa-trash'></i></span>";
-        let appendTimeIcon = "<span><i class='fa fa-play'></i></span>";
+        // create delete + append time elements, place in container div 
+        const deleteLiIcon = document.createElement("span");
+        let iElem = document.createElement("i");
+        let iClasses = [ 'fa', 'fa-trash' ];
+            iElem.classList.add(...iClasses);
+            deleteLiIcon.appendChild(iElem);
+        
+        const appendTimeIcon = document.createElement("span");
+        let iElem2 = document.createElement("i");
+        let iClasses2 = [ 'fa', 'fa-play' ];
+            iElem2.classList.add(...iClasses2);
+            appendTimeIcon.appendChild(iElem2);
 
+        const deleteTimeIcons = document.createElement("div");
+              deleteTimeIcons.className = "deleteTimeIcons";
+              deleteTimeIcons.appendChild(appendTimeIcon);
+              deleteTimeIcons.appendChild(deleteLiIcon);
+
+        // create project name li elements 
         let titleAndColor = projectNameAndColor();
         let projtitle = titleAndColor[0];
         let iconColor = titleAndColor[1];
 
-        let projectNameIcon = "<div class='projIcon'><h6 style='background-color:" + iconColor + "'" + ">" + projtitle + "</h6></div>";
-        let projectBillIcon = "<div class='billIcon noselect'>$</div>";
+        // build project name li element
+        const projectNameIcon = document.createElement("div");
+              projectNameIcon.className = "projIcon";
 
+        let iElem3 = document.createElement("h6");
+            iElem3.style.backgroundColor = iconColor;
+            iElem3.innerHTML = projtitle;
+            projectNameIcon.appendChild(iElem3);
+
+        // create billing icon li element 
+        const projectBillIcon = document.createElement("div");
+        let classesToAdd3 = [ 'billIcon', 'noselect' ];
+            projectBillIcon.classList.add(...classesToAdd3);
+            projectBillIcon.innerHTML = "$";
+
+        // create timestamp for li element 
         const taskTimeStampNode = document.createElement("div");
               taskTimeStampNode.className = "timestamp";
               taskTimeStampNode.innerHTML = timeStamp;
-
-        // list item data  
-        let listItemData = ''; //task + "   " + projectNameIcon + projectBillIcon + taskTimeStamp + "<div class='listIconsRight'>" + clockTimerElement + appendTimeIcon + deleteLiIcon + "</div>";
-        
        
         // declare new li node, add list data  
-        var node = document.createElement("li"); 
+        const node = document.createElement("li"); 
         let classesToAdd = [ 'listItem', 'ui-sortable-handle' ];
-        node.classList.add(...classesToAdd);
+            node.classList.add(...classesToAdd);
 
+            // add list items to li node                
+            node.appendChild(taskNode);
+            node.appendChild(projectNameIcon);
+            node.appendChild(projectBillIcon);
 
-        // node.innerHTML = listItemData;
+            // timer elements on far right 
+            node.appendChild(taskTimeStampNode);
+            node.appendChild(clockTimerElementNode);
 
-        // add list items to li node                
-        node.appendChild(taskNode);
-
-
-        node.appendChild(taskTimeStampNode);
-        
-        node.appendChild(clockTimerElementNode);
-
+            // add time, delete, and billing icons 
+            node.appendChild(deleteTimeIcons);
+ 
         // add li element to list 
         document.getElementById("projects").appendChild(node);
 
-        // show lis + reset inputs 
+        // reset inputs 
         showLis();
-        resetInputs();
-        
+        resetInputs();      
     } 
 }
 

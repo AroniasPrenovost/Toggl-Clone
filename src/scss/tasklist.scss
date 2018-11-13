@@ -24,9 +24,17 @@ li {
     width:100%;
 }
 
+.listItem {
+  text-align: right;
+}
+
 /* font-awesome delete + append icons */
 .fa.fa-trash, .fa.fa-play{
-    font-size: 16px !important;
+    font-size: 22px !important;
+}
+
+.fa.fa-trash {
+    margin: 0 25px 0 0;
 }
 
 span {
@@ -51,6 +59,13 @@ li:nth-child(even) {
 }
 */
 
+.listTask {
+    display:inline-block;
+    margin: 0 40px 0 60px;
+    text-align:left;
+    float:left;
+}
+
 .listIconsRight {
     display:inline-block;
     float:right;
@@ -59,6 +74,8 @@ li:nth-child(even) {
 .timestamp {
     display:inline-block;
     height: 30px;
+    font-weight:400;
+    font-size: 15px;
     padding-top: 8px;
     padding: 8px 30px 0 30px;
     flex: 0 1 auto;
@@ -69,16 +86,18 @@ li:nth-child(even) {
 
 .listClockTime {
     display: inline-block;
+    font-weight:400;
 }
 
-.deleteIcons { 
+.deleteTimeIcons {
     display: inline-block;
-    float:right;
+    margin: 0 60px 0 40px;
 }
 
 .projIcon { 
     display:inline-block;
     display:visible;
+    float: left;
 }
 .projIcon > h6 {
     color:white;
