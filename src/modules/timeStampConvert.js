@@ -151,7 +151,7 @@ function timesToSeconds(str1, str2) {
   // return seconds;
 }
 
-console.log(timesToSeconds("12:09 AM", "6:09 PM"));
+// console.log(timesToSeconds("12:09 AM", "6:09 PM"));
 
 
 // ("4:02 AM", "3:01 AM");

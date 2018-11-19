@@ -39,6 +39,9 @@ li:hover span {
   opacity: 1.0;
   -webkit-transition: 0.1s linear; }
 
+li span:hover {
+  color: black; }
+
 /*
 li:nth-child(even) { 
     background: $dark-grey; 
@@ -105,6 +108,9 @@ li:hover .billIcon {
   color: #bdc3c7;
   opacity: 1.0;
   -webkit-transition: 0.1s linear; }
+
+li .billIcon:hover {
+  color: black; }
 
 li:hover.billIconToggle {
   color: #bdc3c7;
