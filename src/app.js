@@ -6,7 +6,7 @@ import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
 import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
 import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject} from './modules/timerInputValidators';
-import {generateTodaysDate, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
+import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 
@@ -43,27 +43,56 @@ const appendToList = () => {
            return false; 
         }
 
-        var timeStamp = '';
-        var clockTimer = ''; 
+        // date and time elements to be generated 
+        var timeStamp = '',
+            dateStamp = '',
+            alternateDateFormat = '',
+            dateShorthand = '',
+            clockTimer = '';
+
         // if timer mode enabled and digital entry valid
         if (checkManualInput() == false && validateTimerModeEntry() === true) {
-             
-             timeStamp = genTimerModeManualTimeStamp();
+            var manualInputValues = getManualInputs();
 
-             // grab digital time 
-             clockTimer = genDigitalTime();
+            // 4:43 pm - 5:03 pm format 
+            timeStamp = genTimerModeManualTimeStamp();
+
+            // mm/dd/yyyy format 
+            dateStamp = generateTodaysDate();
+
+            // yyyy-mm-dd format 
+            alternateDateFormat = convertToAlternateDate(dateStamp);
+
+            // 'Wed, 28 Nov, 2017' format 
+            dateShorthand = dateToShorthand(alternateDateFormat);
+
+            // grab digital time 
+            clockTimer = genDigitalTime();
         }
             
         // if manual entry enabled and manual entry valid 
         if (checkManualInput() === true && validateManualModeEntry() === true) {
-           var manInputVals = getManualInputs();
+           var manualInputValues = getManualInputs();
 
             // create timestamp
-            timeStamp = manInputVals[0] + " - " + manInputVals[1];
+            timeStamp = manualInputValues[0] + " - " + manualInputValues[1];
+
+            // mm/dd/yyyy format
+            if (manualInputValues[2] === 'Today') {
+               dateStamp = generateTodaysDate();
+            } else {
+               dateStamp = manualInputValues[2] + '/' + manualInputValues[3];
+            }
+
+            // yyyy-mm-dd format 
+            alternateDateFormat = convertToAlternateDate(dateStamp);
+
+            // 'Wed, 28 Nov, 2017' format 
+            dateShorthand = dateToShorthand(alternateDateFormat);
           
             // get seconds difference, and then convert to digital time 
-            manInputVals = timesToSeconds(manInputVals[0], manInputVals[1]);
-            clockTimer = secondsToDigital(manInputVals);
+            let manualTimeStamps  = timesToSeconds(manualInputValues[0], manualInputValues[1]);
+            clockTimer = secondsToDigital(manualTimeStamps);
         }
 
         // generate current time  
@@ -71,7 +100,7 @@ const appendToList = () => {
             assumeTodaysDate = generateTodaysDate(),
             currentTime = generateCurrentTime();
 
-    // begin builing list item components
+        // begin builing list item components
 
         // get task and create item  
         const task = getTaskInput(); 
@@ -129,6 +158,8 @@ const appendToList = () => {
         const taskTimeStampNode = document.createElement("div");
               taskTimeStampNode.className = "timestamp";
               taskTimeStampNode.innerHTML = timeStamp;
+
+        // build object for this time entry
        
         // declare new li node, add list data  
         const node = document.createElement("li"); 
@@ -149,6 +180,13 @@ const appendToList = () => {
  
         // add li element to list 
         document.getElementById("projects").appendChild(node);
+
+        // --- creating date entered list labels --- 
+        // check to see if li w/ date label exists 
+        // if label doesn't exist, create it 
+        // add node underneath (append) that label 
+        // if it does exist, place node within that ul w/ matching date label
+
 
         // reset inputs 
         showLis();

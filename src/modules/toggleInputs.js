@@ -20,8 +20,8 @@ const formatAMPM = (date) => {
 }
 
 const generateTodaysDate = () => {
-	let todaysDate = new Date(),
-	dd = todaysDate.getDate(),
+	let todaysDate = new Date();
+	let dd = todaysDate.getDate(),
 	mm = todaysDate.getMonth()+1, //January is 0
 	yyyy = todaysDate.getFullYear();
 
@@ -33,9 +33,64 @@ const generateTodaysDate = () => {
 	    mm = '0'+mm
 	} 
 
-	todaysDate = mm + '/' + dd + yyyy;
+	todaysDate = mm + '/' + dd + '/' + yyyy;
 	return todaysDate;
 } 
+
+// convert 'mm/dd/yyyy' to 'yyyy-mm-dd' format 
+function convertToAlternateDate(arg){
+	let yyyy = arg.slice(-4);
+	let dd = arg.charAt(3) + arg.charAt(4);
+	let mm = arg.substring(0, 2);
+	return yyyy + '-' + mm + '-' + dd;
+}
+
+// convert '2013-07-31' to 'Wed, 28 Nov' format 
+function dateToShorthand(date) {
+
+	// generate day of week 
+	let dayNames = [
+		'Mon',
+		'Tues',
+		'Wed',
+		'Thur',
+		'Fri',
+		'Sat',
+		'Sun'
+	];
+
+	let d = new Date(date);
+	let dayOfWeek = dayNames[d.getDay()];
+
+	// generate day of month 
+	let dayOfMonth = date.slice(-2);
+
+	// generate month
+	let months = [
+		'Jan', 
+		'Feb', 
+		'Mar', 
+		'Apr', 
+		'May', 
+		'Jun', 
+		'Jul', 
+		'Aug', 
+		'Sep', 
+		'Oct',
+		'Nov', 
+		'Dec'
+	];
+	
+	let x = date.charAt(5) + date.charAt(6);
+		x = Number(x) - 1;
+	let month = months[x];
+
+	// get year 
+	let year = date.substring(0, 4);
+
+	return dayOfWeek + ', ' + dayOfMonth + ' ' + month + ', ' + year;
+}
+
 
 const generateCurrentTime = () => {
 	let date = new Date();
@@ -98,4 +153,4 @@ const checkManualInput = () => {
 	return manInputFlag;
 }
 
-export {generateTodaysDate, formatAMPM, generateCurrentTime, checkManualInput, getManualInputs};
+export {generateTodaysDate, convertToAlternateDate, dateToShorthand, formatAMPM, generateCurrentTime, checkManualInput, getManualInputs};
