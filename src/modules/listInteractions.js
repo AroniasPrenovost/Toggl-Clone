@@ -20,10 +20,17 @@ const showLis = () => {
     })
 }
 
+// shuffle array 
+const shuffle = arr => arr.sort( () => (Math.random() - 0.5) );
+
 // random hex color generator
 const getRandomColor = () => {
     var length = 6;
     var chars = '0123456789ABCDEF';
+    // shuffle char order 
+    chars = Array.from(chars); 
+    chars = shuffle(chars);
+   
     var hex = '#';
     while(length--) hex += chars[(Math.random() * 16) | 0];
     return hex;
