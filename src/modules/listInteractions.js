@@ -1,4 +1,4 @@
-import {startButton, resetButton, myInput, projToggle, taskInput, colorCodeButton, colorNormalButton} from './global/global';
+import {startButton, resetButton, myInput, projToggle, timerModeButton, taskInput, colorCodeButton, colorNormalButton, datepickerInput} from './global/global';
 
 // reset inputs 
 const resetInputs = () => {
@@ -8,6 +8,8 @@ const resetInputs = () => {
     taskInput.value = "";
     myInput.placeholder = "Search..";
     projToggle.innerHTML = '<i class="plus">+</i> Project/task';
+    datepickerInput.value = 'Today';
+    timerModeButton.click();
     $("#container input").slice(1, 2).css({"backgroundColor": "#27ae60"});
 }
 

@@ -226,7 +226,8 @@ const appendToList = () => {
         // add first container element
         if (!idlists) {
             taskListContainer.appendChild(dateContainer);
-          
+            showLis();
+            resetInputs();
         }
 
         // if 2 elements 
@@ -238,11 +239,15 @@ const appendToList = () => {
             let dateCompare = compareDates(arg1, arg2);
 
             if (dateCompare === 'item_1_more_recent') {
-                taskListContainer.appendChild(dateContainer);            
+                taskListContainer.appendChild(dateContainer);  
+                showLis();
+                resetInputs();         
             }
 
             if (dateCompare === 'item_2_more_recent') {
                 taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
+                showLis();
+                resetInputs();
             } 
 
         }
@@ -257,11 +262,12 @@ const appendToList = () => {
             for (var z = 0; z < idlists.length; z++) {
                 let itemCompared = idlists[z];
                 let dateCompare = compareDates(itemCompared, newEntry);
-                // alert(dateCompare);
+                
                 if (dateCompare === 'item_2_more_recent') {
                 // taskListContainer.appendChild(dateContainer);
                 taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[z]);  
-
+                showLis();
+                resetInputs();
                 }  
             }
 
@@ -270,7 +276,8 @@ const appendToList = () => {
             let dateCompare = compareDates(itemCompared, newEntry);
             if (dateCompare === 'item_1_more_recent') {  
                 taskListContainer.appendChild(dateContainer);
-
+                showLis();
+                resetInputs();
             }  
         }
     }
@@ -282,10 +289,9 @@ const appendToList = () => {
         // attach list node to matching list 
         let listMatch = document.getElementById(dateStamp);
             listMatch.appendChild(node);
+            showLis();
+            resetInputs();
         }
-
-    showLis();
-    resetInputs();   
     } 
 }
 

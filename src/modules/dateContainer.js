@@ -22,7 +22,6 @@ function compareDates (arg1, arg2) {
   if (arg1 === arg2) {
     return false;
   } else if (arg1 > arg2) {
-    alert(arg1 + '   ' + arg2)
     return 'item_1_more_recent';  
   } else {
     return 'item_2_more_recent';  
