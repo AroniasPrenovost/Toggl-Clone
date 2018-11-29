@@ -17,23 +17,22 @@ function containerIdMatch(str) {
   }
 }
 
-// pass args as "2013-11-01", "2016-11-01" - alternateDateFormat
+// args requires '2013-11-01', '2016-11-01' (alternateDateFormat)
 function compareDates (arg1, arg2) {
- 
   if (arg1 === arg2) {
     return false;
   } else if (arg1 > arg2) {
-    return 'first';
+    alert(arg1 + '   ' + arg2)
+    return 'item_1_more_recent';  
   } else {
-    return 'second';
+    return 'item_2_more_recent';  
   }
-
 }
 
-// match container instance to id/timestamp 
+// get current ids 
 function containerIdOrder(str) {
 
-    // grab all divs with container class 
+    // get divs with container class 
     let dateContainerids = document.getElementsByClassName('dateContainer');
     let arrLength = dateContainerids.length;
     let ids = [];
@@ -43,47 +42,12 @@ function containerIdOrder(str) {
         ids.push(dateContainerids[i].id);
     }
 
-    // first item 
-    if (ids.length === 1) {
-      return false;
+    if (ids.length != 0) {
+        return ids; 
     }
-
-    // second time 
-    if (ids.length === 2) {
-
-      // find more recent date  
-      let recentDate = compareDates(ids[0], ids[1]);
-
-      // if first container item most recent  
-      if (recentDate === 'first') {
-        return false; 
-      }
-      
-      // if second container item most recent
-      if (recentDate === 'second') {
-        return 'second item more recent';
-      }
-
-    }
-
-    // 3 or more  
-    if (ids.length > 2) {
-    
-      // grab last item in array and shorten 
-      let newDateEntry = ids.pop();
-
-      // compare to other ids
-      for (var i = 0; i < ids.length; i++) {
-        let check = compareDates(ids[i], newDateEntry);
-
-        if (check === 'second') {
-       //   return [ids[i], 'yes'];
-        }
-     }
-
-    }
+  
   }
 
-export {containerIdMatch, containerIdOrder}; 
+export {containerIdMatch, compareDates, containerIdOrder}; 
 
 
