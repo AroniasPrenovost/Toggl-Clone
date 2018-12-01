@@ -26,8 +26,9 @@
                         <p id="timer" class="toggle-inputs"><i class="fa fa-clock-o hover-title" title="Timer Mode"></i></p>
                         <p id="manual" class="toggle-inputs"><i class="fa fa-align-justify hover-title" title="Manual Mode"></i></p>
                     </div>
-                    <button id="start-btn" class="start-btn"><i class="fa fa-play"></i></button>
-
+                    <div class="toggl-button-container">
+                        <button id="start-btn" class="start-btn"><i class="fa fa-play start"></i></button>
+                    </div>
                     <!-- project dropdown --> 
                     <div class="dropdown">
                         <button id="projToggle" class="dropbtn timer-input"><i class="plus">+</i> Project/task</button>
@@ -41,7 +42,6 @@
                         </div>
                     </div>
                     <!-- end project dropdown --> 
-
                     <div id="billIcon" class="billIcon inputBilling noselect" style="opacity:1">$</div>
 
                     <div class="clock-container">
@@ -73,20 +73,12 @@
         </div>
     </div>
 
-<!-- test --> 
+<!-- task container --> 
 <div id="taskList">
-    
+    <!-- general ul w/ project id="date" --> 
+        <!-- generate lis for each new entry --> 
 
 </div>
-<!-- -- --> 
-<!--
-<ul id="projects" class="droppable-area ui-sortable">   
-    
-<li class="listItem ui-sortable-handle" style="display: list-item;"><div class="listTask">Replying to emails </div><div class="projIcon"><h6 style="background-color: rgb(92, 107, 115);">testProject2</h6></div><div class="billIcon noselect">$</div><div class="timestamp">5:22 am - 7:05 am</div><div class="listClockTime">01 : 42 : 16</div><div class="deleteTimeIcons"><span><i class="fa fa-play"></i></span><span><i class="fa fa-trash"></i></span></div></li><li class="listItem ui-sortable-handle" style="display: list-item;"><div class="listTask">Task mgmt </div><div class="projIcon"><h6 style="background-color: rgb(92, 107, 115);">testProject1</h6></div><div class="billIcon noselect">$</div><div class="timestamp">6:45 am - 7:05 am</div><div class="listClockTime">00 : 20 : 00</div><div class="deleteTimeIcons"><span><i class="fa fa-play"></i></span><span><i class="fa fa-trash"></i></span></div></li>
-<li class="listItem ui-sortable-handle" style="display: list-item;"><div class="listTask">Layout creation</div><div class="projIcon"><h6 style="background-color: rgb(92, 107, 115);">testProject3</h6></div><div class="billIcon noselect">$</div><div class="timestamp">5:10 am - 7:06 am</div><div class="listClockTime">01 : 55 : 20</div><div class="deleteTimeIcons"><span><i class="fa fa-play"></i></span><span><i class="fa fa-trash"></i></span></div></li><li class="listItem ui-sortable-handle" style="display: list-item;"><div class="listTask">Hours input </div><div class="projIcon"><h6 style="background-color: rgb(92, 107, 115);">testProject2</h6></div><div class="billIcon noselect">$</div><div class="timestamp">6:44 am - 7:06 am</div><div class="listClockTime">00 : 22 : 00</div><div class="deleteTimeIcons"><span><i class="fa fa-play"></i></span><span><i class="fa fa-trash"></i></span></div></li><li class="listItem ui-sortable-handle" style="display: list-item;"><div class="listTask">QA</div><div class="projIcon"><h6 style="background-color: rgb(92, 107, 115);">testProject5</h6></div><div class="billIcon noselect">$</div><div class="timestamp">6:42 am - 7:06 am</div><div class="listClockTime">00 : 24 : 00</div><div class="deleteTimeIcons"><span><i class="fa fa-play"></i></span><span><i class="fa fa-trash"></i></span></div></li><li class="listItem ui-sortable-handle"><div class="listTask">Proposal writing </div><div class="projIcon"><h6 style="background-color: rgb(92, 107, 115);">testProject4</h6></div><div class="billIcon noselect">$</div><div class="timestamp">4:16 am - 7:07 am</div><div class="listClockTime">02 : 50 : 31</div><div class="deleteTimeIcons"><span><i class="fa fa-play"></i></span><span><i class="fa fa-trash"></i></span></div></li>
-
-</ul>
--->
 
 <!--
     <footer class="footer-container fixed-bottom">
@@ -98,6 +90,28 @@
             </div>
         </div>   
     </footer>
+-->
+
+<!--
+<div class="container">
+    <table id="my_table" class="table">
+    </table>
+</div>
+<script type="text/javascript" src="src/testData.json"></script>
+<script>
+    var local_data = data;
+    var row_data = '';
+    for (var i = 0; i < local_data.length; i++) {
+        var row_data = row_data + '<tr>' +
+        ' <td>' + local_data[i].first_name + ' ' + local_data[i].last_name + '</td>' +
+        ' <td>' + local_data[i].email + '</td>' +
+        ' <td>' + local_data[i].gender + '</td>' +
+        '</tr>';
+    }
+    var table_body_element = document.createElement('tbody');
+    table_body_element.innerHTML = row_data;
+    document.getElementById('my_table').appendChild(table_body_element);
+</script>
 -->
 
 <!-- jquery + jquery ui (drag drop + datepicker) --> 

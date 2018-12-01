@@ -1,3 +1,6 @@
+import {} from './global/global';
+
+/*
 let traverseListButton = document.getElementById('traverse');
 traverseListButton.addEventListener('click', () => {
 
@@ -38,3 +41,7 @@ let readobjects = JSON.stringify(objects);
 let listLength = JSON.stringify(objects.length);
 alert(readobjects);
 });
+*/
+
+export {createListItemObj};
+

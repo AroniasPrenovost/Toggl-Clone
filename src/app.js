@@ -1,3 +1,4 @@
+import {createListItemObj} from './modules/createListItemObject';
 import {dragDropList} from './modules/dragDrop';
 import {listSearch} from './modules/dropListSearch';
 import {appendTaskToInput, deleteListItem} from './modules/liDeleteHide';
@@ -10,7 +11,6 @@ import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCur
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 import {containerIdMatch, compareDates, containerIdOrder} from './modules/dateContainer';
-
 listSearch(); 
 
 // drag drop 
@@ -52,9 +52,8 @@ const appendToList = () => {
         dateStamp = '',
         alternateDateFormat = '',
         dateShorthand = '',
-        seconds = '',
         clockTimer = '',
-        indexCont = '';
+        seconds = '';
 
 
         // if timer mode enabled and digital entry valid
@@ -186,101 +185,118 @@ const appendToList = () => {
         // add time, delete, and billing icons 
         node.appendChild(deleteTimeIcons);
 
+        // build json object w/ list and date data 
+
+        // - timeStamp 
+        // - dateStamp 
+        // - alternateDateFormat
+        // - dateShorthand 
+        // - clockTimer 
+        // - seconds 
+        // - currentYear
+        // - currentTime
+        // - assumeTodaysDate
+        // - task
+        // - projectName
+        // - projectBillable
+        // - taskTimeStamp
+        // = digitalTime 
+
         // if no matching container id 
         if (containerIdMatch(dateStamp) === false) { 
 
-        // create task list container for calendar day (li node)
-        const dateContainer = document.createElement("div"); 
-        let dateContainerClasses = [ 'dateContainer', 'dateContainerStyle' ];
-        dateContainer.classList.add(...dateContainerClasses);
-        dateContainer.id = dateStamp; // id is day's date 
-        dateContainer.draggable = false;
+            // create task list container for calendar day (li node)
+            const dateContainer = document.createElement("div"); 
+            let dateContainerClasses = [ 'dateContainer', 'dateContainerStyle' ];
+            dateContainer.classList.add(...dateContainerClasses);
+            dateContainer.id = dateStamp; // id is day's date 
+            dateContainer.draggable = false;
 
-        // check if dateshorthand year, if current, hide date 
-        let appearDate = '';
-        let enteredYear = Number(dateShorthand.substr(dateShorthand.length - 4));
+            // check if dateshorthand year, if current, hide date 
+            let appearDate = '';
+            let enteredYear = Number(dateShorthand.substr(dateShorthand.length - 4));
 
-        if (currentYear != enteredYear) {
-            appearDate = dateShorthand;
-        } else {
-            appearDate = dateShorthand.substring(0, dateShorthand.lastIndexOf(","));
-        }
-
-        dateContainer.innerHTML = appearDate;
-
-        // create project list 
-        const projTaskListNode = document.createElement("ul"); 
-        let taskListClasses = [ 'droppable-area', 'ui-sortable' ];
-        projTaskListNode.classList.add(...taskListClasses);
-        projTaskListNode.id = 'projects';
-
-        // add li to ul
-        projTaskListNode.appendChild(node); 
-
-        // add ul to newly created div container  
-        dateContainer.appendChild(projTaskListNode);
-
-        // ids apppearing o the page 
-        let idlists = containerIdOrder(dateStamp);
-      
-        // add first container element
-        if (!idlists) {
-            taskListContainer.appendChild(dateContainer);
-            showLis();
-            resetInputs();
-        }
-
-        // if 2 elements 
-        if (idlists.length === 1) {
-
-            let arg1 = convertToAlternateDate(idlists[0]);
-            let arg2 = alternateDateFormat;
-
-            let dateCompare = compareDates(arg1, arg2);
-
-            if (dateCompare === 'item_1_more_recent') {
-                taskListContainer.appendChild(dateContainer);  
-                showLis();
-                resetInputs();         
+            if (currentYear != enteredYear) {
+                appearDate = dateShorthand;
+            } else {
+                appearDate = dateShorthand.substring(0, dateShorthand.lastIndexOf(","));
             }
 
-            if (dateCompare === 'item_2_more_recent') {
-                taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
-                showLis();
-                resetInputs();
-            } 
+            dateContainer.innerHTML = appearDate;
 
-        }
+            // create project list 
+            const projTaskListNode = document.createElement("ul"); 
+            let taskListClasses = [ 'droppable-area', 'ui-sortable' ];
+            projTaskListNode.classList.add(...taskListClasses);
+            projTaskListNode.id = 'projects';
 
-        // if 2+ list elements exist 
-        if (idlists.length > 1) {
+            // add li to ul
+            projTaskListNode.appendChild(node); 
 
-            // get last item in array 
-            let newEntry = dateContainer.id;
+            // add ul to newly created div container  
+            dateContainer.appendChild(projTaskListNode);
 
-             // most recent always at the top 
-            for (var z = 0; z < idlists.length; z++) {
-                let itemCompared = idlists[z];
-                let dateCompare = compareDates(itemCompared, newEntry);
-                
-                if (dateCompare === 'item_2_more_recent') {
-                // taskListContainer.appendChild(dateContainer);
-                taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[z]);  
-                showLis();
-                resetInputs();
-                }  
-            }
-
-            // oldest entry always at bottom
-            let itemCompared = idlists.pop();
-            let dateCompare = compareDates(itemCompared, newEntry);
-            if (dateCompare === 'item_1_more_recent') {  
+            // ids apppearing o the page 
+            let idlists = containerIdOrder(dateStamp);
+          
+            // add first container element
+            if (!idlists) {
                 taskListContainer.appendChild(dateContainer);
                 showLis();
                 resetInputs();
-            }  
+            }
+
+            // if 2 elements 
+            if (idlists.length === 1) {
+
+                let arg1 = convertToAlternateDate(idlists[0]);
+                let arg2 = alternateDateFormat;
+
+                let dateCompare = compareDates(arg1, arg2);
+
+                if (dateCompare === 'item_1_more_recent') {
+                    taskListContainer.appendChild(dateContainer);  
+                    showLis();
+                    resetInputs();         
+                }
+
+                if (dateCompare === 'item_2_more_recent') {
+                    taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
+                    showLis();
+                    resetInputs();
+                } 
+
+            }
+
+            // if 2+ list elements exist 
+            if (idlists.length > 1) {
+
+                // get last item in array 
+                let newEntry = dateContainer.id;
+
+                 // most recent always at the top 
+                for (var z = 0; z < idlists.length; z++) {
+                    let itemCompared = idlists[z];
+                    let dateCompare = compareDates(itemCompared, newEntry);
+                    
+                    if (dateCompare === 'item_2_more_recent') {
+                    // taskListContainer.appendChild(dateContainer);
+                    taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[z]);  
+                    showLis();
+                    resetInputs();
+                    }  
+                }
+
+                // oldest entry always at bottom
+                let itemCompared = idlists.pop();
+                let dateCompare = compareDates(itemCompared, newEntry);
+                if (dateCompare === 'item_1_more_recent') {  
+                    taskListContainer.appendChild(dateContainer);
+                    showLis();
+                    resetInputs();
+                }  
+            }
         }
-    }
     
         // if container id match exists 
         if (containerIdMatch(dateStamp) === true) {

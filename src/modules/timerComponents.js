@@ -30,15 +30,24 @@ const startTimer = () => {
 
 var counter = 1;
 startButton.addEventListener('click', () => {
+  // if manual mode then add manually 
+
+  // if timer mode - if timer on 
+
+  // if timer mode - if timer off 
+
+  
+
+
   counter++;
   if (counter % 2 == 0) {
     intervalId = setInterval(startTimer, 1000);
     startButton.innerHTML = '<i class="fa fa-pause"></i>';
-    startButton.style.backgroundColor = 'red';
+    startButton.style.backgroundColor = '#C84630';
   } else {
 clearInterval(intervalId); // pause timer 
- startButton.innerHTML = '<i class="fa fa-play"></i>';
- startButton.style.backgroundColor = 'green';
+ startButton.innerHTML = '<i class="fa fa-play start"></i>';
+ startButton.style.backgroundColor = '#4CAF50';
 }
 });
 
@@ -47,8 +56,8 @@ resetButton.addEventListener('click', () => {
   stopClock.value = "0 : 00 : 00";
 
 clearInterval(intervalId); // pause timer 
- startButton.innerHTML = '<i class="fa fa-play"></i>';
- startButton.style.backgroundColor = 'green';
+ startButton.innerHTML = '<i class="fa fa-play start"></i>';
+ startButton.style.backgroundColor = '#4CAF50';
 });
 
 const trackListItemTime = () => {
