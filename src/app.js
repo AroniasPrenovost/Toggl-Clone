@@ -11,6 +11,7 @@ import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCur
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 import {containerIdMatch, compareDates, containerIdOrder} from './modules/dateContainer';
+
 listSearch(); 
 
 // drag drop 
@@ -28,6 +29,16 @@ filterFunction();
 filterEntry();
 
 appendProjToButton();
+
+// build existing HTML 
+const generateJSON = () => {
+    // console.log('__generateJSON_____');
+}
+
+generateJSON();
+
+// build list of list data objects 
+var listEntries = [];
 
 const appendToList = () => {
 
@@ -54,7 +65,6 @@ const appendToList = () => {
         dateShorthand = '',
         clockTimer = '',
         seconds = '';
-
 
         // if timer mode enabled and digital entry valid
         if (checkManualInput() == false && validateTimerModeEntry() === true) {
@@ -185,22 +195,31 @@ const appendToList = () => {
         // add time, delete, and billing icons 
         node.appendChild(deleteTimeIcons);
 
-        // build json object w/ list and date data 
+        // build list data object 
+            var taskEntry = {
+                task_name: task,
+                project_name: projtitle,
+                time_stamp: timeStamp,
+                digital_time: clockTimer,
+                total_seconds: seconds, 
+                date_stamp: dateStamp,
+                alternate_date: alternateDateFormat, 
+                short_date: dateShorthand, 
+                billable: billingToggle,
+                created_on: assumeTodaysDate,
+                created_at: currentTime,
+                current_year: currentYear
+            };
+            //console.dir(taskEntry);
+            // track new manual entry 
+            listEntries.push(taskEntry);
 
-        // - timeStamp 
-        // - dateStamp 
-        // - alternateDateFormat
-        // - dateShorthand 
-        // - clockTimer 
-        // - seconds 
-        // - currentYear
-        // - currentTime
-        // - assumeTodaysDate
-        // - task
-        // - projectName
-        // - projectBillable
-        // - taskTimeStamp
-        // = digitalTime 
+            // place in session storage 
+            sessionStorage.setItem('listEntries', JSON.stringify(listEntries));
+
+            // to retrieve
+            // var retrievedObject = sessionStorage.getItem('taskEntry');
+            // console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
         // if no matching container id 
         if (containerIdMatch(dateStamp) === false) { 
@@ -280,7 +299,6 @@ const appendToList = () => {
                     let dateCompare = compareDates(itemCompared, newEntry);
                     
                     if (dateCompare === 'item_2_more_recent') {
-                    // taskListContainer.appendChild(dateContainer);
                     taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[z]);  
                     showLis();
                     resetInputs();
@@ -300,8 +318,6 @@ const appendToList = () => {
     
         // if container id match exists 
         if (containerIdMatch(dateStamp) === true) {
-            indexCont = '';
-
         // attach list node to matching list 
         let listMatch = document.getElementById(dateStamp);
             listMatch.appendChild(node);
@@ -313,7 +329,13 @@ const appendToList = () => {
 
 // initialize append 
 let testappend = document.getElementById('testappend');
+    testappend.addEventListener('click', () => {
+        appendToList();
+});
 
-testappend.addEventListener('click', () => {
-    appendToList();
+// test session storage  
+let testsessiondata = document.getElementById('session-store');
+    testsessiondata.addEventListener('click', () => {
+        const retrieveObj = sessionStorage.getItem('listEntries');
+        alert(retrieveObj);
 });

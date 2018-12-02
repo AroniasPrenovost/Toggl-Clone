@@ -1,21 +1,44 @@
 var data = [
   {
-    "id": 1,
-    "first_name": "Beverlie",
-    "last_name": "Yeoman",
-    "email": "byeoman0@google.it",
-    "gender": "Female"
+    "task_name": "Paperwork",
+    "project_name": "testProject1",
+    "time_stamp": "12:14 pm - 12:34 pm",
+    "digital_time": "00 : 20 : 00",
+    "total_seconds": 1200,
+    "date_stamp": "12/02/2018",
+    "alternate_date": "2018-12-02",
+    "short_date": "Sun, 02 Dec, 2018",
+    "billable": false,
+    "created_on": "12/02/2018",
+    "created_at": "12:34 pm",
+    "current_year": 2018
   }, {
-    "id": 2,
-    "first_name": "Mabel",
-    "last_name": "Saurin",
-    "email": "msaurin1@facebook.com",
-    "gender": "Female"
+    "task_name": "Homework",
+    "project_name": "testProject3",
+    "time_stamp": "12:17 pm - 12:53 pm",
+    "digital_time": "00 : 36 : 00",
+    "total_seconds": 2160,
+    "date_stamp": "11/06/2018",
+    "alternate_date": "2018-11-06",
+    "short_date": "Tues, 06 Nov, 2018",
+    "billable": false,
+    "created_on": "12/02/2018",
+    "created_at": "12:57 pm",
+    "current_year": 2018
   }, {
-    "id": 3,
-    "first_name": "Magnum",
-    "last_name": "Moniker",
-    "email": "mmoniker2@geocities.com",
-    "gender": "Male"
+    "task_name": "SPPA documents, reorganizing",
+    "project_name": "testProject5",
+    "time_stamp": "1:00 pm - 1:06 pm",
+    "digital_time": "00 : 06 : 00",
+    "total_seconds": 360,
+    "date_stamp": "12/03/2018",
+    "alternate_date": "2018-12-03",
+    "short_date": "Mon, 03 Dec, 2018",
+    "billable": false,
+    "created_on": "12/02/2018",
+    "created_at": "1:06 pm",
+    "current_year": 2018
   }
 ]
+
+

@@ -64,8 +64,9 @@
                 <div class="col-lg-12">
                     <div class="button-container">
                         <i class="fa fa-paint-brush header-button" id="colorCode"></i>
-                        <i class="fa fa-eraser header-button" id="colorNormal"></i> 
-                        <i class="fa fa-undo header-button" id="reset-btn"></i>  
+                        <i class="fa fa-eraser header-button" id="colorNormal"></i>
+                         <i class="fa fa-undo header-button" id="reset-btn"></i> 
+                        <i class="fa fa-undo header-button" id="session-store"></i>  
                         <i class="fa fa-file-excel-o header-button" id="testappend"></i>
                     </div>
                 </div>
@@ -73,24 +74,8 @@
         </div>
     </div>
 
-<!-- task container --> 
-<div id="taskList">
-    <!-- general ul w/ project id="date" --> 
-        <!-- generate lis for each new entry --> 
 
-</div>
 
-<!--
-    <footer class="footer-container fixed-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>test</h1>
-                </div>
-            </div>
-        </div>   
-    </footer>
--->
 
 <!--
 <div class="container">
@@ -112,6 +97,25 @@
     table_body_element.innerHTML = row_data;
     document.getElementById('my_table').appendChild(table_body_element);
 </script>
+-->
+
+<!-- append new task entries to task container --> 
+<div id="taskList">
+    <!-- general ul w/ project id="date" --> 
+        <!-- generate lis for each new entry --> 
+
+</div>
+
+<!--
+    <footer class="footer-container fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>test</h1>
+                </div>
+            </div>
+        </div>   
+    </footer>
 -->
 
 <!-- jquery + jquery ui (drag drop + datepicker) --> 
