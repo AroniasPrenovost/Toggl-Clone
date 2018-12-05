@@ -34,11 +34,10 @@ appendProjToButton();
 const generateJSON = () => {
     // console.log('__generateJSON_____');
 }
-
 generateJSON();
 
 // build list of list data objects 
-var listEntries = [];
+const listEntries = [];
 
 const appendToList = () => {
 
@@ -196,30 +195,34 @@ const appendToList = () => {
         node.appendChild(deleteTimeIcons);
 
         // build list data object 
-            var taskEntry = {
-                task_name: task,
-                project_name: projtitle,
-                time_stamp: timeStamp,
-                digital_time: clockTimer,
-                total_seconds: seconds, 
-                date_stamp: dateStamp,
-                alternate_date: alternateDateFormat, 
-                short_date: dateShorthand, 
-                billable: billingToggle,
-                created_on: assumeTodaysDate,
-                created_at: currentTime,
-                current_year: currentYear
-            };
-            //console.dir(taskEntry);
-            // track new manual entry 
-            listEntries.push(taskEntry);
+        var taskEntry = {
+            task_name: task,
+            project_name: projtitle,
+            time_stamp: timeStamp,
+            digital_time: clockTimer,
+            total_seconds: seconds, 
+            date_stamp: dateStamp,
+            alternate_date: alternateDateFormat, 
+            short_date: dateShorthand, 
+            billable: billingToggle,
+            created_on: assumeTodaysDate,
+            created_at: currentTime,
+            current_year: currentYear
+        };
 
-            // place in session storage 
-            sessionStorage.setItem('listEntries', JSON.stringify(listEntries));
+        // track new entry in list
+        listEntries.push(taskEntry);
 
-            // to retrieve
-            // var retrievedObject = sessionStorage.getItem('taskEntry');
-            // console.log('retrievedObject: ', JSON.parse(retrievedObject));
+        // re-order listEntries chronologically by date stamp, in descending order  
+        listEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
+        listEntries.reverse();
+
+        // place in session storage 
+        sessionStorage.setItem('listEntries', JSON.stringify(listEntries));
+
+        // to retrieve
+        // var retrievedObject = sessionStorage.getItem('taskEntry');
+        // console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
         // if no matching container id 
         if (containerIdMatch(dateStamp) === false) { 
@@ -241,7 +244,23 @@ const appendToList = () => {
                 appearDate = dateShorthand.substring(0, dateShorthand.lastIndexOf(","));
             }
 
-            dateContainer.innerHTML = appearDate;
+            // list date container header
+            var dateDivContainer = document.createElement('div');
+            dateDivContainer.classList.add('dateDivContainer'); 
+
+            var h = document.createElement('H3')                
+            var t = document.createTextNode(appearDate); 
+            h.classList.add('dateHeader');    
+            h.appendChild(t);
+
+            var b = document.createElement('H3') 
+            var u = document.createTextNode('placeholder'); // should be sum of seconds 
+            b.classList.add('dateTimeMax');    
+            b.appendChild(u);    
+
+            dateDivContainer.appendChild(h);
+            dateDivContainer.appendChild(b);
+            dateContainer.appendChild(dateDivContainer);
 
             // create project list 
             const projTaskListNode = document.createElement("ul"); 
@@ -263,6 +282,7 @@ const appendToList = () => {
                 taskListContainer.appendChild(dateContainer);
                 showLis();
                 resetInputs();
+                return false; 
             }
 
             // if 2 elements 
@@ -276,13 +296,15 @@ const appendToList = () => {
                 if (dateCompare === 'item_1_more_recent') {
                     taskListContainer.appendChild(dateContainer);  
                     showLis();
-                    resetInputs();         
+                    resetInputs();
+                    return false;          
                 }
 
                 if (dateCompare === 'item_2_more_recent') {
                     taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
                     showLis();
                     resetInputs();
+                    return false; 
                 } 
 
             }
@@ -302,6 +324,7 @@ const appendToList = () => {
                     taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[z]);  
                     showLis();
                     resetInputs();
+                    return false; 
                     }  
                 }
 
@@ -312,6 +335,7 @@ const appendToList = () => {
                     taskListContainer.appendChild(dateContainer);
                     showLis();
                     resetInputs();
+                    return false; 
                 }  
             }
         }
@@ -323,6 +347,7 @@ const appendToList = () => {
             listMatch.appendChild(node);
             showLis();
             resetInputs();
+            return false; 
         }
     } 
 }

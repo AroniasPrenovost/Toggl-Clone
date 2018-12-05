@@ -16,7 +16,8 @@ var startButton = document.getElementById('start-btn'),
 	manualInput2 = document.getElementById('manual-entry-2'),
 	toggleBill = document.getElementById("billIcon"); 
 
-export {startButton,
+export {
+		startButton,
 		resetButton,
 		myInput,
 		projToggle,
