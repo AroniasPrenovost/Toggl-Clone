@@ -76,16 +76,24 @@
 
 
 
-
 <!--
+ 
 <div class="container">
     <table id="my_table" class="table">
     </table>
 </div>
+
 <script type="text/javascript" src="src/testData.json"></script>
+
 <script>
     var local_data = data;
     var row_data = '';
+
+
+
+taskListContainer.appendChild(dateContainer);
+
+    
     for (var i = 0; i < local_data.length; i++) {
         var row_data = row_data + '<tr>' +
         ' <td>' + local_data[i].first_name + ' ' + local_data[i].last_name + '</td>' +
@@ -97,6 +105,7 @@
     table_body_element.innerHTML = row_data;
     document.getElementById('my_table').appendChild(table_body_element);
 </script>
+\
 -->
 
 <!-- append new task entries to task container --> 

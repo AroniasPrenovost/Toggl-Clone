@@ -10,7 +10,7 @@ import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualMode
 import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
-import {containerIdMatch, compareDates, containerIdOrder} from './modules/dateContainer';
+import {containerIdMatch, compareDates, containerIdOrder, getSumOfDayTime, populateContainersTimeSum} from './modules/dateContainer';
 
 listSearch(); 
 
@@ -254,8 +254,10 @@ const appendToList = () => {
             h.appendChild(t);
 
             var b = document.createElement('H3') 
-            var u = document.createTextNode('placeholder'); // should be sum of seconds 
-            b.classList.add('dateTimeMax');    
+            var u = document.createTextNode('placeholder'); // should be sum of seconds
+            b.id = alternateDateFormat;
+            b.classList.add('dateTimeMax');
+
             b.appendChild(u);    
 
             dateDivContainer.appendChild(h);
@@ -274,7 +276,7 @@ const appendToList = () => {
             // add ul to newly created div container  
             dateContainer.appendChild(projTaskListNode);
 
-            // ids apppearing o the page 
+            // ids apppearing on the page 
             let idlists = containerIdOrder(dateStamp);
           
             // add first container element
@@ -282,6 +284,7 @@ const appendToList = () => {
                 taskListContainer.appendChild(dateContainer);
                 showLis();
                 resetInputs();
+                console.log('_first item_')
                 return false; 
             }
 
@@ -297,46 +300,60 @@ const appendToList = () => {
                     taskListContainer.appendChild(dateContainer);  
                     showLis();
                     resetInputs();
-                    return false;          
+                    console.log('_length 1 item 1_')        
                 }
 
                 if (dateCompare === 'item_2_more_recent') {
                     taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
                     showLis();
                     resetInputs();
-                    return false; 
+                    console.log('_length 1 item 2_')  
                 } 
-
+                return false;
             }
 
             // if 2+ list elements exist 
+            var flagentry = '';
             if (idlists.length > 1) {
 
-                // get last item in array 
+                // new entry/most recent addition
                 let newEntry = dateContainer.id;
 
-                 // most recent always at the top 
-                for (var z = 0; z < idlists.length; z++) {
-                    let itemCompared = idlists[z];
-                    let dateCompare = compareDates(itemCompared, newEntry);
-                    
-                    if (dateCompare === 'item_2_more_recent') {
-                    taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[z]);  
-                    showLis();
-                    resetInputs();
-                    return false; 
-                    }  
-                }
-
-                // oldest entry always at bottom
-                let itemCompared = idlists.pop();
-                let dateCompare = compareDates(itemCompared, newEntry);
-                if (dateCompare === 'item_1_more_recent') {  
+                // if new entry is oldest 
+                let lastItem = idlists.slice(-1)[0]; 
+                let compareWithLast = compareDates(lastItem, newEntry);
+                if (compareWithLast === 'item_1_more_recent') {  
                     taskListContainer.appendChild(dateContainer);
                     showLis();
                     resetInputs();
                     return false; 
-                }  
+                }
+
+                // if new entry is most chronologically 'recent'
+                let firstItem = idlists[0];
+                let compareWithFirst = compareDates(firstItem, newEntry);   
+                if (compareWithFirst === 'item_2_more_recent') {
+                    taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);  
+                    showLis();
+                    resetInputs();
+                    return false; 
+                }
+
+                // for entries that should go in the middle 
+                // write code...   
+                for (var b = 0; b < idlists.length; b++) {
+                let itemComparedb = idlists[b];
+                let dateCompareb = compareDates(itemComparedb, newEntry);
+                let itemCompared2b = idlists[b + 1];
+                let dateCompare2b = compareDates(itemCompared2b, newEntry);   
+                    if (dateCompareb === 'item_1_more_recent' && dateCompare2b === 'item_2_more_recent') {
+                        taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[b]);
+                        showLis();
+                        resetInputs();
+                        console.log('_middle attemp_')
+                        return false; 
+                    }    
+                } 
             }
         }
     
@@ -347,8 +364,10 @@ const appendToList = () => {
             listMatch.appendChild(node);
             showLis();
             resetInputs();
+            console.log('item match');
             return false; 
         }
+
     } 
 }
 
@@ -362,5 +381,8 @@ let testappend = document.getElementById('testappend');
 let testsessiondata = document.getElementById('session-store');
     testsessiondata.addEventListener('click', () => {
         const retrieveObj = sessionStorage.getItem('listEntries');
-        alert(retrieveObj);
+
+        console.log(typeof retrieveObj)
+        var jj = JSON.parse(retrieveObj);
+        console.log(jj)
 });
