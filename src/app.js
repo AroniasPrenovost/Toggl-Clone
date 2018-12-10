@@ -95,7 +95,7 @@ const appendToList = () => {
         // create timestamp
         timeStamp = manualInputValues[0] + " - " + manualInputValues[1];
 
-        // mm/dd/yyyy format
+        // mm/dd/yyyy format if entry is present day 
         if (manualInputValues[2] === 'Today') {
             dateStamp = generateTodaysDate();
         } else {
@@ -123,6 +123,7 @@ const appendToList = () => {
         currentTime = generateCurrentTime();
 
         // begin builing list item components
+
         // get task and create item  
         const task = getTaskInput(); 
         const taskNode = document.createElement("div");
@@ -276,22 +277,27 @@ const appendToList = () => {
             // add ul to newly created div container  
             dateContainer.appendChild(projTaskListNode);
 
-            // ids apppearing on the page 
+            // ids apppearing on the page
             let idlists = containerIdOrder(dateStamp);
-          
-            // add first container element
+            let alternateidlist = [];
+
+            if (idlists) {
+                for (let value of idlists) {
+                  alternateidlist.push(convertToAlternateDate(value));
+                }
+            }
+
+            // if first entry
             if (!idlists) {
                 taskListContainer.appendChild(dateContainer);
                 showLis();
                 resetInputs();
-                console.log('_first item_')
-                return false; 
             }
 
             // if 2 elements 
             if (idlists.length === 1) {
 
-                let arg1 = convertToAlternateDate(idlists[0]);
+                let arg1 = alternateidlist[0];
                 let arg2 = alternateDateFormat;
 
                 let dateCompare = compareDates(arg1, arg2);
@@ -299,75 +305,41 @@ const appendToList = () => {
                 if (dateCompare === 'item_1_more_recent') {
                     taskListContainer.appendChild(dateContainer);  
                     showLis();
-                    resetInputs();
-                    console.log('_length 1 item 1_')        
+                    resetInputs();      
                 }
 
                 if (dateCompare === 'item_2_more_recent') {
                     taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
                     showLis();
                     resetInputs();
-                    console.log('_length 1 item 2_')  
                 } 
-                return false;
             }
 
-            // if 2+ list elements exist 
-            var flagentry = '';
+            // if 1 > elements exist, find valid entry position    
             if (idlists.length > 1) {
+                var newEntry = convertToAlternateDate(dateContainer.id);
+                for (var b = 0; b < alternateidlist.length; b++) {
+                    let itemCompared = alternateidlist[b];
+                    let dateCompare = compareDates(itemCompared, newEntry);
 
-                // new entry/most recent addition
-                let newEntry = dateContainer.id;
-
-                // if new entry is oldest 
-                let lastItem = idlists.slice(-1)[0]; 
-                let compareWithLast = compareDates(lastItem, newEntry);
-                if (compareWithLast === 'item_1_more_recent') {  
-                    taskListContainer.appendChild(dateContainer);
-                    showLis();
-                    resetInputs();
-                    return false; 
-                }
-
-                // if new entry is most chronologically 'recent'
-                let firstItem = idlists[0];
-                let compareWithFirst = compareDates(firstItem, newEntry);   
-                if (compareWithFirst === 'item_2_more_recent') {
-                    taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);  
-                    showLis();
-                    resetInputs();
-                    return false; 
-                }
-
-                // for entries that should go in the middle 
-                // write code...   
-                for (var b = 0; b < idlists.length; b++) {
-                let itemComparedb = idlists[b];
-                let dateCompareb = compareDates(itemComparedb, newEntry);
-                let itemCompared2b = idlists[b + 1];
-                let dateCompare2b = compareDates(itemCompared2b, newEntry);   
-                    if (dateCompareb === 'item_1_more_recent' && dateCompare2b === 'item_2_more_recent') {
-                        taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[b]);
-                        showLis();
-                        resetInputs();
-                        console.log('_middle attemp_')
-                        return false; 
-                    }    
+                    let nextItemCompare = alternateidlist[b+1];
+                    let nextDateCompare = compareDates(nextItemCompare, newEntry);
+                    if (dateCompare === 'item_1_more_recent' && nextDateCompare === 'item_2_more_recent') {
+                            taskListContainer.children[b].insertAdjacentElement("afterEnd", dateContainer);
+                            showLis();
+                            resetInputs();
+                    }   
                 } 
             }
         }
     
-        // if container id match exists 
+        // if container id match exists, attach node to match 
         if (containerIdMatch(dateStamp) === true) {
-        // attach list node to matching list 
         let listMatch = document.getElementById(dateStamp);
             listMatch.appendChild(node);
             showLis();
             resetInputs();
-            console.log('item match');
-            return false; 
         }
-
     } 
 }
 
