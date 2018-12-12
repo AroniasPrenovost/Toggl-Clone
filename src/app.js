@@ -292,45 +292,49 @@ const appendToList = () => {
                 taskListContainer.appendChild(dateContainer);
                 showLis();
                 resetInputs();
+                // match {week date : total_seconds} and find sum
+                populateContainersTimeSum(listEntries);
                 return false; 
-            }
+            } else {
 
-            // if 2 elements 
-            if (idlists.length === 1) {
+                // if 2 elements 
+                if (idlists.length === 1) {
 
-                let arg1 = alternateidlist[0];
-                let arg2 = alternateDateFormat;
+                    let arg1 = alternateidlist[0];
+                    let arg2 = alternateDateFormat;
 
-                let dateCompare = compareDates(arg1, arg2);
+                    let dateCompare = compareDates(arg1, arg2);
 
-                if (dateCompare === 'item_1_more_recent') {
-                    taskListContainer.appendChild(dateContainer);  
-                    showLis();
-                    resetInputs();      
+                    if (dateCompare === 'item_1_more_recent') {
+                        taskListContainer.appendChild(dateContainer);  
+                        showLis();
+                        resetInputs();      
+                    }
+
+                    if (dateCompare === 'item_2_more_recent') {
+                        taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
+                        showLis();
+                        resetInputs();
+                    } 
                 }
 
-                if (dateCompare === 'item_2_more_recent') {
-                    taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
-                    showLis();
-                    resetInputs();
-                } 
-            }
+                // if 1 > elements exist, find valid entry position    
+                if (idlists.length > 1) {
+                    var newEntry = convertToAlternateDate(dateContainer.id);
+                    for (var b = 0; b < alternateidlist.length; b++) {
+                        let itemCompared = alternateidlist[b];
+                        let dateCompare = compareDates(itemCompared, newEntry);
 
-            // if 1 > elements exist, find valid entry position    
-            if (idlists.length > 1) {
-                var newEntry = convertToAlternateDate(dateContainer.id);
-                for (var b = 0; b < alternateidlist.length; b++) {
-                    let itemCompared = alternateidlist[b];
-                    let dateCompare = compareDates(itemCompared, newEntry);
-
-                    let nextItemCompare = alternateidlist[b+1];
-                    let nextDateCompare = compareDates(nextItemCompare, newEntry);
-                    if (dateCompare === 'item_1_more_recent' && nextDateCompare === 'item_2_more_recent') {
-                            taskListContainer.children[b].insertAdjacentElement("afterEnd", dateContainer);
-                            showLis();
-                            resetInputs();
-                    }   
-                } 
+                        let nextItemCompare = alternateidlist[b+1];
+                        let nextDateCompare = compareDates(nextItemCompare, newEntry);
+                        if (dateCompare === 'item_1_more_recent' && nextDateCompare === 'item_2_more_recent') {
+                                taskListContainer.children[b].insertAdjacentElement("afterEnd", dateContainer);
+                                showLis();
+                                resetInputs();
+                        }   
+                    } 
+                }
+                populateContainersTimeSum(listEntries); 
             }
         }
 
@@ -340,11 +344,8 @@ const appendToList = () => {
             listMatch.appendChild(node);
             showLis();
             resetInputs();
-        }
-
-        // match {week date : total_seconds} and find sum
-        populateContainersTimeSum(listEntries);   
-        
+            populateContainersTimeSum(listEntries); 
+        }  
     } 
 }
 
@@ -359,7 +360,7 @@ let testsessiondata = document.getElementById('session-store');
     testsessiondata.addEventListener('click', () => {
         const retrieveObj = sessionStorage.getItem('listEntries');
 
-        console.log(typeof retrieveObj)
+        console.log(retrieveObj)
         var jj = JSON.parse(retrieveObj);
-        console.log(jj)
+        alert(jj)
 });

@@ -74,8 +74,16 @@
         </div>
     </div>
 
-
-
+    <button onclick="myFunction()">Click me</button>
+    <script type="text/javascript" src="data/testData.json"></script>
+    <script>
+        let listData = data;
+        //  alert(local_data[0]);
+        function myFunction() {
+            console.log(JSON.stringify(listData[0]));
+        }
+    </script>
+    
 <!--
  
 <div class="container">
@@ -83,12 +91,12 @@
     </table>
 </div>
 
-<script type="text/javascript" src="src/testData.json"></script>
+<script type="text/javascript" src="data/testData.json"></script>
 
 <script>
     var local_data = data;
     var row_data = '';
-
+ 
 
 
 taskListContainer.appendChild(dateContainer);

@@ -1,4 +1,6 @@
 
+import {secondsToDigital, digitalTimeToWord} from "./timeConversion";
+
 // check if input dateStamp matches current container Ids 
 function containerIdMatch(str) {
 // grab all divs with container class 
@@ -55,10 +57,17 @@ function populateContainersTimeSum(obj) {
   }, {}));
 
   for (var i = 0; i < data.length; i++) {
-    let idDate = data[i].alternate_date; 
-    let idTime = data[i].total_seconds;
+    let idDate = data[i].alternate_date.toString(); 
+    let idTime = data[i].total_seconds.toString();
     let containerSpot = document.getElementById(idDate);
-        containerSpot.innerHTML = idTime;  
+
+    // converts "36082" seconds to "10 : 01 : 22" 
+    let idTimeDigital = secondsToDigital(idTime);
+
+    // converts "10 : 01 : 22" to "10 hours 1 minute 22 seconds"
+    let idTimeWorded = digitalTimeToWord(idTimeDigital);
+
+        containerSpot.innerHTML = idTimeWorded;  
   }
 }
 
