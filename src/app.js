@@ -11,6 +11,7 @@ import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCur
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './modules/dateContainer';
+import json from '../data/testData.json';
 
 listSearch(); 
 
@@ -32,8 +33,9 @@ appendProjToButton();
 
 // build existing HTML 
 const generateJSON = () => {
-    // console.log('__generateJSON_____');
+    console.log(json);
 }
+
 generateJSON();
 
 // build list of list data objects 
@@ -122,21 +124,44 @@ const appendToList = () => {
         assumeTodaysDate = generateTodaysDate(),
         currentTime = generateCurrentTime();
 
-        // begin builing list item components
-
-        // get task and create item  
+        // get currentYear
         const task = getTaskInput(); 
+
+        // create project name li elements 
+        let titleAndColor = projectNameAndColor();
+        let projtitle = titleAndColor[0];
+        let iconColor = titleAndColor[1]; // not as vital 
+
+        // toggle billable hours 
+        let billingToggle = checkBillingToggle();
+
+        // build list data object 
+        var taskEntry = {
+            task_name: task,  // 
+            project_name: projtitle,
+            time_stamp: timeStamp,
+            digital_time: clockTimer,
+            total_seconds: seconds, 
+            date_stamp: dateStamp,
+            alternate_date: alternateDateFormat, 
+            short_date: dateShorthand, 
+            billable: billingToggle,
+            created_on: assumeTodaysDate,
+            created_at: currentTime,
+            current_year: currentYear
+        };
+
+        // begin builing list item components  
+
+        // task node first 
         const taskNode = document.createElement("div");
         taskNode.className = "listTask";
-        taskNode.innerHTML = task;
+        taskNode.innerHTML = taskEntry.task_name;
 
         // create digital time component 
         const clockTimerElementNode = document.createElement("div");
         clockTimerElementNode.className = "listClockTime";
-        clockTimerElementNode.innerHTML = clockTimer;
-
-        // toggle billable hours 
-        let billingToggle = checkBillingToggle();
+        clockTimerElementNode.innerHTML = taskEntry.digital_time;
 
         // create delete + append time elements, place in container div 
         const deleteLiIcon = document.createElement("span");
@@ -156,18 +181,13 @@ const appendToList = () => {
         deleteTimeIcons.appendChild(appendTimeIcon);
         deleteTimeIcons.appendChild(deleteLiIcon);
 
-        // create project name li elements 
-        let titleAndColor = projectNameAndColor();
-        let projtitle = titleAndColor[0];
-        let iconColor = titleAndColor[1];
-
         // build project name li element
         const projectNameIcon = document.createElement("div");
         projectNameIcon.className = "projIcon";
 
         let iElem3 = document.createElement("h6");
         iElem3.style.backgroundColor = iconColor;
-        iElem3.innerHTML = projtitle;
+        iElem3.innerHTML = taskEntry.project_name;
         projectNameIcon.appendChild(iElem3);
 
         // create billing icon li element 
@@ -179,7 +199,7 @@ const appendToList = () => {
         // create timestamp li element 
         const taskTimeStampNode = document.createElement("div");
         taskTimeStampNode.className = "timestamp";
-        taskTimeStampNode.innerHTML = timeStamp;
+        taskTimeStampNode.innerHTML = taskEntry.time_stamp;
 
         // declare new li node, add list data  
         const node = document.createElement("li"); 
@@ -194,22 +214,6 @@ const appendToList = () => {
         node.appendChild(clockTimerElementNode);
         // add time, delete, and billing icons 
         node.appendChild(deleteTimeIcons);
-
-        // build list data object 
-        var taskEntry = {
-            task_name: task,
-            project_name: projtitle,
-            time_stamp: timeStamp,
-            digital_time: clockTimer,
-            total_seconds: seconds, 
-            date_stamp: dateStamp,
-            alternate_date: alternateDateFormat, 
-            short_date: dateShorthand, 
-            billable: billingToggle,
-            created_on: assumeTodaysDate,
-            created_at: currentTime,
-            current_year: currentYear
-        };
 
         // track new entry in list
         listEntries.push(taskEntry);
@@ -255,7 +259,7 @@ const appendToList = () => {
             h.appendChild(t);
 
             var b = document.createElement('H3') 
-            var u = document.createTextNode('placeholder'); // should be sum of seconds
+            var u = document.createTextNode('placeholder'); // will become sum of seconds
             b.id = alternateDateFormat;
             b.classList.add('dateTimeMax');
 
@@ -359,8 +363,9 @@ let testappend = document.getElementById('testappend');
 let testsessiondata = document.getElementById('session-store');
     testsessiondata.addEventListener('click', () => {
         const retrieveObj = sessionStorage.getItem('listEntries');
-
+/*
         console.log(retrieveObj)
         var jj = JSON.parse(retrieveObj);
         alert(jj)
+*/
 });

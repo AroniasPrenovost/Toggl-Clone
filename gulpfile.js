@@ -2,11 +2,9 @@ var gulp = require('gulp'),
 sass = require('gulp-sass'),
 browserSync = require('browser-sync').create();
 
-
 gulp.task('hello', function() {
   console.log('Hello Aron');
 });
-
 
 gulp.task('sass', function() {
   return gulp.src('src/scss/**/*.scss') // Glob .scss files in src/scss

@@ -1,5 +1,4 @@
-// import from db 
-var data = [
+[
    {  
       "task_name":"wewe",
       "project_name":"testProject3",
