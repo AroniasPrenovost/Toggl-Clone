@@ -31,11 +31,10 @@ function compareDates (arg1, arg2) {
 
 // get current ids 
 function containerIdOrder(str) {
-
-// get divs with container class 
-let dateContainerids = document.getElementsByClassName('dateContainer');
-let arrLength = dateContainerids.length;
-let ids = [];
+  // get divs with container class 
+  let dateContainerids = document.getElementsByClassName('dateContainer');
+  let arrLength = dateContainerids.length;
+  let ids = [];
 
   // grab container ids
   for (var i = 0; i < arrLength; i++) {
@@ -46,70 +45,23 @@ let ids = [];
   }
 }
 
-
-function getSumOfDayTime(obj) {
-
-// grab an alternate object key if you wish 
-  var alternateDateStamps = [];
-  for (var i = 0; i < obj.length; i++) {
-    if (alternateDateStamps.indexOf(obj[i].alternate_date) > -1) {
-      continue;
-    } else { // doesn't exist in array
-      alternateDateStamps.push(obj[i].alternate_date);
-    }
-  }
-
-  var idTimeSumObj = [],
-      key,
-      total_time = '',
-      newObj = '',
-      idSumFlag = '',
-      removePrev = false;
-
-  for (var t = 0; t < obj.length; t++) {
-    if (t === 0) {
-      key = obj[t].alternate_date;
-      total_time = obj[t].total_seconds;
-    }
-    if (t > 0) {
-      if (obj[t].alternate_date === obj[t - 1].alternate_date) {
-        if (idSumFlag) {
-          total_time = idSumFlag + obj[t - 1].total_seconds;
-          idSumFlag = total_time;
-        }
-        if (!idSumFlag) {
-          total_time = obj[t].total_seconds + obj[t - 1].total_seconds;
-          idSumFlag = total_time;
-        }
-        removePrev = true;
-      } else {
-        total_time = obj[t].total_seconds;
-        idSumFlag = 0;
-      }
-    }
-    key = obj[t].alternate_date;
-    newObj = { [key]: total_time };
-    if (removePrev === true) {
-      idTimeSumObj.pop();
-    }
-    removePrev = false;
-    idTimeSumObj.push(newObj)
-  }
-  return idTimeSumObj;
-}
-
+// get sum of task time for each each date id 
+// '{ alternate_date: '2018-12-05', total_seconds: 232 }'
 function populateContainersTimeSum(obj) {
-  let data = getSumOfDayTime(obj);
+  let data = Object.values(obj.reduce((c, {alternate_date, total_seconds}) => {
+  c[alternate_date] = c[alternate_date] || {alternate_date,total_seconds: 0};
+  c[alternate_date].total_seconds += total_seconds;
+  return c;
+  }, {}));
 
-  var alternateDateStamps = Object.keys(data);
-
-  for (var i = 0; i < data[i].length; i++) {
-    console.log(data[i])
-    var containerSpot = document.getElementsById(data[i]);
-        containerSpot.innerHTML = alternateDateStamps[i];
+  for (var i = 0; i < data.length; i++) {
+    let idDate = data[i].alternate_date; 
+    let idTime = data[i].total_seconds;
+    let containerSpot = document.getElementById(idDate);
+        containerSpot.innerHTML = idTime;  
   }
 }
 
-export {containerIdMatch, compareDates, containerIdOrder, getSumOfDayTime, populateContainersTimeSum}; 
+export {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum}; 
 
 

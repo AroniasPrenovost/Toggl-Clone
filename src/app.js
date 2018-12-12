@@ -10,7 +10,7 @@ import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualMode
 import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
-import {containerIdMatch, compareDates, containerIdOrder, getSumOfDayTime, populateContainersTimeSum} from './modules/dateContainer';
+import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './modules/dateContainer';
 
 listSearch(); 
 
@@ -292,6 +292,7 @@ const appendToList = () => {
                 taskListContainer.appendChild(dateContainer);
                 showLis();
                 resetInputs();
+                return false; 
             }
 
             // if 2 elements 
@@ -332,7 +333,7 @@ const appendToList = () => {
                 } 
             }
         }
-    
+
         // if container id match exists, attach node to match 
         if (containerIdMatch(dateStamp) === true) {
         let listMatch = document.getElementById(dateStamp);
@@ -340,6 +341,10 @@ const appendToList = () => {
             showLis();
             resetInputs();
         }
+
+        // match {week date : total_seconds} and find sum
+        populateContainersTimeSum(listEntries);   
+        
     } 
 }
 
