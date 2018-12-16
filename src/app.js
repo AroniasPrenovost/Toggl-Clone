@@ -5,7 +5,7 @@ import {appendTaskToInput, deleteListItem} from './modules/liDeleteHide';
 import {toggleBilling, checkBillingToggle} from './modules/toggleBilling';
 import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
-import {getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/projectTagColors';
+import {getProjectName, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/projectNameBadge';
 import {resetInputs, showLis} from './modules/resetInputs';
 import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject} from './modules/timerInputValidators';
 import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
@@ -128,9 +128,9 @@ const appendToList = () => {
         const task = getTaskInput(); 
 
         // create project name li elements 
-        let projTitleLabelColor = projectNameAndColor(); 
-        let projTitle = projTitleLabelColor[0];
-        let ProjColor = projTitleLabelColor[1];
+        let projTitle = getProjectName(); 
+        // let projTitleLabelColor = projectNameAndColor(); 
+        //let ProjColor = projTitleLabelColor[1];
 
         // toggle billable hours 
         let billingToggle = checkBillingToggle();
@@ -152,8 +152,7 @@ const appendToList = () => {
             created_on: assumeTodaysDate,
             created_at: currentTime,
             current_year: currentYear,
-            entry_time: entryTime,
-            proj_color: ProjColor
+            entry_time: entryTime
         };
 
         // build HTML li component for new task entry

@@ -1,5 +1,10 @@
 import {projToggle, colorCodeButton, colorNormalButton} from './global/global';
 
+const getProjectName = () => {
+    var projectName = projToggle.innerHTML.split(" - ").pop();
+    return projectName; 
+}
+
 // shuffle array 
 const shuffle = arr => arr.sort( () => (Math.random() - 0.5) );
 
@@ -73,7 +78,7 @@ const determineProjectTagColors = (str1, str2) => {
 }
 
 const projectNameAndColor = () => {
-    var projtitle = projToggle.innerHTML.split(" - ").pop();
+    let projtitle = getProjectName();
     var color = '';
     color = $("h6:first").css("background-color");
 
@@ -100,4 +105,4 @@ colorNormalButton.addEventListener('click', () => {
     changeProjectNameColors("normalize");
 });
 
-export {getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor};
+export {getProjectName, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor};

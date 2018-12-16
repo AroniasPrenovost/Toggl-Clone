@@ -1,4 +1,4 @@
-import {projectNameAndColor} from './projectTagColors';
+import {projectNameAndColor} from './projectNameBadge';
 
 // pass new task entry object as arg 
 function createListItemNode(obj) {
