@@ -1,4 +1,4 @@
-import {projectNameAndColor} from './listInteractions';
+import {projectNameAndColor} from './projectTagColors';
 
 // pass new task entry object as arg 
 function createListItemNode(obj) {
@@ -36,8 +36,8 @@ function createListItemNode(obj) {
   projectNameIcon.className = "projIcon";
 
   let iElem3 = document.createElement("h6");
-  let iconColor = projectNameAndColor()[1];
-  iElem3.style.backgroundColor = iconColor;
+  //let iconColor = projectNameAndColor()[1];
+  iElem3.style.backgroundColor = obj.proj_color;
   iElem3.innerHTML = obj.project_name;
   projectNameIcon.appendChild(iElem3);
 

@@ -1,17 +1,17 @@
-import {createListItemObj} from './modules/createListItemObject';
+import {createListItemNode} from './modules/createListEntryNode';
 import {dragDropList} from './modules/dragDrop';
 import {listSearch} from './modules/dropListSearch';
 import {appendTaskToInput, deleteListItem} from './modules/liDeleteHide';
 import {toggleBilling, checkBillingToggle} from './modules/toggleBilling';
 import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
-import {resetInputs, showLis, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/listInteractions';
+import {getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/projectTagColors';
+import {resetInputs, showLis} from './modules/resetInputs';
 import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject} from './modules/timerInputValidators';
 import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './modules/dateContainer';
-import {createListItemNode} from './modules/createListEntryNode';
 import json from '../data/testData.json';
 
 listSearch(); 
@@ -128,7 +128,9 @@ const appendToList = () => {
         const task = getTaskInput(); 
 
         // create project name li elements 
-        let projtitle = projectNameAndColor()[0]; 
+        let projTitleLabelColor = projectNameAndColor(); 
+        let projTitle = projTitleLabelColor[0];
+        let ProjColor = projTitleLabelColor[1];
 
         // toggle billable hours 
         let billingToggle = checkBillingToggle();
@@ -139,7 +141,7 @@ const appendToList = () => {
         // build list data object 
         var taskEntry = {
             task_name: task,  
-            project_name: projtitle,
+            project_name: projTitle,
             time_stamp: timeStamp,
             digital_time: clockTimer,
             total_seconds: seconds, 
@@ -150,10 +152,11 @@ const appendToList = () => {
             created_on: assumeTodaysDate,
             created_at: currentTime,
             current_year: currentYear,
-            entry_time: entryTime
+            entry_time: entryTime,
+            proj_color: ProjColor
         };
 
-        // build HTML component for new task entry
+        // build HTML li component for new task entry
         let node = createListItemNode(taskEntry);
 
         // track new entry in list
