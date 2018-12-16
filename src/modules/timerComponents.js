@@ -21,7 +21,7 @@ const startTimer = () => {
   }
 
   stopClock.value = ((hour<=9) ? "0"+hour : hour) + " : " + ((minute<=9) ? "0" + minute : minute) + " : " + seconds;
-  document.title = "Timer - " + stopClock.value; // show timer in <title> 
+  document.title = stopClock.value + ' - Timer App'; // show timer in <title> 
 
   if(stopClock.value.charAt(0) === '0'){
     stopClock.value = stopClock.value.substr(1);
@@ -30,15 +30,6 @@ const startTimer = () => {
 
 var counter = 1;
 startButton.addEventListener('click', () => {
-  // if manual mode then add manually 
-
-  // if timer mode - if timer on 
-
-  // if timer mode - if timer off 
-
-  
-
-
   counter++;
   if (counter % 2 == 0) {
     intervalId = setInterval(startTimer, 1000);

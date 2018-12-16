@@ -11,6 +11,7 @@ import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCur
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './modules/dateContainer';
+import {createListItemNode} from './modules/createListEntryNode';
 import json from '../data/testData.json';
 
 listSearch(); 
@@ -33,10 +34,8 @@ appendProjToButton();
 
 // build existing HTML 
 const generateJSON = () => {
-    console.log(json);
-}
 
-generateJSON();
+}
 
 // build list of list data objects 
 const listEntries = [];
@@ -92,7 +91,8 @@ const appendToList = () => {
 
         // if manual entry enabled and manual entry valid 
         if (checkManualInput() === true && validateManualModeEntry() === true) {
-            var manualInputValues = getManualInputs();
+        
+        var manualInputValues = getManualInputs();
 
         // create timestamp
         timeStamp = manualInputValues[0] + " - " + manualInputValues[1];
@@ -128,16 +128,17 @@ const appendToList = () => {
         const task = getTaskInput(); 
 
         // create project name li elements 
-        let titleAndColor = projectNameAndColor();
-        let projtitle = titleAndColor[0];
-        let iconColor = titleAndColor[1]; // not as vital 
+        let projtitle = projectNameAndColor()[0]; 
 
         // toggle billable hours 
         let billingToggle = checkBillingToggle();
 
+        // item entry time in milliseconds, based on unix timestap 
+        let entryTime = Date.now(); 
+
         // build list data object 
         var taskEntry = {
-            task_name: task,  // 
+            task_name: task,  
             project_name: projtitle,
             time_stamp: timeStamp,
             digital_time: clockTimer,
@@ -148,72 +149,12 @@ const appendToList = () => {
             billable: billingToggle,
             created_on: assumeTodaysDate,
             created_at: currentTime,
-            current_year: currentYear
+            current_year: currentYear,
+            entry_time: entryTime
         };
 
-        // begin builing list item components  
-
-        // task node first 
-        const taskNode = document.createElement("div");
-        taskNode.className = "listTask";
-        taskNode.innerHTML = taskEntry.task_name;
-
-        // create digital time component 
-        const clockTimerElementNode = document.createElement("div");
-        clockTimerElementNode.className = "listClockTime";
-        clockTimerElementNode.innerHTML = taskEntry.digital_time;
-
-        // create delete + append time elements, place in container div 
-        const deleteLiIcon = document.createElement("span");
-        let iElem = document.createElement("i");
-        let iClasses = [ 'fa', 'fa-trash' ];
-        iElem.classList.add(...iClasses);
-        deleteLiIcon.appendChild(iElem);
-
-        const appendTimeIcon = document.createElement("span");
-        let iElem2 = document.createElement("i");
-        let iClasses2 = [ 'fa', 'fa-play' ];
-        iElem2.classList.add(...iClasses2);
-        appendTimeIcon.appendChild(iElem2);
-
-        const deleteTimeIcons = document.createElement("div");
-        deleteTimeIcons.className = "deleteTimeIcons";
-        deleteTimeIcons.appendChild(appendTimeIcon);
-        deleteTimeIcons.appendChild(deleteLiIcon);
-
-        // build project name li element
-        const projectNameIcon = document.createElement("div");
-        projectNameIcon.className = "projIcon";
-
-        let iElem3 = document.createElement("h6");
-        iElem3.style.backgroundColor = iconColor;
-        iElem3.innerHTML = taskEntry.project_name;
-        projectNameIcon.appendChild(iElem3);
-
-        // create billing icon li element 
-        const projectBillIcon = document.createElement("div");
-        let classesToAdd3 = [ 'billIcon', 'noselect' ];
-        projectBillIcon.classList.add(...classesToAdd3);
-        projectBillIcon.innerHTML = "$";
-
-        // create timestamp li element 
-        const taskTimeStampNode = document.createElement("div");
-        taskTimeStampNode.className = "timestamp";
-        taskTimeStampNode.innerHTML = taskEntry.time_stamp;
-
-        // declare new li node, add list data  
-        const node = document.createElement("li"); 
-        let classesToAdd = [ 'listItem', 'ui-sortable-handle' ];
-        node.classList.add(...classesToAdd);
-        // add list items to li node                
-        node.appendChild(taskNode);
-        node.appendChild(projectNameIcon);
-        node.appendChild(projectBillIcon);
-        // timer elements on far right 
-        node.appendChild(taskTimeStampNode);
-        node.appendChild(clockTimerElementNode);
-        // add time, delete, and billing icons 
-        node.appendChild(deleteTimeIcons);
+        // build HTML component for new task entry
+        let node = createListItemNode(taskEntry);
 
         // track new entry in list
         listEntries.push(taskEntry);

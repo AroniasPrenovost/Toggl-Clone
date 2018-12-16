@@ -11,6 +11,8 @@ const resetInputs = () => {
     datepickerInput.value = 'Today';
     timerModeButton.click();
     $('#container input').slice(1, 2).css({'backgroundColor': '#27ae60'});
+    document.title = 'Timer App';
+    // need to reset datepicker selection 
 }
 
 const showLis = () => {

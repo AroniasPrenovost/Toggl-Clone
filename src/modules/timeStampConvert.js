@@ -153,40 +153,6 @@ function timesToSeconds(str1, str2) {
 
 // console.log(timesToSeconds("12:09 AM", "6:09 PM"));
 
-
-// ("4:02 AM", "3:01 AM");
-// 84570 
-// 23.491667
-
-// ("2:02 PM", "6:01 AM");
-// 57540
-// 15:59:00
-
-
-// ("2:02 AM", "6:01 AM");
-// 3.9833333
-// 14340
-
-// ("2:00 PM", "6:00 PM");
-// 14400
-// 4:00:00 
-
-
-// ("2:02 PM", "2:10 PM");
-// 480
-// 0 : 08: 00 
-// 8 mins 
-
-// ("2:06 PM", "2:04 PM");
-// 86340
-//
-
-//("12:06 PM", "12:09 PM");
-// 180
-
-// ("12:06 PM", "12:04 PM");
-// 86340
-
 import {timerModeClock} from './global/global';
 import {generateCurrentTime} from "./toggleInputs";
 import {digitalTimeToSeconds, secondsToDigital} from './timeConversion';
@@ -242,11 +208,11 @@ const genTimerModeManualTimeStamp = () => {
 
   // 12 hours' of seconds - negDif 
   differSeconds = 43200 - negDif;
-  if (ampm = 'pm') { // toggle AM/PM 
-    ampm = 'am';
-  } else {
-    ampm = 'am';
-  }
+    if (ampm = 'pm') { // toggle AM/PM 
+      ampm = 'am';
+    } else {
+      ampm = 'am';
+    }
 
   } else { // if seconds match, default to hour 12 
     differSeconds = 43200;

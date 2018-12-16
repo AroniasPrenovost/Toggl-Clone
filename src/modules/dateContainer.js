@@ -3,21 +3,21 @@ import {secondsToDigital, digitalTimeToWord} from "./timeConversion";
 
 // check if input dateStamp matches current container Ids 
 function containerIdMatch(str) {
-// grab all divs with container class 
-let dateContainerDivs = document.getElementsByClassName('dateContainer');
-let arrLength = dateContainerDivs.length;
-let divIds = [];
+  // grab all divs with container class 
+  let dateContainerDivs = document.getElementsByClassName('dateContainer');
+  let arrLength = dateContainerDivs.length;
+  let divIds = [];
 
-// loop through ids 
-for (let i = 0; i < arrLength; i++) {
-  divIds.push(dateContainerDivs[i].id);
-}
+  // loop through ids 
+  for (let i = 0; i < arrLength; i++) {
+    divIds.push(dateContainerDivs[i].id);
+  }
 
-if (divIds.indexOf(str) > -1) {
-  return true;
-} else {
-  return false;
-}
+  if (divIds.indexOf(str) > -1) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // args requires '2013-11-01', '2016-11-01' (alternateDateFormat)
