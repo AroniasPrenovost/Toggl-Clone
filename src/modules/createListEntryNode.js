@@ -36,8 +36,8 @@ function createListItemNode(obj) {
   projectNameIcon.className = "projIcon";
 
   let iElem3 = document.createElement("h6");
-  //let iconColor = projectNameAndColor()[1];
-  iElem3.style.backgroundColor = obj.proj_color;
+  let iconColor = projectNameAndColor()[1];
+  iElem3.style.backgroundColor = iconColor; 
   iElem3.innerHTML = obj.project_name;
   projectNameIcon.appendChild(iElem3);
 

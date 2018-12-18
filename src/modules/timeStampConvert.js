@@ -1,11 +1,10 @@
 function getRawNum(str) {
   // grab first two characters  
   let a = 4,
-  b = 1;
+    b = 1;
 
   if (str.length === 8) {
-    a = 5,
-    b = 2;
+    a = 5, b = 2;
   }
 
   let s = str.substring(0, a);
@@ -14,144 +13,123 @@ function getRawNum(str) {
     return false;
   } else {
     s = s.slice(0, b) + s.slice(b + 1);
-    return Number(s);
+    return s;
   }
 }
 
 function timesToSeconds(str1, str2) {
   let start = str1,
-      end = str2;
+    end = str2;
 
   // add date and convert to unix timestamp 
-  start = new Date('01.01.1970 ' + start).getTime() / 1000;
-  end = new Date('01.01.1970 ' + end).getTime() / 1000;
+  start = new Date(`01.01.1970 ${start}`).getTime() / 1000;
+  end = new Date(`01.01.1970 ${end}`).getTime() / 1000;
 
   // time diff in minutes
+  let seconds = 0; 
   let mins = Math.abs(end - start) / 60,
-      dayMinutes = 24 * 60;
+    dayMinutes = 24 * 60;
 
   // if PM - PM or AM - AM left is larger 
   // compare start time and end time 
-  let rawNum1 = getRawNum(str1),
-      rawNum2 = getRawNum(str2);
+  const rawNum1 = getRawNum(str1), rawNum2 = getRawNum(str2);
 
   // create + check AM/PM variables
-  let ampm1 = str1.toLowerCase().substr(str1.length - 3).trim();
-  let ampm2 = str2.toLowerCase().substr(str2.length - 3).trim();
+  const ampm1 = str1.toLowerCase().substr(str1.length - 3).trim();
+  const ampm2 = str2.toLowerCase().substr(str2.length - 3).trim();
 
-    // pm/pm is true and start time later than end time [works]
-    if (ampm1 === 'pm' && ampm2 === 'pm') {
-      if (rawNum1 > rawNum2 && ampm1.charAt(2) === ':') {
-             
-            // return seconds;
-            /*
-              let minuteDiff = dayMinutes - mins;
-              let thismins = minuteDiff + dayMinutes; // + 24 hours
-              let seconds = thismins * 60 / 2;
-              return seconds;
-              */
-    } else if (rawNum1 > rawNum2 && ampm1.charAt(1) === ':') {
-        let minuteDiff = dayMinutes - mins;
-        let thismins = minuteDiff + dayMinutes; // + 24 hours
-        let seconds = thismins * 60 / 2;
-        return seconds;
-
-    } else if (rawNum1 === rawNum2) { // entry time is zero 
-      let seconds = dayMinutes * 60;
+  // pm/pm is true and start time later than end time [works]
+  if (ampm1 === 'pm' && ampm2 === 'pm') {
+    if (Number(rawNum1) > Number(rawNum2)) {
+      const minuteDiff = dayMinutes - mins;
+      const thismins = minuteDiff + dayMinutes; // + 24 hours
+      seconds = thismins * 60 / 2;
+      return seconds;
+    } else if (Number(rawNum1) === Number(rawNum2)) { // entry time is zero 
+      seconds = dayMinutes * 60;
       return seconds;
     } else {
       // proceed as normal 
-      let seconds = mins * 60;
-      return seconds;
-      }
-    }
-
-    // am/am is true 
-    if (ampm1 === 'am' && ampm2 === 'am') {
-      if (rawNum1 > rawNum2) {
-        let minuteDiff = dayMinutes - mins;
-        let thismins = minuteDiff + dayMinutes; // + 24 hours
-        let seconds = thismins * 60 / 2;
-        return seconds;
-    } else if (rawNum1 === rawNum2) { // entry time is zero 
-      let seconds = dayMinutes * 60;
-      return seconds;
-    } else {
-      // proceed as normal 
-      let seconds = mins * 60;
-      return seconds;
-      }
-    }
-
-    // am/pm are different and start time earlier than end time 
-    if (ampm1 === 'pm' && ampm2 === 'am') {
-    
-    // if time matches 
-    if (rawNum1 === rawNum2) {
-      let seconds = dayMinutes * 60 / 2;
-      return seconds;
-    }
-    if (rawNum1 < rawNum2) {
-      str1 = str1.slice(0, -2) + 'am';
-      str2 = str2.slice(0, -2) + 'pm';
-
-      let start = str1,
-      end = str2;
-
-      // add date and convert to unix timestamp 
-      start = new Date('01.01.1970 ' + start).getTime() / 1000;
-      end = new Date('01.01.1970 ' + end).getTime() / 1000;
-
-      let mins = Math.abs(end - start) / 60;
-      let seconds = mins * 60;
-      return seconds;
-      }
-    }
-
-  if (ampm1 === 'am' && ampm2 === 'pm') {
-    // if time matches 
-    if (rawNum1 === rawNum2) {
-      let seconds = dayMinutes * 60 / 2;
-      return seconds;
-    }
-
-    if (rawNum1 < rawNum2) {
-      str1 = str1.slice(0, -2) + 'am';
-      str2 = str2.slice(0, -2) + 'pm';
-
-      let start = str1,
-      end = str2;
-
-      // add date and convert to unix timestamp 
-      start = new Date('01.01.1970 ' + start).getTime() / 1000;
-      end = new Date('01.01.1970 ' + end).getTime() / 1000;
-
-      let mins = Math.abs(end - start) / 60,
       seconds = mins * 60;
+      return seconds;
+    }
+  }
+
+  // am/am is true 
+  if (ampm1 === 'am' && ampm2 === 'am') {
+    if (Number(rawNum1) > Number(rawNum2)) {
+      const minuteDiff = dayMinutes - mins;
+      const thismins = minuteDiff + dayMinutes; // + 24 hours
+     // alert(thismins)
+      seconds = thismins * 60 / 2;
+      return `${seconds} __test `;
+    } else if (Number(rawNum1) === Number(rawNum2)) { // entry time is zero 
+      seconds = dayMinutes * 60;
+      return seconds;
+      // return false 
+    } else {
+      // proceed as normal 
+      seconds = mins * 60;
+      return seconds;
+    }
+  }
+
+  // am/pm are different and start time earlier than end time 
+  if (ampm1 === 'pm' && ampm2 === 'am') {
+    if (Number(rawNum1) < Number(rawNum2)) {
+
+      str1 = `${str1.slice(0, -2)}am`;
+      str2 = `${str2.slice(0, -2)}pm`;
+
+      start = str1, end = str2;
+
+      // add date and convert to unix timestamp 
+      start = new Date(`01.01.1970 ${start}`).getTime() / 1000;
+      end = new Date(`01.01.1970 ${end}`).getTime() / 1000;
+
+      mins = Math.abs(end - start) / 60, seconds = mins * 60;
+      return seconds;
+    }
+  }
+
+    if (ampm1 === 'am' && ampm2 === 'pm') {
+    // if time matches 
+    if (rawNum1 === rawNum2) {
+      seconds = dayMinutes * 60 / 2;
+      return seconds;
+    }
+
+    if (rawNum1 < rawNum2) {
+      str1 = `${str1.slice(0, -2)}am`;
+      str2 = `${str2.slice(0, -2)}pm`;
+
+      start = str1, end = str2;
+
+      // add date and convert to unix timestamp 
+      start = new Date(`01.01.1970 ${start}`).getTime() / 1000;
+      end = new Date(`01.01.1970 ${end}`).getTime() / 1000;
+
+      mins = Math.abs(end - start) / 60, seconds = mins * 60;
       return seconds;
     }
 
     if (rawNum1 > rawNum2) {    // this workss 
-      str1 = str1.slice(0, -2) + 'am';
-      str2 = str2.slice(0, -2) + 'pm';
+      str1 = `${str1.slice(0, -2)}am`;
+      str2 = `${str2.slice(0, -2)}pm`;
 
-      let start = str1,
-      end = str2;
+      start = str1, end = str2;
 
       // add date and convert to unix timestamp 
-      start = new Date('01.01.1970 ' + start).getTime() / 1000;
-      end = new Date('01.01.1970 ' + end).getTime() / 1000;
+      start = new Date(`01.01.1970 ${start}`).getTime() / 1000;
+      end = new Date(`01.01.1970 ${end}`).getTime() / 1000;
 
-      let mins = Math.abs(end - start) / 60,
-      seconds = mins * 60;
-      return seconds;
+      mins = Math.abs(end - start) / 60, seconds = mins * 60;
     }  
-
   }
-  // return seconds;
+  return seconds;
 }
 
-// console.log(timesToSeconds("12:09 AM", "6:09 PM"));
+// timesToSeconds("11:10 PM", "5:12 PM");
 
 import {timerModeClock} from './global/global';
 import {generateCurrentTime} from "./toggleInputs";

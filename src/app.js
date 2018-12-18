@@ -12,7 +12,7 @@ import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCur
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './modules/dateContainer';
-import json from '../data/testData.json';
+import {buildListFromJSON, listEntries} from './modules/buildListFromJSON';
 
 listSearch(); 
 
@@ -32,13 +32,11 @@ filterEntry();
 
 appendProjToButton();
 
-// build existing HTML 
-const generateJSON = () => {
+// generate list from JSON 
+// buildListFromJSON();
 
-}
-
-// build list of list data objects 
-const listEntries = [];
+// build list of list data objects based off imported list 
+var listEntries = [];
 
 const appendToList = () => {
 
@@ -70,53 +68,52 @@ const appendToList = () => {
         if (checkManualInput() == false && validateTimerModeEntry() === true) {
             var manualInputValues = getManualInputs();
 
-        // 4:43 pm - 5:03 pm format 
-        timeStamp = genTimerModeManualTimeStamp();
+            // 4:43 pm - 5:03 pm format 
+            timeStamp = genTimerModeManualTimeStamp();
 
-        // mm/dd/yyyy format 
-        dateStamp = generateTodaysDate();
+            // mm/dd/yyyy format 
+            dateStamp = generateTodaysDate();
 
-        // yyyy-mm-dd format 
-        alternateDateFormat = convertToAlternateDate(dateStamp);
+            // yyyy-mm-dd format 
+            alternateDateFormat = convertToAlternateDate(dateStamp);
 
-        // 'Wed, 28 Nov, 2017' format 
-        dateShorthand = dateToShorthand(alternateDateFormat);
+            // 'Wed, 28 Nov, 2017' format 
+            dateShorthand = dateToShorthand(alternateDateFormat);
 
-        // grab digital time 
-        clockTimer = genDigitalTime();
+            // grab digital time 
+            clockTimer = genDigitalTime();
 
-        // seconds format
-        seconds = digitalTimeToSeconds(clockTimer);
+            // seconds format
+            seconds = digitalTimeToSeconds(clockTimer);
         }
 
         // if manual entry enabled and manual entry valid 
         if (checkManualInput() === true && validateManualModeEntry() === true) {
-        
-        var manualInputValues = getManualInputs();
+            
+            var manualInputValues = getManualInputs();
 
-        // create timestamp
-        timeStamp = manualInputValues[0] + " - " + manualInputValues[1];
+            // create timestamp
+            timeStamp = manualInputValues[0] + " - " + manualInputValues[1];
 
-        // mm/dd/yyyy format if entry is present day 
-        if (manualInputValues[2] === 'Today') {
-            dateStamp = generateTodaysDate();
-        } else {
-            dateStamp = manualInputValues[2] + '/' + manualInputValues[3];
-        }
+            // mm/dd/yyyy format if entry is present day 
+            if (manualInputValues[2] === 'Today') {
+                dateStamp = generateTodaysDate();
+            } else {
+                dateStamp = manualInputValues[2] + '/' + manualInputValues[3];
+            }
 
-        // yyyy-mm-dd format 
-        alternateDateFormat = convertToAlternateDate(dateStamp);
+            // yyyy-mm-dd format 
+            alternateDateFormat = convertToAlternateDate(dateStamp);
 
-        // 'Wed, 28 Nov, 2017' format 
-        dateShorthand = dateToShorthand(alternateDateFormat);
+            // 'Wed, 28 Nov, 2017' format 
+            dateShorthand = dateToShorthand(alternateDateFormat);
 
-        // get seconds difference, and then convert to digital time 
-        let manualTimeStamps  = timesToSeconds(manualInputValues[0], manualInputValues[1]);
+            // get seconds difference, and then convert to digital time 
+            let manualTimeStamps  = timesToSeconds(manualInputValues[0], manualInputValues[1]);
 
-        clockTimer = secondsToDigital(manualTimeStamps);
+            clockTimer = secondsToDigital(manualTimeStamps);
 
-        // seconds format
-        seconds = digitalTimeToSeconds(clockTimer);
+            seconds = digitalTimeToSeconds(clockTimer);
         }
 
         // generate current time  
@@ -127,10 +124,8 @@ const appendToList = () => {
         // get currentYear
         const task = getTaskInput(); 
 
-        // create project name li elements 
+        // get project name 
         let projTitle = getProjectName(); 
-        // let projTitleLabelColor = projectNameAndColor(); 
-        //let ProjColor = projTitleLabelColor[1];
 
         // toggle billable hours 
         let billingToggle = checkBillingToggle();
@@ -155,6 +150,8 @@ const appendToList = () => {
             entry_time: entryTime
         };
 
+        console.log(taskEntry)
+
         // build HTML li component for new task entry
         let node = createListItemNode(taskEntry);
 
@@ -172,7 +169,8 @@ const appendToList = () => {
         // var retrievedObject = sessionStorage.getItem('taskEntry');
         // console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
-        // if no matching container id 
+        // add new list item to page, determine node placement 
+
         if (containerIdMatch(dateStamp) === false) { 
 
             // create task list container for calendar day (li node)
@@ -306,6 +304,7 @@ let testappend = document.getElementById('testappend');
 let testsessiondata = document.getElementById('session-store');
     testsessiondata.addEventListener('click', () => {
         const retrieveObj = sessionStorage.getItem('listEntries');
+        test();
 /*
         console.log(retrieveObj)
         var jj = JSON.parse(retrieveObj);

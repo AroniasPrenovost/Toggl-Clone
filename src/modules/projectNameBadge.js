@@ -69,12 +69,12 @@ const determineProjectTagColors = (str1, str2) => {
             } 
         }
 
-    if (counter === currentProjectColors.length) {
-        projColor = getRandomColor();
-    }
+        if (counter === currentProjectColors.length) {
+            projColor = getRandomColor();
+        }
     return projColor;
     }
-    return str2; 
+return str2; 
 }
 
 const projectNameAndColor = () => {
@@ -83,7 +83,7 @@ const projectNameAndColor = () => {
     color = $("h6:first").css("background-color");
 
     //  one or more li exists
-    if (typeof color === "string" || color instanceof String){
+    if (color){
         if (color !== "rgb(92, 107, 115)") {
             color = determineProjectTagColors(projtitle, color);
         } else {
