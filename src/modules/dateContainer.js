@@ -1,4 +1,3 @@
-
 import {secondsToDigital, digitalTimeToWord} from "./timeConversion";
 
 // check if input dateStamp matches current container Ids 
@@ -35,12 +34,11 @@ function compareDates (arg1, arg2) {
 function containerIdOrder(str) {
   // get divs with container class 
   let dateContainerids = document.getElementsByClassName('dateContainer');
-  let arrLength = dateContainerids.length;
   let ids = [];
 
   // grab container ids
-  for (var i = 0; i < arrLength; i++) {
-    ids.push(dateContainerids[i].id);
+  for (let value of dateContainerids) {
+    ids.push(value.id);
   }
   if (ids.length != 0) {
     return ids; 

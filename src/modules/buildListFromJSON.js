@@ -4,7 +4,7 @@ import {containerIdMatch, compareDates, containerIdOrder, populateContainersTime
 import {generateTodaysDate, generateCurrentTime, convertToAlternateDate} from './toggleInputs'; 
   
 // build list to calculate 
-var listEntries = [];
+var jsonImportEntries = [];
 
 const buildListFromJSON = () => {
 
@@ -15,11 +15,11 @@ const buildListFromJSON = () => {
         let node = createListItemNode(value);
 
         // track new entry in list
-        listEntries.push(value);
+        jsonImportEntries.push(value);
 
         // re-order listEntries chronologically by date stamp, in descending order  
-        listEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
-        listEntries.reverse();
+        jsonImportEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
+        jsonImportEntries.reverse();
  
 		// list container 
 		var taskListContainer = document.getElementById("taskList");
@@ -96,7 +96,7 @@ const buildListFromJSON = () => {
                 taskListContainer.appendChild(dateContainer);
 
                 // match {week date : total_seconds} and find sum
-                populateContainersTimeSum(listEntries);
+                populateContainersTimeSum(jsonImportEntries);
                // return false; 
             } else {
 
@@ -131,7 +131,7 @@ const buildListFromJSON = () => {
                         }   
                     } 
                 }
-                populateContainersTimeSum(listEntries); 
+                populateContainersTimeSum(jsonImportEntries); 
             }
         }
 
@@ -139,13 +139,16 @@ const buildListFromJSON = () => {
         if (containerIdMatch(value.date_stamp) === true) {
         let listMatch = document.getElementById(value.date_stamp);
             listMatch.appendChild(node);
-            populateContainersTimeSum(listEntries); 
+            populateContainersTimeSum(jsonImportEntries); 
         }
 	}
 }
 
 const exportListEntries = () => {
-    return listEntries; 
+    // re-order listEntries chronologically by date stamp, in descending order  
+    jsonImportEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
+    jsonImportEntries.reverse();
+    return jsonImportEntries; 
 }
 
 export {buildListFromJSON, exportListEntries};

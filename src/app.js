@@ -33,14 +33,16 @@ filterEntry();
 appendProjToButton();
 
 // generate list from JSON 
-// buildListFromJSON();
+buildListFromJSON();
 
-// build list of list data objects based off imported list 
-var listEntries = [];
-// listEntries.push(exportListEntries()); 
-// re-order listEntries chronologically by date stamp, in descending order  
-// listEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
-// listEntries.reverse();
+// append new items to imported JSON list
+var listEntries = exportListEntries();
+
+// works for:
+// - new items 
+// - adding to existing 
+// - not for entering 'day of'
+
 
 const appendToList = () => {
 
@@ -308,6 +310,11 @@ let testappend = document.getElementById('testappend');
 let testsessiondata = document.getElementById('session-store');
     testsessiondata.addEventListener('click', () => {
         const retrieveObj = sessionStorage.getItem('listEntries');
+        //console.log(exportListEntries());
+
+console.log(typeof listEntries)
+
+console.log(JSON.stringify(listEntries));
         /*
                 console.log(retrieveObj)
                 var jj = JSON.parse(retrieveObj);

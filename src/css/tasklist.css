@@ -19,6 +19,7 @@ ol, ul {
   margin-bottom: 0px !important; }
 
 .listItem {
+  list-style: none;
   text-align: right; }
 
 /* font-awesome delete + append icons */
