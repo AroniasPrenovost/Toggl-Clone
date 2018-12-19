@@ -12,7 +12,7 @@ import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCur
 import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './modules/dateContainer';
-import {buildListFromJSON, listEntries} from './modules/buildListFromJSON';
+import {buildListFromJSON, exportListEntries} from './modules/buildListFromJSON';
 
 listSearch(); 
 
@@ -37,6 +37,10 @@ appendProjToButton();
 
 // build list of list data objects based off imported list 
 var listEntries = [];
+// listEntries.push(exportListEntries()); 
+// re-order listEntries chronologically by date stamp, in descending order  
+// listEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
+// listEntries.reverse();
 
 const appendToList = () => {
 
@@ -133,6 +137,9 @@ const appendToList = () => {
         // item entry time in milliseconds, based on unix timestap 
         let entryTime = Date.now(); 
 
+        // id user name 
+        // to do... 
+
         // build list data object 
         var taskEntry = {
             task_name: task,  
@@ -141,16 +148,13 @@ const appendToList = () => {
             digital_time: clockTimer,
             total_seconds: seconds, 
             date_stamp: dateStamp,
-            alternate_date: alternateDateFormat, 
+            alternate_date: alternateDateFormat,
             short_date: dateShorthand, 
             billable: billingToggle,
             created_on: assumeTodaysDate,
-            created_at: currentTime,
             current_year: currentYear,
             entry_time: entryTime
         };
-
-        console.log(taskEntry)
 
         // build HTML li component for new task entry
         let node = createListItemNode(taskEntry);
@@ -304,10 +308,9 @@ let testappend = document.getElementById('testappend');
 let testsessiondata = document.getElementById('session-store');
     testsessiondata.addEventListener('click', () => {
         const retrieveObj = sessionStorage.getItem('listEntries');
-        test();
-/*
-        console.log(retrieveObj)
-        var jj = JSON.parse(retrieveObj);
-        alert(jj)
-*/
+        /*
+                console.log(retrieveObj)
+                var jj = JSON.parse(retrieveObj);
+                alert(jj)
+        */
 });

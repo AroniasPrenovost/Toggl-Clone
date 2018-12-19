@@ -129,8 +129,6 @@ function timesToSeconds(str1, str2) {
   return seconds;
 }
 
-// timesToSeconds("11:10 PM", "5:12 PM");
-
 import {timerModeClock} from './global/global';
 import {generateCurrentTime} from "./toggleInputs";
 import {digitalTimeToSeconds, secondsToDigital} from './timeConversion';

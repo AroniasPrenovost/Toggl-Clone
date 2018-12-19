@@ -94,8 +94,6 @@ const buildListFromJSON = () => {
             // if first entry
             if (!idlists) {
                 taskListContainer.appendChild(dateContainer);
-                //  showLis();
-                //  resetInputs();
 
                 // match {week date : total_seconds} and find sum
                 populateContainersTimeSum(listEntries);
@@ -111,15 +109,11 @@ const buildListFromJSON = () => {
                     let dateCompare = compareDates(arg1, arg2);
 
                     if (dateCompare === 'item_1_more_recent') {
-                        taskListContainer.appendChild(dateContainer);  
-                    //  showLis();
-                    //  resetInputs();  
+                        taskListContainer.appendChild(dateContainer);   
                     }
 
                     if (dateCompare === 'item_2_more_recent') {
                         taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
-                    //  showLis();
-                    //  resetInputs();
                     } 
                 }
 
@@ -134,8 +128,6 @@ const buildListFromJSON = () => {
                         let nextDateCompare = compareDates(nextItemCompare, newEntry);
                         if (dateCompare === 'item_1_more_recent' && nextDateCompare === 'item_2_more_recent') {
                                 taskListContainer.children[b].insertAdjacentElement("afterEnd", dateContainer);
-	                    //  showLis();
-	                    //  resetInputs();
                         }   
                     } 
                 }
@@ -147,11 +139,13 @@ const buildListFromJSON = () => {
         if (containerIdMatch(value.date_stamp) === true) {
         let listMatch = document.getElementById(value.date_stamp);
             listMatch.appendChild(node);
-            //  showLis();
-            //  resetInputs();
             populateContainersTimeSum(listEntries); 
         }
 	}
 }
 
-export {buildListFromJSON};
+const exportListEntries = () => {
+    return listEntries; 
+}
+
+export {buildListFromJSON, exportListEntries};
