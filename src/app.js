@@ -13,6 +13,7 @@ import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigita
 import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
 import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './modules/dateContainer';
 import {buildListFromJSON, exportListEntries} from './modules/buildListFromJSON';
+import {JSONToCSV} from './modules/csvExport';
 
 listSearch(); 
 
@@ -33,16 +34,10 @@ filterEntry();
 appendProjToButton();
 
 // generate list from JSON 
-buildListFromJSON();
+// buildListFromJSON();
 
 // append new items to imported JSON list
 var listEntries = exportListEntries();
-
-// works for:
-// - new items 
-// - adding to existing 
-// - not for entering 'day of'
-
 
 const appendToList = () => {
 
@@ -300,6 +295,14 @@ const appendToList = () => {
     } 
 }
 
+// export list data to csv 
+let excelExport = document.getElementById('excel-export');
+    excelExport.addEventListener('click', () => {
+    var timeSheetNameTitle = "Time Report - " + generateTodaysDate() + ' ' + generateCurrentTime();
+    JSONToCSV(listEntries, timeSheetNameTitle, true);
+});
+
+
 // initialize append 
 let testappend = document.getElementById('testappend');
     testappend.addEventListener('click', () => {
@@ -311,13 +314,4 @@ let testsessiondata = document.getElementById('session-store');
     testsessiondata.addEventListener('click', () => {
         const retrieveObj = sessionStorage.getItem('listEntries');
         //console.log(exportListEntries());
-
-console.log(typeof listEntries)
-
-console.log(JSON.stringify(listEntries));
-        /*
-                console.log(retrieveObj)
-                var jj = JSON.parse(retrieveObj);
-                alert(jj)
-        */
 });
