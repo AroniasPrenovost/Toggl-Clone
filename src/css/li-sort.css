@@ -13,7 +13,8 @@ li.listItem {
   transition: box-shadow .25s ease-in-out; }
 
 li.listItem:hover {
-  cursor: pointer; }
+  cursor: default;
+  background-color: #f5f6fa; }
 
 /* styles during drag */
 li.listItem.ui-sortable-helper {
