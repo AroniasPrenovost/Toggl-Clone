@@ -5,7 +5,7 @@ $default-project-tag: #5C6B73;
 $hourglass-green: #27ae60;
 
 body {
-    background-color: #f7f7f7 !important;
+    background-color: #f5f6fa !important;
     height:100%;
 }
 
@@ -20,7 +20,6 @@ li {
     height: 40px;
     line-height: 40px;
     font-size: 20px;
-    background: $light-grey;
     width:100%;
 }
 
@@ -63,13 +62,9 @@ li span:hover {
     color:black;
 }
 
-/*
-li:nth-child(even) { 
-    background: $dark-grey; 
-}
-*/
-
 .listTask {
+    font-size: 16px;
+    font-weight: bold; 
     display:inline-block;
     margin: 0 40px 0 60px;
     text-align:left;
@@ -95,8 +90,9 @@ li:nth-child(even) {
 }
 
 .listClockTime {
-    display: inline-block;
+    font-size: 18px;
     font-weight:400;
+    display: inline-block;
 }
 
 .deleteTimeIcons {
@@ -175,23 +171,29 @@ li:hover.billIconToggle {
 }
 
 .dateContainerStyle {
-  background-color:#efefef;
+    background-color: #fff;
+    box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1);
     width:100%;
     height:100%;
 }
 
 .dateDivContainer {
+    box-shadow: 0 -1px 0 0 #f3f3f3; 
     width:100%;
     height:50px;
 }
 
 .dateHeader {
     font-size:14px;
+    font-weight:bold;
     float:left;
     display:inline-block;
+    margin-left:24px;
 }
 
 .dateTimeMax {
     float:right;
     font-size:14px;
+    font-weight:bold;
+    margin-right:24px;
 }

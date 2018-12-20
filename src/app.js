@@ -37,8 +37,9 @@ appendProjToButton();
 // buildListFromJSON();
 
 // append + combine new entries w/ imported JSON
-// var listEntries = exportListEntries();
 var listEntries = [];
+// var listEntries = exportListEntries();
+
 const appendToList = () => {
 
         // check task and project is assigned 
