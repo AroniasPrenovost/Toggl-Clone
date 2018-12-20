@@ -34,11 +34,14 @@ filterEntry();
 appendProjToButton();
 
 // generate li from JSON
-// buildListFromJSON();
+buildListFromJSON();
 
 // append + combine new entries w/ imported JSON
 var listEntries = [];
-// var listEntries = exportListEntries();
+var JSONimport = exportListEntries();
+for (let value of JSONimport) {
+    listEntries.push(value);
+}
 
 const appendToList = () => {
 
@@ -164,6 +167,8 @@ const appendToList = () => {
         listEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
         listEntries.reverse();
 
+        console.log(listEntries);
+
         // place in session storage 
         sessionStorage.setItem('listEntries', JSON.stringify(listEntries));
 
@@ -267,6 +272,10 @@ const appendToList = () => {
 
                 // if 1 > elements exist, find valid entry position    
                 if (idlists.length > 1) {
+
+                    // if first item in list 
+                    // to do...
+
                     var newEntry = convertToAlternateDate(dateContainer.id);
                     for (var b = 0; b < alternateidlist.length; b++) {
                         let itemCompared = alternateidlist[b];
