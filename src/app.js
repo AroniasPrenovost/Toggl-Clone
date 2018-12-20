@@ -273,8 +273,16 @@ const appendToList = () => {
                 // if 1 > elements exist, find valid entry position    
                 if (idlists.length > 1) {
 
-                    // if first item in list 
-                    // to do...
+                    // if new entry is most recent
+                    let firstEntry = alternateidlist[0];
+                    let thisEntry = alternateDateFormat;
+                    let firstCompare = compareDates(firstEntry, thisEntry);
+
+                    if (firstCompare === 'item_2_more_recent') {
+                        taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
+                        showLis();
+                        resetInputs();
+                    }
 
                     var newEntry = convertToAlternateDate(dateContainer.id);
                     for (var b = 0; b < alternateidlist.length; b++) {
