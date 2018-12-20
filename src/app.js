@@ -33,12 +33,12 @@ filterEntry();
 
 appendProjToButton();
 
-// generate list from JSON 
+// generate li from JSON
 // buildListFromJSON();
 
-// append new items to imported JSON list
-var listEntries = exportListEntries();
-
+// append + combine new entries w/ imported JSON
+// var listEntries = exportListEntries();
+var listEntries = [];
 const appendToList = () => {
 
         // check task and project is assigned 
