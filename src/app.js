@@ -315,14 +315,37 @@ const appendToList = () => {
 
 // remove item from list  
 $('.fa-trash').click(function() {
-    let index = $('.fa-trash').index(this);
-    // to do ... 
     
+    let index = $('.fa-trash').index(this);
+    let lc = document.getElementsByClassName('fa-trash')[index]
+    let deletedItemDateStamp = listEntries[index].date_stamp;
+
+    // remove from listEntries 
+    if (index !== -1) {
+        listEntries.splice(index, 1);
+    }
+
+    // > 1 li in datecontainer 
+    for (let value of listEntries) {
+        if (value.date_stamp === deletedItemDateStamp) {
+            $(lc).parent().parent().parent().fadeOut(500,function(){            
+                $(lc).remove();                
+            });
+        populateContainersTimeSum(listEntries);
+        return false; 
+        } 
+    }
+
+    // 1 li in datecontainer 
+    $(lc).parent().parent().parent().parent().fadeOut(500,function(){            
+        $(lc).remove();                
+    });
 });
 
 // resume task 
 $('.fa-play').click(function() {
     let index = $('.fa-play').index(this);
+    let item = listEntries[index];
     // to do ... 
 
 });
