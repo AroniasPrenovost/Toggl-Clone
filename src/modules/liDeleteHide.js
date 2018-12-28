@@ -20,23 +20,4 @@ const appendTaskToInput = () => {
     });
 }
 
-const deleteListItem = () =>  {
-    $("ul").on("click", ".fa-trash", function(event){ 
-        $(this).parent().parent().parent().fadeOut(500,function(){
-            $(this).remove();
-        });
-        event.stopPropagation();
-    });
-}
-
-/*
-const hideListInput = () => {
-    $(".fa-plus").click(function(){
-        $("input[type='text']").fadeToggle();
-        $(".dropbtn").fadeToggle();
-        $("#start-btn").fadeToggle();
-    });
-}
-*/
-
-export {appendTaskToInput, deleteListItem}; 
+export {appendTaskToInput}; 

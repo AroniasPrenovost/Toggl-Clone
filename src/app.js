@@ -1,7 +1,7 @@
 import {createListItemNode} from './modules/createListEntryNode';
 import {dragDropList} from './modules/dragDrop';
 import {listSearch} from './modules/dropListSearch';
-import {appendTaskToInput, deleteListItem} from './modules/liDeleteHide';
+import {appendTaskToInput} from './modules/liDeleteHide';
 import {toggleBilling, checkBillingToggle} from './modules/toggleBilling';
 import {startTimer, trackListItemTime} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
@@ -23,7 +23,7 @@ toggleBilling();
 
 // li items delete, hide 
 appendTaskToInput();
-deleteListItem();
+// deleteListItem();
 trackListItemTime();
 
 // choose project dropdown 
@@ -313,6 +313,21 @@ const appendToList = () => {
     } 
 }
 
+// remove item from list  
+$('.fa-trash').click(function() {
+    let index = $('.fa-trash').index(this);
+    // to do ... 
+    
+});
+
+// resume task 
+$('.fa-play').click(function() {
+    let index = $('.fa-play').index(this);
+    // to do ... 
+
+});
+ 
+
 // export list data to csv 
 let excelExport = document.getElementById('excel-export');
     excelExport.addEventListener('click', () => {
@@ -322,8 +337,8 @@ let excelExport = document.getElementById('excel-export');
 
 
 // initialize append 
-let testappend = document.getElementById('testappend');
-    testappend.addEventListener('click', () => {
+let append = document.getElementById('append');
+    append.addEventListener('click', () => {
         appendToList();
 });
 

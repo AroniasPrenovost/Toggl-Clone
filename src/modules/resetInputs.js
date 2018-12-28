@@ -1,9 +1,8 @@
 import {startButton, resetButton, myInput, projToggle, timerModeButton, taskInput, colorCodeButton, colorNormalButton, datepickerInput} from './global/global';
 
-// reset inputs 
 const resetInputs = () => {
     startButton.click();
-    resetButton.click();
+    // resetButton.click();
     taskInput.placeholder = 'Add new to-do';
     taskInput.value = "";
     myInput.placeholder = 'Search..';

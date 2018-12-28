@@ -36,30 +36,11 @@ startButton.addEventListener('click', () => {
     startButton.innerHTML = '<i class="fa fa-pause"></i>';
     startButton.style.backgroundColor = '#C84630';
   } else {
-
-    // append item 
-    // to do... 
-
-    // reset inputs
-    /*
-    totalSeconds = 0;
-    stopClock.value = "0 : 00 : 00";
-    clearInterval(intervalId); // pause timer 
+  clearInterval(intervalId); // pause timer 
     startButton.innerHTML = '<i class="fa fa-play start"></i>';
     startButton.style.backgroundColor = '#4CAF50';
-    */
-}
+  }
 });
-
-/* 
-const resetClock = () => {
-  totalSeconds = 0;
-  stopClock.value = "0 : 00 : 00";
-
-  clearInterval(intervalId); // pause timer 
-  startButton.innerHTML = '<i class="fa fa-play start"></i>';
-  startButton.style.backgroundColor = '#4CAF50';
-}; */
 
 const trackListItemTime = () => {
   $("ul").on("click", ".fa-play", function(event){
