@@ -1,9 +1,8 @@
+import {startButton} from './modules/global/global';
 import {createListItemNode} from './modules/createListEntryNode';
 import {dragDropList} from './modules/dragDrop';
-import {listSearch} from './modules/dropListSearch';
-import {appendTaskToInput} from './modules/liDeleteHide';
 import {toggleBilling, checkBillingToggle} from './modules/toggleBilling';
-import {startTimer, trackListItemTime} from './modules/timerComponents';
+import {startTimer} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
 import {getProjectName, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/projectNameBadge';
 import {resetInputs, showLis} from './modules/resetInputs';
@@ -15,16 +14,10 @@ import {containerIdMatch, compareDates, containerIdOrder, populateContainersTime
 import {buildListFromJSON, exportListEntries} from './modules/buildListFromJSON';
 import {JSONToCSV} from './modules/csvExport';
 
-listSearch(); 
-
 // drag drop 
 dragDropList();
-toggleBilling();
 
-// li items delete, hide 
-appendTaskToInput();
-// deleteListItem();
-trackListItemTime();
+toggleBilling();
 
 // choose project dropdown 
 toggleProjectDropdown();
@@ -172,10 +165,6 @@ const appendToList = () => {
         // place in session storage 
         sessionStorage.setItem('listEntries', JSON.stringify(listEntries));
 
-        // to retrieve
-        // var retrievedObject = sessionStorage.getItem('taskEntry');
-        // console.log('retrievedObject: ', JSON.parse(retrievedObject));
-
         // add new list item to page, determine node placement 
 
         if (containerIdMatch(dateStamp) === false) { 
@@ -315,7 +304,7 @@ const appendToList = () => {
 
 // remove item from list  
 $('.fa-trash').click(function() {
-    
+
     let index = $('.fa-trash').index(this);
     let lc = document.getElementsByClassName('fa-trash')[index]
     let deletedItemDateStamp = listEntries[index].date_stamp;
@@ -342,12 +331,19 @@ $('.fa-trash').click(function() {
     });
 });
 
-// resume task 
+// resume task
 $('.fa-play').click(function() {
-    let index = $('.fa-play').index(this);
-    let item = listEntries[index];
-    // to do ... 
 
+    let index = $('.fa-play').index(this) - 1; // accounts for play btn in tracker 
+    let item = listEntries[index];
+
+    // append task 
+    document.getElementById("placeholder").value = item.task_name;
+
+    // append project name 
+    projToggle.innerHTML = "Project - " + item.project_name;
+
+    startButton.click();
 });
  
 
