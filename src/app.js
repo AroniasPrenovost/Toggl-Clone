@@ -160,7 +160,7 @@ const appendToList = () => {
         listEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
         listEntries.reverse();
 
-        console.log(listEntries);
+        // console.log(listEntries);
 
         // place in session storage 
         sessionStorage.setItem('listEntries', JSON.stringify(listEntries));
@@ -296,7 +296,7 @@ const appendToList = () => {
         let listMatch = document.getElementById(dateStamp);
             listMatch.appendChild(node);
             showLis();
-            resetInputs();
+            resetInputs(); 
             populateContainersTimeSum(listEntries); 
         }  
     } 
@@ -327,14 +327,21 @@ $('.fa-trash').click(function() {
 
     // 1 li in datecontainer 
     $(lc).parent().parent().parent().parent().fadeOut(500,function(){            
-        $(lc).remove();                
+        $(lc).remove();
+        populateContainersTimeSum(listEntries);              
     });
 });
 
 // resume task
 $('.fa-play').click(function() {
+ 
+    let index = $('.fa-play').index(this);
 
-    let index = $('.fa-play').index(this) - 1; // accounts for play btn in tracker 
+    // click event ignore first class instance 
+    if (index === 0) {
+        return false; 
+    }
+
     let item = listEntries[index];
 
     // append task 

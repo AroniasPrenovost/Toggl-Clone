@@ -1,5 +1,4 @@
 var startButton = document.getElementById('start-btn'),
-    resetButton = document.getElementById('reset-btn'),
     excelExport = document.getElementById('excel-export'),
     myInput = document.getElementById('myInput'),
     projToggle = document.getElementById('projToggle'),

@@ -1,17 +1,23 @@
-import {startButton, resetButton, myInput, projToggle, timerModeButton, taskInput, colorCodeButton, colorNormalButton, datepickerInput} from './global/global';
+import {startButton, myInput, projToggle, timerModeButton, taskInput, stopClock, colorCodeButton, colorNormalButton, datepickerInput} from './global/global';
 
 const resetInputs = () => {
-    startButton.click();
-    // resetButton.click();
+
+    // timer is running 
+    if (startButton.style.backgroundColor === 'rgb(200, 70, 48)') {
+        startButton.click();
+    }
+
     taskInput.placeholder = 'Add new to-do';
     taskInput.value = "";
     myInput.placeholder = 'Search..';
     projToggle.innerHTML = '<i class="plus">+</i> Project/task';
     datepickerInput.value = 'Today';
     timerModeButton.click();
+    stopClock.value = '0 : 00 : 00',
     $('#container input').slice(1, 2).css({'backgroundColor': '#27ae60'});
     document.title = 'Timer App';
-    // need to reset datepicker selection 
+    // to do...
+    // reset datepicker selection 
 }
 
 const showLis = () => {
