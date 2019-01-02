@@ -56,7 +56,7 @@ function populateContainersTimeSum(obj) {
 
   for (let value of data) {
     let idDate = value.alternate_date.toString(); 
-    let idTime = value.total_seconds.toString();
+    let idTime = value.total_seconds.toString(); // - 1 hour 
     let containerSpot = document.getElementById(idDate);
 
     // converts "36082" seconds to "10 : 01 : 22" 

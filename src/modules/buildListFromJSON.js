@@ -2,14 +2,26 @@ import json from '../../data/testData.json';
 import {createListItemNode} from './createListEntryNode';
 import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './dateContainer';
 import {generateTodaysDate, generateCurrentTime, convertToAlternateDate} from './toggleInputs'; 
-  
+
 // build list to calculate 
 var jsonImportEntries = [];
 
+
+// for use in slot animation 
+function setIntervalLimited(callback, interval, x) {
+    for (var i = 0; i < x; i++) {
+        setTimeout(callback, i * interval);
+    }
+}
+
 const buildListFromJSON = () => {
 
-	// loop through array 
-	for (let value of json) {
+    var animateXtimes = json.length;
+    var count = 0;
+
+    setIntervalLimited(function() {
+
+        var value = json[count];
 
 		// build HTML li component for new task entry
         let node = createListItemNode(value);
@@ -141,8 +153,12 @@ const buildListFromJSON = () => {
             listMatch.appendChild(node);
             populateContainersTimeSum(jsonImportEntries); 
         }
-	}
+    count++; 
+    }, 150, animateXtimes);
 }
+
+ 
+
 
 const exportListEntries = () => {
     // re-order listEntries chronologically by date stamp, in descending order  

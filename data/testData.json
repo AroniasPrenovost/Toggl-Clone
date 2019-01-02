@@ -1,20 +1,6 @@
 [  
    {  
       "task_name":"wewe",
-      "project_name":"testProject2",
-      "time_stamp":"6:11 pm - 6:11 pm",
-      "digital_time":"24 : 00 : 00",
-      "total_seconds":86400,
-      "date_stamp":"12/12/2018",
-      "alternate_date":"2018-12-12",
-      "short_date":"Wed, 12 Dec, 2018",
-      "billable":false,
-      "created_on":"12/18/2018",
-      "current_year":2018,
-      "entry_time":1545185475340
-   },
-   {  
-      "task_name":"wewe",
       "project_name":"testProject3",
       "time_stamp":"5:50 pm - 6:10 pm",
       "digital_time":"00 : 20 : 00",
@@ -26,6 +12,20 @@
       "created_on":"12/18/2018",
       "current_year":2018,
       "entry_time":1545185427247
+   },
+   {  
+      "task_name":"wewe",
+      "project_name":"testProject2",
+      "time_stamp":"6:11 pm - 6:11 pm",
+      "digital_time":"24 : 00 : 00",
+      "total_seconds":86400,
+      "date_stamp":"12/12/2018",
+      "alternate_date":"2018-12-12",
+      "short_date":"Wed, 12 Dec, 2018",
+      "billable":false,
+      "created_on":"12/18/2018",
+      "current_year":2018,
+      "entry_time":1545185475340
    },
    {  
       "task_name":"gmmm",

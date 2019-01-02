@@ -36,6 +36,14 @@ for (let value of JSONimport) {
     listEntries.push(value);
 }
 
+/*
+const liFadeIn = () => {
+
+    for ()
+
+}
+*/
+
 const appendToList = () => {
 
         // check task and project is assigned 
@@ -310,9 +318,9 @@ $('.fa-trash').click(function() {
     let deletedItemDateStamp = listEntries[index].date_stamp;
 
     // remove from listEntries 
-    if (index !== -1) {
+ //   if (index !== -1) {
         listEntries.splice(index, 1);
-    }
+  //  }
 
     // > 1 li in datecontainer 
     for (let value of listEntries) {
