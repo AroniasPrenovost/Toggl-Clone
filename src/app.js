@@ -1,7 +1,7 @@
 import {startButton} from './modules/global/global';
 import {createListItemNode} from './modules/createListEntryNode';
 import {dragDropList} from './modules/dragDrop';
-import {toggleBilling, checkBillingToggle, resumeTime} from './modules/toggleButtons';
+import {toggleBilling, checkBillingToggle} from './modules/toggleButtons';
 import {startTimer} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
 import {getProjectName, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/projectNameBadge';
@@ -18,7 +18,6 @@ import {JSONToCSV} from './modules/csvExport';
 dragDropList();
 
 toggleBilling();
- resumeTime();
 // deleteTask(); 
 
 // choose project dropdown 
@@ -312,8 +311,51 @@ const appendToList = () => {
     } 
 }
 
- 
-// toggle color lock
+// initialize list item timer 
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('fa-play')) {
+    event.target.classList.add('flag'); // add flag class 
+    const playIcons = [...document.getElementsByClassName('fa-play')];
+        for (let index = 0; index < playIcons.length; index++) {
+            if (playIcons[index].classList.contains('flag')) {
+         
+            if (index === 0) { return false; }
+
+            let list = exportListEntries();
+
+            // -1 accounts for onCLicks taking place at indices 1+ 
+            document.getElementById('placeholder').value = list[index - 1].task_name;
+            projToggle.innerHTML = 'Project - ' + list[index - 1].project_name;
+
+            startButton.click();
+            }
+        }
+        event.target.classList.remove('flag');
+    }
+}, false);
+/*
+// delete list item button 
+document.addEventListener('click', function (event) {
+    if (event.target.classList.contains('fa-trash')) {
+    event.target.classList.add('flag'); // add flag class 
+    const trashIcons = [...document.getElementsByClassName('fa-trash')];
+        for (let index = 0; index < trashIcons.length; index++) {
+            if (trashIcons[index].classList.contains('flag')) {
+         
+
+            let list = exportListEntries();
+
+            // -1 accounts for onCLicks taking place at indices 1+ 
+            document.getElementById('placeholder').value = list[index - 1].task_name;
+            projToggle.innerHTML = 'Project - ' + list[index - 1].project_name;
+
+            startButton.click();
+            }
+        }
+        event.target.classList.remove('flag');
+    }
+}, false);
+*/
 
 // remove item from list  
 /*
@@ -342,28 +384,8 @@ $('.fa-trash').click(function() {
         populateContainersTimeSum(listEntries);              
     });
 });
-
-// resume task
-$('.fa-play').click(function() {
-    let index = $('.fa-play').index(this);
- 
-    // click event ignore first class instance 
-    if (index === 0) {
-        return false; 
-    }
-
-    let item = listEntries[index];
-
-    // append task 
-    document.getElementById("placeholder").value = item.task_name;
-
-    // append project name 
-    projToggle.innerHTML = "Project - " + item.project_name;
-
-    startButton.click();
-});
- 
 */
+
 // export list data to csv 
 let excelExport = document.getElementById('excel-export');
     excelExport.addEventListener('click', () => {
@@ -382,5 +404,5 @@ let append = document.getElementById('append');
 let testsessiondata = document.getElementById('session-store');
     testsessiondata.addEventListener('click', () => {
         const retrieveObj = sessionStorage.getItem('listEntries');
-        //console.log(exportListEntries());
+       // console.log(exportListEntries());
 });
