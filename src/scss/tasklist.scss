@@ -36,12 +36,19 @@ ol, ul {
 /* font-awesome delete + append icons */
 .fa.fa-trash, .fa.fa-play{
     font-size: 18px !important;
+     z-index:9999999999999999;
 }
 
 .fa.fa-trash {
     margin: 0 25px 0 0;
+    z-index:9999999999999999;
 }
 
+.playClick {
+    color: red !important;
+    font-weight:900 !important;
+}
+ 
 span {
     margin-left:10px;
     background-color: transparent;
@@ -145,6 +152,8 @@ li:hover.billIconToggle {
     opacity: 1.0;
     -webkit-transition: 0.1s linear;
 }
+
+
 
 .inputBilling {
     height:50px;

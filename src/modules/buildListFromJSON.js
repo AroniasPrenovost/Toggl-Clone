@@ -6,7 +6,6 @@ import {generateTodaysDate, generateCurrentTime, convertToAlternateDate} from '.
 // build list to calculate 
 var jsonImportEntries = [];
 
-
 // for use in slot animation 
 function setIntervalLimited(callback, interval, x) {
     for (var i = 0; i < x; i++) {
@@ -14,7 +13,7 @@ function setIntervalLimited(callback, interval, x) {
     }
 }
 
-const buildListFromJSON = () => {
+const buildListFromJSON = () => { 
 
     var animateXtimes = json.length;
     var count = 0;
@@ -154,7 +153,7 @@ const buildListFromJSON = () => {
             populateContainersTimeSum(jsonImportEntries); 
         }
     count++; 
-    }, 150, animateXtimes);
+    }, 50, animateXtimes);
 }
 
  

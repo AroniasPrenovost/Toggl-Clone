@@ -1,7 +1,7 @@
 import {startButton} from './modules/global/global';
 import {createListItemNode} from './modules/createListEntryNode';
 import {dragDropList} from './modules/dragDrop';
-import {toggleBilling, checkBillingToggle} from './modules/toggleBilling';
+import {toggleBilling, checkBillingToggle, resumeTime} from './modules/toggleButtons';
 import {startTimer} from './modules/timerComponents';
 import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
 import {getProjectName, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/projectNameBadge';
@@ -18,6 +18,8 @@ import {JSONToCSV} from './modules/csvExport';
 dragDropList();
 
 toggleBilling();
+ resumeTime();
+// deleteTask(); 
 
 // choose project dropdown 
 toggleProjectDropdown();
@@ -310,18 +312,19 @@ const appendToList = () => {
     } 
 }
 
-// remove item from list  
-$('.fa-trash').click(function() {
+ 
+// toggle color lock
 
+// remove item from list  
+/*
+$('.fa-trash').click(function() {
+    // console.log('trash')
     let index = $('.fa-trash').index(this);
     let lc = document.getElementsByClassName('fa-trash')[index]
     let deletedItemDateStamp = listEntries[index].date_stamp;
 
-    // remove from listEntries 
- //   if (index !== -1) {
-        listEntries.splice(index, 1);
-  //  }
-
+    listEntries.splice(index, 1);
+ 
     // > 1 li in datecontainer 
     for (let value of listEntries) {
         if (value.date_stamp === deletedItemDateStamp) {
@@ -342,9 +345,8 @@ $('.fa-trash').click(function() {
 
 // resume task
 $('.fa-play').click(function() {
- 
     let index = $('.fa-play').index(this);
-
+ 
     // click event ignore first class instance 
     if (index === 0) {
         return false; 
@@ -361,7 +363,7 @@ $('.fa-play').click(function() {
     startButton.click();
 });
  
-
+*/
 // export list data to csv 
 let excelExport = document.getElementById('excel-export');
     excelExport.addEventListener('click', () => {
