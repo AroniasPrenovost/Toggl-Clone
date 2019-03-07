@@ -1,4 +1,4 @@
-import {startButton} from './modules/global/global';
+import {startButton, stopClock} from './modules/global/global';
 import {createListItemNode} from './modules/createListEntryNode';
 import {dragDropList} from './modules/dragDrop';
 import {toggleBilling, checkBillingToggle} from './modules/toggleButtons';
@@ -313,23 +313,34 @@ const appendToList = () => {
 
 // initialize list item timer 
 document.addEventListener('click', function (event) {
+    
     if (event.target.classList.contains('fa-play')) {
-    event.target.classList.add('flag'); // add flag class 
-    const playIcons = [...document.getElementsByClassName('fa-play')];
-        for (let index = 0; index < playIcons.length; index++) {
+        event.target.classList.add('flag'); // add flag class 
+        const playIcons = [...document.getElementsByClassName('fa-play')];
+
+        for (let index in playIcons) {
             if (playIcons[index].classList.contains('flag')) {
          
-            if (index === 0) { return false; }
+            if (index === 0) return false; 
 
             let list = exportListEntries();
 
-            // -1 accounts for onCLicks taking place at indices 1+ 
+             if (projToggle.innerHTML !== '<i class="plus">+</i> Project/task') {
+             startButton.click();
+             stopClock.value = '00 : 00 : 00';
+             // change value in the function somehow 
+
+             return false;   
+            }
+
+            // -1 accounts for onCLicks taking place at indices 1+
             document.getElementById('placeholder').value = list[index - 1].task_name;
             projToggle.innerHTML = 'Project - ' + list[index - 1].project_name;
 
             startButton.click();
             }
         }
+
         event.target.classList.remove('flag');
     }
 }, false);
