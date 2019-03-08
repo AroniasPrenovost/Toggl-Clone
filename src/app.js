@@ -299,7 +299,6 @@ const appendToList = () => {
                 populateContainersTimeSum(listEntries); 
             }
         }
-
         // if container id match exists, attach node to match 
         if (containerIdMatch(dateStamp) === true) {
         let listMatch = document.getElementById(dateStamp);
@@ -311,91 +310,70 @@ const appendToList = () => {
     } 
 }
 
+
 // initialize list item timer 
 document.addEventListener('click', function (event) {
-    
     if (event.target.classList.contains('fa-play')) {
-        event.target.classList.add('flag'); // add flag class 
-        const playIcons = [...document.getElementsByClassName('fa-play')];
 
-        for (let index in playIcons) {
-            if (playIcons[index].classList.contains('flag')) {
-         
+    event.target.classList.add('flag');  
+    const playIcons = [...document.getElementsByClassName('fa-play')];
+    for (let index in playIcons) {
+        if (playIcons[index].classList.contains('flag')) {
+
             if (index === 0) return false; 
 
             let list = exportListEntries();
 
-             if (projToggle.innerHTML !== '<i class="plus">+</i> Project/task') {
-             startButton.click();
-             stopClock.value = '00 : 00 : 00';
-             // change value in the function somehow 
-
-             return false;   
+            if (projToggle.innerHTML !== '<i class="plus">+</i> Project/task') {
+            startButton.click();
+            return false;   
             }
 
             // -1 accounts for onCLicks taking place at indices 1+
             document.getElementById('placeholder').value = list[index - 1].task_name;
             projToggle.innerHTML = 'Project - ' + list[index - 1].project_name;
-
             startButton.click();
             }
         }
-
-        event.target.classList.remove('flag');
+    event.target.classList.remove('flag');
     }
 }, false);
-/*
-// delete list item button 
+
+// initialize list item timer 
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('fa-trash')) {
-    event.target.classList.add('flag'); // add flag class 
+
+    event.target.classList.add('flag');  
     const trashIcons = [...document.getElementsByClassName('fa-trash')];
-        for (let index = 0; index < trashIcons.length; index++) {
+        for (let index in trashIcons) {
             if (trashIcons[index].classList.contains('flag')) {
-         
 
-            let list = exportListEntries();
+                let list = exportListEntries();
+                let lc = document.getElementsByClassName('fa-trash')[index];
+                let deletedItemDateStamp = list[index].date_stamp;
+                list.splice(index, 1);
 
-            // -1 accounts for onCLicks taking place at indices 1+ 
-            document.getElementById('placeholder').value = list[index - 1].task_name;
-            projToggle.innerHTML = 'Project - ' + list[index - 1].project_name;
-
-            startButton.click();
+                // > 1 li in datecontainer 
+                for (let value of list) {
+                    if (value.date_stamp === deletedItemDateStamp) {
+                        $(lc).parent().parent().parent().fadeOut(500,function(){            
+                            $(lc).remove();                
+                        });
+                    populateContainersTimeSum(list);
+                    return false; 
+                    } 
+                }
+                
+                // 1 li in datecontainer 
+                $(lc).parent().parent().parent().parent().fadeOut(500,function(){            
+                    $(lc).remove();
+                    populateContainersTimeSum(list);              
+                });
             }
         }
-        event.target.classList.remove('flag');
+    event.target.classList.remove('flag');
     }
 }, false);
-*/
-
-// remove item from list  
-/*
-$('.fa-trash').click(function() {
-    // console.log('trash')
-    let index = $('.fa-trash').index(this);
-    let lc = document.getElementsByClassName('fa-trash')[index]
-    let deletedItemDateStamp = listEntries[index].date_stamp;
-
-    listEntries.splice(index, 1);
- 
-    // > 1 li in datecontainer 
-    for (let value of listEntries) {
-        if (value.date_stamp === deletedItemDateStamp) {
-            $(lc).parent().parent().parent().fadeOut(500,function(){            
-                $(lc).remove();                
-            });
-        populateContainersTimeSum(listEntries);
-        return false; 
-        } 
-    }
-
-    // 1 li in datecontainer 
-    $(lc).parent().parent().parent().parent().fadeOut(500,function(){            
-        $(lc).remove();
-        populateContainersTimeSum(listEntries);              
-    });
-});
-*/
 
 // export list data to csv 
 let excelExport = document.getElementById('excel-export');
