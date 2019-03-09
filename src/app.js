@@ -311,7 +311,8 @@ const appendToList = () => {
 }
 
 
-// initialize list item timer 
+// initialize list item timer
+var indexSave;  
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('fa-play')) {
 
@@ -324,13 +325,22 @@ document.addEventListener('click', function (event) {
 
             let list = exportListEntries();
 
+            // if user clicks same play button as prev 
+            if (indexSave === index) {
+                appendToList();
+                return;   
+            }
+
+            // if different, pause 
             if (projToggle.innerHTML !== '<i class="plus">+</i> Project/task') {
-            startButton.click();
-            return false;   
+                startButton.click();
+                return;   
             }
 
             // -1 accounts for onCLicks taking place at indices 1+
             document.getElementById('placeholder').value = list[index - 1].task_name;
+            indexSave = (index - 1).toString(); 
+
             projToggle.innerHTML = 'Project - ' + list[index - 1].project_name;
             startButton.click();
             }
@@ -339,7 +349,7 @@ document.addEventListener('click', function (event) {
     }
 }, false);
 
-// initialize list item timer 
+// initialize delete list item button  
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('fa-trash')) {
 
