@@ -9,10 +9,10 @@ const toggleBilling = () => {
 }
 
 const checkBillingToggle = () => {
-	if (document.querySelector(".billIcon").classList.contains("billIconToggle")) {
-		return true;
-	}
-	return false;
+    if (document.querySelector(".billIcon").classList.contains("billIconToggle")) {
+        return true;
+    }
+    return false;
 }
 
-export {toggleBilling, checkBillingToggle};  
+export { toggleBilling, checkBillingToggle };  

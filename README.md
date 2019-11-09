@@ -1,4 +1,10 @@
-# Gulp, Sass, webpack and ES6 modules boilerplate
+# Timer
 
-## runs 'webpack -d --watch' and 'gulp watch' simultaneously 
-# npm start 
+Inspired by https://toggl.com/
+
+## Installation 
+
+```
+$ npm install ; npm install gulp@3.9.1 --save
+$ npm start
+```

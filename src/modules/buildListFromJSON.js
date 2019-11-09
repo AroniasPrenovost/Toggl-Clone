@@ -1,7 +1,7 @@
 import json from '../../data/testData.json';
-import {createListItemNode} from './createListEntryNode';
-import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './dateContainer';
-import {generateTodaysDate, generateCurrentTime, convertToAlternateDate} from './toggleInputs'; 
+import { createListItemNode } from './createListEntryNode';
+import { containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum } from './dateContainer';
+import { generateTodaysDate, generateCurrentTime, convertToAlternateDate } from './toggleInputs';
 
 // build list to calculate 
 var jsonImportEntries = [];
@@ -13,34 +13,34 @@ function setIntervalLimited(callback, interval, x) {
     }
 }
 
-const buildListFromJSON = () => { 
+const buildListFromJSON = () => {
 
     var animateXtimes = json.length;
     var count = 0;
 
-    setIntervalLimited(function() {
+    setIntervalLimited(function () {
 
         var value = json[count];
 
-		// build HTML li component for new task entry
+        // build HTML li component for new task entry
         let node = createListItemNode(value);
 
         // track new entry in list
         jsonImportEntries.push(value);
 
         // re-order listEntries chronologically by date stamp, in descending order  
-        jsonImportEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
+        jsonImportEntries.sort((a, b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
         jsonImportEntries.reverse();
- 
-		// list container 
-		var taskListContainer = document.getElementById("taskList");
- 
+
+        // list container 
+        var taskListContainer = document.getElementById("taskList");
+
         // if no matching container id 
-        if (containerIdMatch(value.date_stamp) === false) { 
+        if (containerIdMatch(value.date_stamp) === false) {
 
             // create task list container for calendar day (li node)
-            const dateContainer = document.createElement("div"); 
-            let dateContainerClasses = [ 'dateContainer', 'dateContainerStyle' ];
+            const dateContainer = document.createElement("div");
+            let dateContainerClasses = ['dateContainer', 'dateContainerStyle'];
             dateContainer.classList.add(...dateContainerClasses);
             dateContainer.id = value.date_stamp; // id is day's date 
             dateContainer.draggable = false;
@@ -49,10 +49,10 @@ const buildListFromJSON = () => {
             let appearDate = '';
             let enteredYear = Number(value.short_date.substr(value.short_date.length - 4));
 
-			// generate current time  
-			let currentYear = (new Date()).getFullYear(),
-			assumeTodaysDate = generateTodaysDate(),
-			currentTime = generateCurrentTime();
+            // generate current time  
+            let currentYear = (new Date()).getFullYear(),
+                assumeTodaysDate = generateTodaysDate(),
+                currentTime = generateCurrentTime();
 
             if (currentYear != enteredYear) {
                 appearDate = value.short_date;
@@ -62,32 +62,32 @@ const buildListFromJSON = () => {
 
             // list date container header
             var dateDivContainer = document.createElement('div');
-            dateDivContainer.classList.add('dateDivContainer'); 
+            dateDivContainer.classList.add('dateDivContainer');
 
-            var h = document.createElement('H3')                
-            var t = document.createTextNode(appearDate); 
-            h.classList.add('dateHeader');    
+            var h = document.createElement('H3')
+            var t = document.createTextNode(appearDate);
+            h.classList.add('dateHeader');
             h.appendChild(t);
 
-            var b = document.createElement('H3') 
+            var b = document.createElement('H3')
             var u = document.createTextNode('placeholder'); // will become sum of seconds
             b.id = value.alternate_date;
             b.classList.add('dateTimeMax');
 
-            b.appendChild(u);    
+            b.appendChild(u);
 
             dateDivContainer.appendChild(h);
             dateDivContainer.appendChild(b);
             dateContainer.appendChild(dateDivContainer);
 
             // create project list 
-            const projTaskListNode = document.createElement("ul"); 
-            let taskListClasses = [ 'droppable-area', 'ui-sortable' ];
+            const projTaskListNode = document.createElement("ul");
+            let taskListClasses = ['droppable-area', 'ui-sortable'];
             projTaskListNode.classList.add(...taskListClasses);
             projTaskListNode.id = 'projects';
 
             // add li to ul
-            projTaskListNode.appendChild(node); 
+            projTaskListNode.appendChild(node);
 
             // add ul to newly created div container  
             dateContainer.appendChild(projTaskListNode);
@@ -98,7 +98,7 @@ const buildListFromJSON = () => {
 
             if (idlists) {
                 for (let value of idlists) {
-                  alternateidlist.push(convertToAlternateDate(value));
+                    alternateidlist.push(convertToAlternateDate(value));
                 }
             }
 
@@ -108,7 +108,7 @@ const buildListFromJSON = () => {
 
                 // match {week date : total_seconds} and find sum
                 populateContainersTimeSum(jsonImportEntries);
-               // return false; 
+                // return false; 
             } else {
 
                 // if 2 elements 
@@ -120,12 +120,12 @@ const buildListFromJSON = () => {
                     let dateCompare = compareDates(arg1, arg2);
 
                     if (dateCompare === 'item_1_more_recent') {
-                        taskListContainer.appendChild(dateContainer);   
+                        taskListContainer.appendChild(dateContainer);
                     }
 
                     if (dateCompare === 'item_2_more_recent') {
                         taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
-                    } 
+                    }
                 }
 
                 // if 1 > elements exist, find valid entry position    
@@ -135,35 +135,35 @@ const buildListFromJSON = () => {
                         let itemCompared = alternateidlist[b];
                         let dateCompare = compareDates(itemCompared, newEntry);
 
-                        let nextItemCompare = alternateidlist[b+1];
+                        let nextItemCompare = alternateidlist[b + 1];
                         let nextDateCompare = compareDates(nextItemCompare, newEntry);
                         if (dateCompare === 'item_1_more_recent' && nextDateCompare === 'item_2_more_recent') {
-                                taskListContainer.children[b].insertAdjacentElement("afterEnd", dateContainer);
-                        }   
-                    } 
+                            taskListContainer.children[b].insertAdjacentElement("afterEnd", dateContainer);
+                        }
+                    }
                 }
-                populateContainersTimeSum(jsonImportEntries); 
+                populateContainersTimeSum(jsonImportEntries);
             }
         }
 
         // if container id match exists, attach node to match 
         if (containerIdMatch(value.date_stamp) === true) {
-        let listMatch = document.getElementById(value.date_stamp);
+            let listMatch = document.getElementById(value.date_stamp);
             listMatch.appendChild(node);
-            populateContainersTimeSum(jsonImportEntries); 
+            populateContainersTimeSum(jsonImportEntries);
         }
-    count++; 
+        count++;
     }, 50, animateXtimes);
 }
 
- 
+
 
 
 const exportListEntries = () => {
     // re-order listEntries chronologically by date stamp, in descending order  
-    jsonImportEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
+    jsonImportEntries.sort((a, b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
     jsonImportEntries.reverse();
-    return jsonImportEntries; 
+    return jsonImportEntries;
 }
 
-export {buildListFromJSON, exportListEntries};
+export { buildListFromJSON, exportListEntries };

@@ -1,32 +1,32 @@
 var gulp = require('gulp'),
-sass = require('gulp-sass'),
-browserSync = require('browser-sync').create();
+  sass = require('gulp-sass'),
+  browserSync = require('browser-sync').create();
 
-gulp.task('hello', function() {
+gulp.task('hello', function () {
   console.log('Hello Aron');
 });
 
-gulp.task('sass', function() {
+gulp.task('sass', function () {
   return gulp.src('src/scss/**/*.scss') // Glob .scss files in src/scss
     .pipe(sass())
     .pipe(gulp.dest('src/css'))
     .pipe(browserSync.reload({
-  stream: true
-  }))
+      stream: true
+    }))
 });
 
 
-gulp.task('browserSync', function() {
+gulp.task('browserSync', function () {
   browserSync.init({
     server: {
       baseDir: './' // root folder
-      },
-      port: 8080
-    })
+    },
+    port: 8080
+  })
 })
 
 
-gulp.task('watch', ['browserSync', 'sass'], function (){
-  gulp.watch('src/scss/**/*.scss', ['sass']); 
-// Other watchers
+gulp.task('watch', ['browserSync', 'sass'], function () {
+  gulp.watch('src/scss/**/*.scss', ['sass']);
+  // Other watchers
 });

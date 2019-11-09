@@ -1,4 +1,4 @@
-import {projectNameAndColor} from './projectNameBadge';
+import { projectNameAndColor } from './projectNameBadge';
 
 // pass new task entry object as arg 
 function createListItemNode(obj) {
@@ -37,7 +37,7 @@ function createListItemNode(obj) {
 
   let iElem3 = document.createElement("h6");
   let iconColor = projectNameAndColor()[1];
-  iElem3.style.backgroundColor = iconColor; 
+  iElem3.style.backgroundColor = iconColor;
   iElem3.innerHTML = obj.project_name;
   projectNameIcon.appendChild(iElem3);
 
@@ -69,4 +69,4 @@ function createListItemNode(obj) {
   return node;
 }
 
-export {createListItemNode};
+export { createListItemNode };

@@ -26,7 +26,7 @@ function timesToSeconds(str1, str2) {
   end = new Date(`01.01.1970 ${end}`).getTime() / 1000;
 
   // time diff in minutes
-  let seconds = 0; 
+  let seconds = 0;
   let mins = Math.abs(end - start) / 60,
     dayMinutes = 24 * 60;
 
@@ -60,7 +60,7 @@ function timesToSeconds(str1, str2) {
     if (Number(rawNum1) > Number(rawNum2)) {
       const minuteDiff = dayMinutes - mins;
       const thismins = minuteDiff + dayMinutes; // + 24 hours
-     // alert(thismins)
+      // alert(thismins)
       seconds = thismins * 60 / 2;
       return `${seconds} __test `;
     } else if (Number(rawNum1) === Number(rawNum2)) { // entry time is zero 
@@ -92,7 +92,7 @@ function timesToSeconds(str1, str2) {
     }
   }
 
-    if (ampm1 === 'am' && ampm2 === 'pm') {
+  if (ampm1 === 'am' && ampm2 === 'pm') {
     // if time matches 
     if (rawNum1 === rawNum2) {
       seconds = dayMinutes * 60 / 2;
@@ -124,20 +124,20 @@ function timesToSeconds(str1, str2) {
       end = new Date(`01.01.1970 ${end}`).getTime() / 1000;
 
       mins = Math.abs(end - start) / 60, seconds = mins * 60;
-    }  
+    }
   }
   return seconds;
 }
 
-import {timerModeClock} from './global/global';
-import {generateCurrentTime} from "./toggleInputs";
-import {digitalTimeToSeconds, secondsToDigital} from './timeConversion';
+import { timerModeClock } from './global/global';
+import { generateCurrentTime } from "./toggleInputs";
+import { digitalTimeToSeconds, secondsToDigital } from './timeConversion';
 
 // generate timer mode manual input timestamps
 const genTimerModeManualTimeStamp = () => {
   // create END timestamp, use current time 
   var endStamp = generateCurrentTime(),
-      endTimeFormat = generateCurrentTime();
+    endTimeFormat = generateCurrentTime();
 
   // store current am/pm 
   var ampm = endStamp.slice(-2);
@@ -149,21 +149,21 @@ const genTimerModeManualTimeStamp = () => {
     endStamp = endStamp.replace(":", " : ");
   }
   if (endStamp.charAt(5) === 'a') {
-    endStamp = endStamp.replace(" am", "").trim(); 
+    endStamp = endStamp.replace(" am", "").trim();
     endStamp = '0' + endStamp + ' : 00';
     endStamp = endStamp.replace(":", " : ");
-  } 
+  }
   if (endStamp.charAt(6) === 'a') {
-    endStamp = endStamp.replace(" am", "").trim();   
+    endStamp = endStamp.replace(" am", "").trim();
     endStamp = endStamp + ' : 00';
     endStamp = endStamp.replace(":", " : ");
-  } 
+  }
 
   if (endStamp.charAt(6) === 'p') {
-    endStamp = endStamp.replace(" pm", "").trim(); 
+    endStamp = endStamp.replace(" pm", "").trim();
     endStamp = endStamp + ' : 00';
-    endStamp = endStamp.replace(":", " : "); 
-  } 
+    endStamp = endStamp.replace(":", " : ");
+  }
 
   // convert to seconds 
   let endStampSeconds = digitalTimeToSeconds(endStamp);
@@ -178,12 +178,12 @@ const genTimerModeManualTimeStamp = () => {
   // endStamp seconds - input clock seconds
   var differSeconds = '';
   if (endStampSeconds > timerSeconds) {
-    differSeconds = endStampSeconds - timerSeconds; 
+    differSeconds = endStampSeconds - timerSeconds;
   } else if (endStampSeconds < timerSeconds) {
     var negDif = timerSeconds - endStampSeconds;
 
-  // 12 hours' of seconds - negDif 
-  differSeconds = 43200 - negDif;
+    // 12 hours' of seconds - negDif 
+    differSeconds = 43200 - negDif;
     if (ampm = 'pm') { // toggle AM/PM 
       ampm = 'am';
     } else {
@@ -213,7 +213,7 @@ const genTimerModeManualTimeStamp = () => {
 
   // remove empty spaces 
   startTimeFormat = startTimeFormat.replace(/\s/g, '');
-  startTimeFormat = startTimeFormat + ' ' + ampm; 
+  startTimeFormat = startTimeFormat + ' ' + ampm;
 
   // create final timestamp 
   var timerModeManualStamps = startTimeFormat + " - " + endTimeFormat
@@ -221,4 +221,4 @@ const genTimerModeManualTimeStamp = () => {
   return timerModeManualStamps;
 }
 
-export {timesToSeconds, genTimerModeManualTimeStamp}; 
+export { timesToSeconds, genTimerModeManualTimeStamp }; 

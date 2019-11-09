@@ -1,18 +1,18 @@
-import {startButton, stopClock} from './modules/global/global';
-import {createListItemNode} from './modules/createListEntryNode';
-import {dragDropList} from './modules/dragDrop';
-import {toggleBilling, checkBillingToggle} from './modules/toggleButtons';
-import {startTimer} from './modules/timerComponents';
-import {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton} from './modules/dropDownButton';
-import {getProjectName, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor} from './modules/projectNameBadge';
-import {resetInputs, showLis} from './modules/resetInputs';
-import {getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject} from './modules/timerInputValidators';
-import {generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCurrentTime, checkManualInput, getManualInputs} from './modules/toggleInputs';
-import {genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds} from './modules/timeConversion';
-import {timesToSeconds, genTimerModeManualTimeStamp} from './modules/timeStampConvert';
-import {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum} from './modules/dateContainer';
-import {buildListFromJSON, exportListEntries} from './modules/buildListFromJSON';
-import {JSONToCSV} from './modules/csvExport';
+import { startButton, stopClock } from './modules/global/global';
+import { createListItemNode } from './modules/createListEntryNode';
+import { dragDropList } from './modules/dragDrop';
+import { toggleBilling, checkBillingToggle } from './modules/toggleButtons';
+import { startTimer } from './modules/timerComponents';
+import { toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton } from './modules/dropDownButton';
+import { getProjectName, getRandomColor, changeProjectNameColors, determineProjectTagColors, projectNameAndColor } from './modules/projectNameBadge';
+import { resetInputs, showLis } from './modules/resetInputs';
+import { getTaskInput, checkTaskInput, validateTimerModeEntry, validateManualModeEntry, checkAssignedProject } from './modules/timerInputValidators';
+import { generateTodaysDate, convertToAlternateDate, dateToShorthand, generateCurrentTime, checkManualInput, getManualInputs } from './modules/toggleInputs';
+import { genDigitalTime, digitalTimeToWord, digitalTimeToSeconds, secondsToDigital, wordedTimeToSeconds } from './modules/timeConversion';
+import { timesToSeconds, genTimerModeManualTimeStamp } from './modules/timeStampConvert';
+import { containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum } from './modules/dateContainer';
+import { buildListFromJSON, exportListEntries } from './modules/buildListFromJSON';
+import { JSONToCSV } from './modules/csvExport';
 
 // drag drop 
 dragDropList();
@@ -47,17 +47,17 @@ const liFadeIn = () => {
 
 const appendToList = () => {
 
-        // check task and project is assigned 
-        if (checkTaskInput() == true && checkAssignedProject() === true) {
+    // check task and project is assigned 
+    if (checkTaskInput() == true && checkAssignedProject() === true) {
 
         // if timer mode enabled and digital entry invalid 
         if (checkManualInput() == false && validateTimerModeEntry() === false) {
-            return false;     
+            return false;
         }
 
         // if manual entry enabled and manual entry invalid 
         if (checkManualInput() === true && validateManualModeEntry() === false) {
-            return false; 
+            return false;
         }
 
         // list container 
@@ -65,11 +65,11 @@ const appendToList = () => {
 
         // date and time elements to be generated 
         var timeStamp = '',
-        dateStamp = '',
-        alternateDateFormat = '',
-        dateShorthand = '',
-        clockTimer = '',
-        seconds = '';
+            dateStamp = '',
+            alternateDateFormat = '',
+            dateShorthand = '',
+            clockTimer = '',
+            seconds = '';
 
         // if timer mode enabled and digital entry valid
         if (checkManualInput() == false && validateTimerModeEntry() === true) {
@@ -96,7 +96,7 @@ const appendToList = () => {
 
         // if manual entry enabled and manual entry valid 
         if (checkManualInput() === true && validateManualModeEntry() === true) {
-            
+
             var manualInputValues = getManualInputs();
 
             // create timestamp
@@ -116,7 +116,7 @@ const appendToList = () => {
             dateShorthand = dateToShorthand(alternateDateFormat);
 
             // get seconds difference, and then convert to digital time 
-            let manualTimeStamps  = timesToSeconds(manualInputValues[0], manualInputValues[1]);
+            let manualTimeStamps = timesToSeconds(manualInputValues[0], manualInputValues[1]);
 
             clockTimer = secondsToDigital(manualTimeStamps);
 
@@ -125,34 +125,34 @@ const appendToList = () => {
 
         // generate current time  
         let currentYear = (new Date()).getFullYear(),
-        assumeTodaysDate = generateTodaysDate(),
-        currentTime = generateCurrentTime();
+            assumeTodaysDate = generateTodaysDate(),
+            currentTime = generateCurrentTime();
 
         // get currentYear
-        const task = getTaskInput(); 
+        const task = getTaskInput();
 
         // get project name 
-        let projTitle = getProjectName(); 
+        let projTitle = getProjectName();
 
         // toggle billable hours 
         let billingToggle = checkBillingToggle();
 
         // item entry time in milliseconds, based on unix timestap 
-        let entryTime = Date.now(); 
+        let entryTime = Date.now();
 
         // id user name 
         // to do... 
 
         // build list data object 
         var taskEntry = {
-            task_name: task,  
+            task_name: task,
             project_name: projTitle,
             time_stamp: timeStamp,
             digital_time: clockTimer,
-            total_seconds: seconds, 
+            total_seconds: seconds,
             date_stamp: dateStamp,
             alternate_date: alternateDateFormat,
-            short_date: dateShorthand, 
+            short_date: dateShorthand,
             billable: billingToggle,
             created_on: assumeTodaysDate,
             current_year: currentYear,
@@ -166,7 +166,7 @@ const appendToList = () => {
         listEntries.push(taskEntry);
 
         // re-order listEntries chronologically by date stamp, in descending order  
-        listEntries.sort((a,b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
+        listEntries.sort((a, b) => new Date(a.alternate_date).getTime() - new Date(b.alternate_date).getTime());
         listEntries.reverse();
 
         // console.log(listEntries);
@@ -176,11 +176,11 @@ const appendToList = () => {
 
         // add new list item to page, determine node placement 
 
-        if (containerIdMatch(dateStamp) === false) { 
+        if (containerIdMatch(dateStamp) === false) {
 
             // create task list container for calendar day (li node)
-            const dateContainer = document.createElement("div"); 
-            let dateContainerClasses = [ 'dateContainer', 'dateContainerStyle' ];
+            const dateContainer = document.createElement("div");
+            let dateContainerClasses = ['dateContainer', 'dateContainerStyle'];
             dateContainer.classList.add(...dateContainerClasses);
             dateContainer.id = dateStamp; // id is day's date 
             dateContainer.draggable = false;
@@ -197,32 +197,32 @@ const appendToList = () => {
 
             // list date container header
             var dateDivContainer = document.createElement('div');
-            dateDivContainer.classList.add('dateDivContainer'); 
+            dateDivContainer.classList.add('dateDivContainer');
 
-            var h = document.createElement('H3')                
-            var t = document.createTextNode(appearDate); 
-            h.classList.add('dateHeader');    
+            var h = document.createElement('H3')
+            var t = document.createTextNode(appearDate);
+            h.classList.add('dateHeader');
             h.appendChild(t);
 
-            var b = document.createElement('H3') 
+            var b = document.createElement('H3')
             var u = document.createTextNode('placeholder'); // will become sum of seconds
             b.id = alternateDateFormat;
             b.classList.add('dateTimeMax');
 
-            b.appendChild(u);    
+            b.appendChild(u);
 
             dateDivContainer.appendChild(h);
             dateDivContainer.appendChild(b);
             dateContainer.appendChild(dateDivContainer);
 
             // create project list 
-            const projTaskListNode = document.createElement("ul"); 
-            let taskListClasses = [ 'droppable-area', 'ui-sortable' ];
+            const projTaskListNode = document.createElement("ul");
+            let taskListClasses = ['droppable-area', 'ui-sortable'];
             projTaskListNode.classList.add(...taskListClasses);
             projTaskListNode.id = 'projects';
 
             // add li to ul
-            projTaskListNode.appendChild(node); 
+            projTaskListNode.appendChild(node);
 
             // add ul to newly created div container  
             dateContainer.appendChild(projTaskListNode);
@@ -233,7 +233,7 @@ const appendToList = () => {
 
             if (idlists) {
                 for (let value of idlists) {
-                  alternateidlist.push(convertToAlternateDate(value));
+                    alternateidlist.push(convertToAlternateDate(value));
                 }
             }
 
@@ -244,7 +244,7 @@ const appendToList = () => {
                 resetInputs();
                 // match {week date : total_seconds} and find sum
                 populateContainersTimeSum(listEntries);
-                return false; 
+                return false;
             } else {
 
                 // if 2 elements 
@@ -256,16 +256,16 @@ const appendToList = () => {
                     let dateCompare = compareDates(arg1, arg2);
 
                     if (dateCompare === 'item_1_more_recent') {
-                        taskListContainer.appendChild(dateContainer);  
+                        taskListContainer.appendChild(dateContainer);
                         showLis();
-                        resetInputs();      
+                        resetInputs();
                     }
 
                     if (dateCompare === 'item_2_more_recent') {
                         taskListContainer.insertBefore(dateContainer, taskListContainer.childNodes[0]);
                         showLis();
                         resetInputs();
-                    } 
+                    }
                 }
 
                 // if 1 > elements exist, find valid entry position    
@@ -287,65 +287,65 @@ const appendToList = () => {
                         let itemCompared = alternateidlist[b];
                         let dateCompare = compareDates(itemCompared, newEntry);
 
-                        let nextItemCompare = alternateidlist[b+1];
+                        let nextItemCompare = alternateidlist[b + 1];
                         let nextDateCompare = compareDates(nextItemCompare, newEntry);
                         if (dateCompare === 'item_1_more_recent' && nextDateCompare === 'item_2_more_recent') {
-                                taskListContainer.children[b].insertAdjacentElement("afterEnd", dateContainer);
-                                showLis();
-                                resetInputs();
-                        }   
-                    } 
+                            taskListContainer.children[b].insertAdjacentElement("afterEnd", dateContainer);
+                            showLis();
+                            resetInputs();
+                        }
+                    }
                 }
-                populateContainersTimeSum(listEntries); 
+                populateContainersTimeSum(listEntries);
             }
         }
         // if container id match exists, attach node to match 
         if (containerIdMatch(dateStamp) === true) {
-        let listMatch = document.getElementById(dateStamp);
+            let listMatch = document.getElementById(dateStamp);
             listMatch.appendChild(node);
             showLis();
-            resetInputs(); 
-            populateContainersTimeSum(listEntries); 
-        }  
-    } 
+            resetInputs();
+            populateContainersTimeSum(listEntries);
+        }
+    }
 }
 
 
 // initialize list item timer
-var indexSave;  
+var indexSave;
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('fa-play')) {
 
-    event.target.classList.add('flag');  
-    const playIcons = [...document.getElementsByClassName('fa-play')];
-    for (let index in playIcons) {
-        if (playIcons[index].classList.contains('flag')) {
+        event.target.classList.add('flag');
+        const playIcons = [...document.getElementsByClassName('fa-play')];
+        for (let index in playIcons) {
+            if (playIcons[index].classList.contains('flag')) {
 
-            if (index === 0) return false; 
+                if (index === 0) return false;
 
-            let list = exportListEntries();
+                let list = exportListEntries();
 
-            // if user clicks same play button as prev 
-            if (indexSave === index) {
-                appendToList();
-                return;   
-            }
+                // if user clicks same play button as prev 
+                if (indexSave === index) {
+                    appendToList();
+                    return;
+                }
 
-            // if different, pause 
-            if (projToggle.innerHTML !== '<i class="plus">+</i> Project/task') {
+                // if different, pause 
+                if (projToggle.innerHTML !== '<i class="plus">+</i> Project/task') {
+                    startButton.click();
+                    return;
+                }
+
+                // -1 accounts for onCLicks taking place at indices 1+
+                document.getElementById('placeholder').value = list[index - 1].task_name;
+                indexSave = (index - 1).toString();
+
+                projToggle.innerHTML = 'Project - ' + list[index - 1].project_name;
                 startButton.click();
-                return;   
-            }
-
-            // -1 accounts for onCLicks taking place at indices 1+
-            document.getElementById('placeholder').value = list[index - 1].task_name;
-            indexSave = (index - 1).toString(); 
-
-            projToggle.innerHTML = 'Project - ' + list[index - 1].project_name;
-            startButton.click();
             }
         }
-    event.target.classList.remove('flag');
+        event.target.classList.remove('flag');
     }
 }, false);
 
@@ -353,8 +353,8 @@ document.addEventListener('click', function (event) {
 document.addEventListener('click', function (event) {
     if (event.target.classList.contains('fa-trash')) {
 
-    event.target.classList.add('flag');  
-    const trashIcons = [...document.getElementsByClassName('fa-trash')];
+        event.target.classList.add('flag');
+        const trashIcons = [...document.getElementsByClassName('fa-trash')];
         for (let index in trashIcons) {
             if (trashIcons[index].classList.contains('flag')) {
 
@@ -366,28 +366,28 @@ document.addEventListener('click', function (event) {
                 // > 1 li in datecontainer 
                 for (let value of list) {
                     if (value.date_stamp === deletedItemDateStamp) {
-                        $(lc).parent().parent().parent().fadeOut(500,function(){            
-                            $(lc).remove();                
+                        $(lc).parent().parent().parent().fadeOut(500, function () {
+                            $(lc).remove();
                         });
-                    populateContainersTimeSum(list);
-                    return false; 
-                    } 
+                        populateContainersTimeSum(list);
+                        return false;
+                    }
                 }
-                
+
                 // 1 li in datecontainer 
-                $(lc).parent().parent().parent().parent().fadeOut(500,function(){            
+                $(lc).parent().parent().parent().parent().fadeOut(500, function () {
                     $(lc).remove();
-                    populateContainersTimeSum(list);              
+                    populateContainersTimeSum(list);
                 });
             }
         }
-    event.target.classList.remove('flag');
+        event.target.classList.remove('flag');
     }
 }, false);
 
 // export list data to csv 
 let excelExport = document.getElementById('excel-export');
-    excelExport.addEventListener('click', () => {
+excelExport.addEventListener('click', () => {
     var timeSheetNameTitle = "Time Report - " + generateTodaysDate() + ' ' + generateCurrentTime();
     JSONToCSV(listEntries, timeSheetNameTitle, true);
 });
@@ -395,13 +395,13 @@ let excelExport = document.getElementById('excel-export');
 
 // initialize append 
 let append = document.getElementById('append');
-    append.addEventListener('click', () => {
-        appendToList();
+append.addEventListener('click', () => {
+    appendToList();
 });
 
 // test session storage  
 let testsessiondata = document.getElementById('session-store');
-    testsessiondata.addEventListener('click', () => {
-        const retrieveObj = sessionStorage.getItem('listEntries');
-       // console.log(exportListEntries());
+testsessiondata.addEventListener('click', () => {
+    const retrieveObj = sessionStorage.getItem('listEntries');
+    // console.log(exportListEntries());
 });

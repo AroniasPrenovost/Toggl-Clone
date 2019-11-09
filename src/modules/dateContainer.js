@@ -1,4 +1,4 @@
-import {secondsToDigital, digitalTimeToWord} from "./timeConversion";
+import { secondsToDigital, digitalTimeToWord } from "./timeConversion";
 
 // check if input dateStamp matches current container Ids 
 function containerIdMatch(str) {
@@ -20,13 +20,13 @@ function containerIdMatch(str) {
 }
 
 // args requires '2013-11-01', '2016-11-01' (alternateDateFormat)
-function compareDates (arg1, arg2) {
+function compareDates(arg1, arg2) {
   if (arg1 === arg2) {
     return false;
   } else if (arg1 > arg2) {
-    return 'item_1_more_recent';  
+    return 'item_1_more_recent';
   } else {
-    return 'item_2_more_recent';  
+    return 'item_2_more_recent';
   }
 }
 
@@ -41,21 +41,21 @@ function containerIdOrder(str) {
     ids.push(value.id);
   }
   if (ids.length != 0) {
-    return ids; 
+    return ids;
   }
 }
 
 // get sum of task time for each each date id 
 // '{ alternate_date: '2018-12-05', total_seconds: 232 }'
 function populateContainersTimeSum(obj) {
-  let data = Object.values(obj.reduce((c, {alternate_date, total_seconds}) => {
-  c[alternate_date] = c[alternate_date] || {alternate_date,total_seconds: 0};
-  c[alternate_date].total_seconds += total_seconds;
-  return c;
+  let data = Object.values(obj.reduce((c, { alternate_date, total_seconds }) => {
+    c[alternate_date] = c[alternate_date] || { alternate_date, total_seconds: 0 };
+    c[alternate_date].total_seconds += total_seconds;
+    return c;
   }, {}));
 
   for (let value of data) {
-    let idDate = value.alternate_date.toString(); 
+    let idDate = value.alternate_date.toString();
     let idTime = value.total_seconds.toString(); // - 1 hour 
     let containerSpot = document.getElementById(idDate);
 
@@ -65,10 +65,10 @@ function populateContainersTimeSum(obj) {
     // converts "10 : 01 : 22" to "10 hours 1 minute 22 seconds"
     let idTimeWorded = digitalTimeToWord(idTimeDigital);
 
-        containerSpot.innerHTML = idTimeWorded;  
+    containerSpot.innerHTML = idTimeWorded;
   }
 }
 
-export {containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum}; 
+export { containerIdMatch, compareDates, containerIdOrder, populateContainersTimeSum };
 
 

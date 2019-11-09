@@ -1,4 +1,4 @@
-import {startButton, myInput, projToggle, timerModeButton, taskInput, stopClock, colorCodeButton, colorNormalButton, datepickerInput} from './global/global';
+import { startButton, myInput, projToggle, timerModeButton, taskInput, stopClock, colorCodeButton, colorNormalButton, datepickerInput } from './global/global';
 
 const resetInputs = () => {
 
@@ -14,19 +14,19 @@ const resetInputs = () => {
     datepickerInput.value = 'Today';
     timerModeButton.click();
     stopClock.value = '0 : 00 : 00',
-    $('#container input').slice(1, 2).css({'backgroundColor': '#27ae60'});
+        $('#container input').slice(1, 2).css({ 'backgroundColor': '#27ae60' });
     document.title = 'Timer App';
     // to do...
     // reset datepicker selection 
 }
 
 const showLis = () => {
-    $('ul li').each(function(i){
-        $(this).show(); 
-    });    
-    $(this).prev().val(function(){
+    $('ul li').each(function (i) {
+        $(this).show();
+    });
+    $(this).prev().val(function () {
         return this.defaultValue;
     })
 }
 
-export {resetInputs, showLis};
+export { resetInputs, showLis };

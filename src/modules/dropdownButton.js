@@ -1,7 +1,7 @@
-import {myInput, projToggle, myDropdown} from './global/global';
+import { myInput, projToggle, myDropdown } from './global/global';
 
 const toggleProjectDropdown = () => {
-  projToggle.addEventListener('click', function(){
+  projToggle.addEventListener('click', function () {
     myDropdown.classList.toggle('show');
   });
 }
@@ -33,4 +33,4 @@ const appendProjToButton = () => {
   });
 }
 
-export {toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton};
+export { toggleProjectDropdown, filterFunction, filterEntry, appendProjToButton };
